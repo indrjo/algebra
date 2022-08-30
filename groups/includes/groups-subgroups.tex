@@ -1,0 +1,100 @@
+% !TEX program = lualatex
+% !TEX spellcheck = en_GB
+% !TEX root = ../groups.tex
+
+\section{Groups and subgroups}
+
+\begin{definition}[Groups]
+A {\em group} is a pointed set \((G, 1)\) together with a function
+\[\ast : G \times G \to G \,, \ \ast(x, y) \coloneq x \ast y ,\]
+called {\em operation}\footnote{Actually, these functions are \q{binary} operations. Here, our operations are binary operations.}, such that all this satisfies the following axioms:
+\begin{enumerate}
+\item \(\ast\) is {\em associative}, that is for every \(x,y,z \in G\)
+\[(x \ast y) \ast z = x \ast (y \ast z) ;\]
+\item \(1\) is the {\em identity}, that is for every \(x \in G\) we have
+\[x \ast 1 = 1 \ast x = x ;\]
+\item every \(x \in G\) has an {\em inverse element}, that is some \(y \in G\) such that
+\[x \ast y = y \ast x = 1 .\]
+\end{enumerate}
+\end{definition}
+
+\begin{proposition}
+In the notations of the last definition, the identity is unique and every element has a unique inverse.
+\end{proposition}
+
+\begin{proof}
+Let \(e \in G\) be an identity: \(e = e \ast 1\) because \(1\) is an identity, but also \(e \ast 1 = 1\) because \(e\) is an identity too. Thus \(e = 1\). For \(x \in G\), let \(a, b \in G\) two inverses of \(x\). We have \(a = a \ast 1 = a \ast (x \ast b) = (a \ast x) \ast b = 1 \ast b = b\).
+\end{proof}
+
+%\begin{exercise}
+%Calculate \(\inv{(ab)}\), where \(a\) and \(b\) are elements of some group.
+%\end{exercise}
+
+In practice in most cases, there exists an obvious way for a set to give rise to a group structure.
+
+\begin{example}
+The most natural group structure upon \(\zz\) is the one that comes as you consider the usual operation of addition and \(0 \in \zz\): the addition is associative, \(0\) is the identity and for \(x \in \zz\) the element \(-x\) is the inverse of \(x\). Notice that if you replace the addition with the multiplication, the axioms (2) and (3) are violated. From now on, with \q{the group \(\zz\)}, unless otherwise specified, we mean the set \(\zz\) with \(0\) and the addition.
+\end{example}
+
+\begin{example}
+For a set \(X\), we have the set
+\[\cals_X \coloneq \set{f : X \to X \mid f \text{ is bijective}} .\]
+If you take into account the composition of functions and the identity function \(\id_X\) you will recognise a groups structure: this is the {\em symmetric group of \(X\)}! From now on, \q{the group \(\cals_X\)} is the \q{set \(\cals_X\) with \(\id_X\) and the composition}. The case when \(X\) is finite is relevant, and we adopt the following convention:
+\[\cals_n \coloneq \cals_{\set{1, \dots{}, n}} \text{, where } n \in \nn^{\ge 1} .\]
+\end{example}
+
+Since there is a good chance to have an unnecessary heavy or complicated symbolism, we will adopt some conventions that applies at a purely theoretical level (definitions, propositions and proofs). Although in some situations they may create ambiguity, there are some choices that are almost always effective.
+
+First of all, we do not reserve a particular symbol for the operation on a group. To operate with two elements \(x\) and \(y\) (in this order), we just juxtapose them, as in \(xy\). In concrete cases, for sake of clarity, we shall use a distinguished symbols for operations, as for example \(+\), \(\cdot\) or \(\circ\).
+
+Neither the identity element has a dedicated symbol. We generically denote it \(1\), although it is not universally adopted. Outside general theory, one uses \(0\) when addition is involved, \(1\) with multiplication and \(\id_X\) to indicate the identity function, for example.
+
+We write \(\inv x\) to mean the unique inverse of \(x\), which reminds the multiplicative inverse of real numbers. However, in groups as \(\zz\) with \(+\) and \(0\) the inverse of \(x \in \zz\) is denoted \(-x\).
+
+Another thing is: we will refer to groups by mentioning uniquely the sets of its elements. In the general theory, we suppose the above conventions are adopted. In practical instances, we should be more clear.
+
+\begin{definition}
+A group \(G\) is abelian whenever for every \(a, b \in G\) we have \(ab= ba\).
+\end{definition}
+
+As in Set Theory we there are {\em sub}sets, we want to have {\em sub}groups as well. The idea is a subgroup to be a subset that inherits the group structure from a group which contains it.
+
+\begin{definition}
+Let \(G\) be a group. A {\em subgroup} of \(G\) is a non empty set \(H\) such that
+\begin{enumerate}
+\item for every \(a, b \in H\) also \(a b \in H\);
+\item for every \(a \in H\) also \(\inv a \in H\).
+\end{enumerate}
+\end{definition}
+
+In particular, every subgroup of \(G\) has the identity element. 
+
+\begin{lemma}\label{lem:SubgroupsCond}
+For \(G\) a group, any non empty \(H \subseteq G\) is a subgroup of \(G\) if and only if for every \(a, b \in H\) we have \(a \inv b \in H\).
+\end{lemma}
+
+\begin{proof}
+Suppose \(H \subseteq G\) is a group. For \(b \in H\), by (2), we have \(\inv b \in H\); now, using (1), for all \(a \in H\) we have \(a\inv b \in H\). Conversely, let a non empty \(H \subseteq G\) satisfy the property: \(a \inv b \in H\) for every \(a, b \in H\). We directly have that \(\inv a \in H\) for every \(a \in H\), since \(\inv a = 1 \inv a\). Now let \(b \in H\): we have \(b = \inv{(\inv b)}\), so \(b \in H\) too; hence \(a b \in H\) for every \(a \in H\).
+\end{proof}
+
+\begin{proposition}
+Consider a group \(G\), and a family of its subgroups \(\set{H_i}_{i \in I}\). Then \(\bigcap_{i \in I} H_i\) is a subgroup of \(G\). Not always \(\bigcup_{i \in I} H_i\) is a subgroup of \(G\).
+\end{proposition}
+
+\begin{proof}
+The proof of the first part immediately follows form the previous Lemma. Consider \(3 \zz\) and \(5\zz\): their union is not a subgroup of \(\zz\), since \(8 \notin 3\zz \cup 5\zz\).
+\end{proof}
+
+\begin{exercise}
+Demonstrate that the union of two subgroups is a subgroup if and only if one of them is contained by the other.
+\end{exercise}
+
+\begin{proposition}
+Let \(G\) be a group and \(S \subseteq G\). There exists one and only one subgroup \(S^\ast\) of \(G\) with the following property: \(S \subseteq S^\ast\) and \(S^\ast \subseteq H\) for every subgroup \(H\) of \(G\) that contains \(S\).
+\end{proposition}
+
+\begin{proof}
+Indicate with \(\mathcal I\) the family of the subgroups of \(G\) that contains \(S\). \(\mathcal I \ne \nil\) because \(G \in \mathcal I\). The subgroup \(\bigcap \mathcal I\) is what we are looking for.
+\end{proof}
+
+%We write \(\gen{S}\) instead of \(S^\ast\) and we say it is the subgroup {\em generated} by \(S\). In general, those groups are quite difficult to understand and we will study the most simple case, in which \(S\) is a singleton. In that case the notation \(\gen x\) is preferred instead of \(\gen{\set{x}}\).

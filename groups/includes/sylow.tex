@@ -1,0 +1,110 @@
+% !TEX program = lualatex
+% !TEX spellcheck = en_GB
+% !TEX root = ../groups.tex
+
+\section{Sylow Theorem}
+
+We have actions of a group on itself too. For \(G\) group, there is an important \(G\)-action on \(G\):
+\[\text{inn} : G \to \cals_G ,\]
+where the function \(\text{inn}_g : G \to G\) is defined by \(\text{inn}_g(x) = g x\inv g\).\footnote{Actually, \(\text{inn}_g\) is an automorphism of \(G\), but here we only care it is a bijection.} It is useful to give some new notation in this case:
+\begin{align*}
+& C_G(x) \coloneq \stab_{\text{inn}} x = \set{g \in G \mid g x \inv g = x} = \set{g \in G \mid gx = xg} \\
+& [x]_G \coloneq \orb_{\text{inn}} x = \set{y \in G \mid y = g x \inv g \text{ for some } g \in G} .
+\end{align*}
+In this case we have an important property.
+
+\begin{proposition}[Class Formula for groups]\label{prop:ClassFormulaForGroups}
+For \(G\) finite group, let \(F \subseteq G\) that has one element from each conjugacy class of \(G\). Then \(\calz G \subseteq F\) and \(\set{\calz G} \cup \set{[x]_G \mid x \in F \setminus \calz G}\) is a partition of \(G\). In particular, if \(G\) is finite, we have
+\begin{equation}\abs G = \abs{\mathcal Z G} + \sum_{x \in F \setminus \mathcal Z G} [G:C_G(x)] .\label{eqn:ClassForm}\end{equation}
+\end{proposition}
+
+\begin{proof}
+\begin{enumerate}
+\item If \(x \in \calz G\), then there exists \(a \in F\) such that \(x \in \orb_\lambda a\), that is \(x = g a \inv g\) for some \(g \in G\). Thus \(a = \inv g x g = x\) and \(x \in F\) as well.
+\item Follows from what we have just shown. In order to prove the identity~\eqref{eqn:ClassForm} also Corollary~\ref{cor:ClassFormulaForSets} is needed.\qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{corollary}
+Let \(G\) be a group with \(p^n\) elements, where \(p\) is a prime number. Then \(p\) divides \(\abs{\calz G}\); in particular, \(\calz G\) cannot be a trivial group.
+\end{corollary}
+
+\begin{proof}
+Consider \(R \subseteq G\) such that \(\set{[x]_G \mid x \in R}\) is a partition of \(G\). Obviously, \(p\) cannot divide the cardinality of any \([x]_G\) with \(x \in \calz G\), because they are singletons. If \(p\) does not divide \(\abs{[x]_G} = \abs G / \abs{C_G(x)}\) for some \(x \in R \setminus \calz G\), then \(\abs{C_G (x)} = \abs G\) and so \(C_G(x) = G\). But in this case, \(g x \inv g = x\), viz \(gx = xg\), for every \(g \in G\), and then \(x \in \calz G\). Absurd. \(p\) divides also non banal conjugacy classes. The conclusion we want follows immediately.
+\end{proof}
+
+\begin{corollary}
+For \(p\) prime number, any group with \(p^2\) elements is abelian.
+\end{corollary}
+
+\begin{proof}
+Let \(G\) be a group with \(\abs G = p^2\). By the previous corollary, \(\calz G\) must have \(p\) or \(p^2\) elements. If it has \(p\), then \(\abs{G / \calz G} = p\) and consequently \(G/\calz G\) is cyclic (Lemma~\ref{cor:GroupsWithPrimeCardAreCyclic}). This is equivalent to saying \(G = \calz G\), which cannot happen since the twos have a different number of elements. In conclusion, the unique alternative survives is \(\abs{\calz G} = p^2\); in particular \(\calz G = G\) since the groups are both finite.
+\end{proof}
+
+\begin{exercise}
+Now you are aware that, for \(p\) prime number, any group \(G\) of order \(p^2\) must be abelian, you can go deeper: show that \(G \cong \zz/p^2\zz\) if it is cyclic, \(G \cong \zz/p\zz \times \zz/p\zz\) otherwise. (Hint: if \(G\) is not cyclic, there exist \(x, y \in G\) such that \(\gen x \cap \gen y = \set{1}\).)
+\end{exercise}
+
+\begin{lemma}\label{lem:PreSylowTheoremI}
+Let \(G\) be a finite group. For every prime number \(p\) and \(r \in \nn^{\ge 1}\) such that \(p^r\) divides \(\abs G\) there exists a subgroup of \(G\) of cardinality \(p^r\).
+\end{lemma}
+
+\begin{proof}[Proof, with \(G\) abelian] We use induction on the cardinality of \(G\). If \(G\) has \(2\) elements, the statement is true. Thanks to Proposition~\ref{prop:PreCauchysTheorem}, there exists a cyclic subgroup \(H\) of \(G\) with order \(p\). Since \(G\) is abelian, \(H\) is abelian (thus it is normal too), and so we have the abelian group \(G/H\) that has cardinality multiple of \(p^{r-1}\) (Proposition~\ref{prop:LagrangesTheorem}) and less then \(\abs G\). By inductive hypothesis, we there is a subgroup \(K\) of \(G/H\) that has \(p^{r-1}\) elements; besides, \(K = K'/H\) for some \(K'\) subgroup of \(G\). We can conclude \(\abs {K'} = p^{r}\), again by Proposition~\ref{prop:LagrangesTheorem}.
+\end{proof}
+
+\begin{proof}[Proof of the general case]
+Again by induction on \(\abs G\). The case in which \(G\) has \(2\) elements is trivial. If \(G\) is abelian, we fall back into the previous situation. Then, let \(\calz G\) be a proper subgroup of \(G\) and assume \(\abs G\) is a multiple of \(p^r\). Let \(R \subseteq G\) have exactly one element from every conjugacy class of \(G\) so that, by Proposition~\ref{prop:ClassFormulaForGroups}, we have
+\[\abs G = \abs{\mathcal Z G} + \sum_{x \in R \setminus \mathcal Z G} \frac{\abs G}{\abs{C_G(x)}} .\] If there is some \(a \in R \setminus \calz G\) such that \(p^r\) divides \(\abs{C_G(a)}\), then by induction \(C_G(a)\) has a subgroup of order \(p^r\). Otherwise, we must have \(\abs{\calz G}\) is a multiple of \(p\). Thanks to Proposition~\ref{prop:PreCauchysTheorem}, there exists a cyclic subgroup \(H\) of \(\calz G\) with order \(p\). We have then the quotient \(G/H\), since \(H\) is normal; it has cardinality multiple of \(p^{r-1}\). By induction, there exists a subgroup \(K/H\) of \(G/H\) with \(p^{r-1}\) elements, so we can conclude \(\abs K = p^r\).
+\end{proof}
+
+From Lemma~\ref{lem:PreSylowTheoremI} comes the generalization of Proposition~\ref{prop:PreCauchysTheorem}, that is Lemma~\ref{lem:PreSylowTheoremI} with \(r=1\).
+
+\begin{proposition}[Cauchy's Theorem]\label{prop:CauchysTheorem}
+Let \(G\) be a finite group. Then for every prime \(p \in \nn\) that divides \(\abs G\) there exists \(x \in G\) such that \(\ord x = p\).
+\end{proposition}
+
+\begin{lemma}\label{lem:PreSylowTheoremII}
+Let \(H\) be a group of order \(p^r\), for some prime \(p\) and \(r \in \nn^{\ge 1}\), and \(\phi\) an action of \(H\) on a set \(X\); consider \(X_0 \coloneq \set{x \in X \mid \stab_\phi x = H}\). Then
+\[\abs X \equiv \abs{X_0} \bmod p .\]
+\end{lemma}
+
+\begin{proof}
+Recall that \(X\) is chopped into orbits of its elements. By Proposition~\ref{prop:OrbsStabsCosets}, the elements of \(X_0\) have banal orbits while, the non banal orbits have cardinality equal to powers of \(p\).
+\end{proof}
+
+\begin{proposition}[Sylow Theorem]\label{prop:SylowTheorem}
+Let \(p\) be a prime number and  \(G\) a group with \(\abs G = p^rk\), for \(r, k \in \nn^{\ge 1}\) such that \(p\) does not divide \(k\).
+\begin{enumerate}
+\item There exists a subgroup of \(G\) with \(p^r\) elements.
+\item Let \(S\) and \(H\) be subgroups of \(G\) with cardinality \(p^r\) and \(p^n\) respectively. Then \(\inv g H g \subseteq P\) for some \(g \in G\). In particular, two any subgroups of \(G\) with \(p^r\) elements are conjugated.
+\item Let \(s_p\) be the number of subgroups of \(G\) with \(p^r\) elements. Then %\(s_p \equiv 1 \bmod p\) and \(s_p\) divides \(k\).
+\[\begin{cases}
+s_p \equiv 1 \bmod p \\
+s_p \text{ divides } k .
+\end{cases}\]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\begin{enumerate}
+\item Immediate consequence of Lemma~\ref{lem:PreSylowTheoremI}.
+%
+\item Consider the action
+\[\phi : H \to \cals(G/\call_S)\,,\ \phi_h (C) \coloneq hC .\]
+By Lemma~\ref{lem:PreSylowTheoremII}, we have
+\[[G:S] \equiv \abs\Omega \bmod p ,\]
+where
+\[\Omega \coloneq \set{gS \in G/\call_S \mid \stab_\phi (gS) = H} .\]
+By assumption, \(p\) does not divide \([G:S]\), hence it neither divides \(\abs\Omega\). In particular \(\abs\Omega \ne 0\), so there exists \(gS \in G/\call_S\) such that \(\phi_h(gS) = hgS = gS\) for every \(h \in H\). That is, \((\inv g h g) S = S\) for every \(h \in H\), and then \(\inv g H g \subseteq S\).
+%
+\item {\color{red} [Rewrite\dots{}]} Let \(X\) be the family of the subgroups of \(G\) with cardinality \(p^r\), and consider the action of \(G\) on \(X\)
+\[\eta : G \to \cals X\,, \ \eta_g (S) = \inv g S g .\]
+Because the preceding two parts of this theorem, there exists \(S \in X\) such that \(\orb_\eta (S) = X\). Hence, using Proposition~\ref{prop:OrbsStabsCosets},
+\[s_p = \abs{\orb_\eta S} = \frac{\abs G}{\abs{\stab_\eta S}}.\]
+But \(\abs{\stab_\eta S} \ge \abs S = p^r\) and \(\abs{\stab_\eta S}\) divides \(\abs G = p^r k\), hence (it is crucial that \(p\) is prime) \(s_p\) does divide \(k\). Besides,
+\[X_0 \coloneq \set{H \in X \mid \inv g H g = H \text{ for every } g \in G}\]
+is a singleton: it has at least one element because
+\[s_p = \abs X \equiv \abs{X_0} \bmod p ,\]
+so if it were empty, \(s_p\) would be a multiple of \(p\), absurd; \(X_0\) has at most one element, since two any \(H_1, H_2 \in X_0\) are conjugated and then, by how \(X_0\) is defined, equal. Thanks to Lemma~\ref{lem:PreSylowTheoremII}, we conclude \(s_p \equiv 1 \bmod p\).\qedhere
+\end{enumerate}
+\end{proof}

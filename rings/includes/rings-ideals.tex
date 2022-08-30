@@ -1,0 +1,93 @@
+% !TEX program = lualatex
+% !TEX root = ../rings.tex
+% !TEX spellcheck = en_GB
+
+\section{Rings and Ideals}
+
+\begin{definition}[Rings]
+A {\em ring} is an abelian group \((R, +)\) endowed with another operation
+\[\cdot : R \times R \to R\,, \ (x, y) \to x \cdot y\] such that \((R, \cdot)\) is a monoid and the {\em distributive laws} hold:
+\begin{align*}
+& x \cdot (y+z) = (x \cdot y) + (x \cdot z) \\
+& (x+y) \cdot z = (x \cdot z) + (y \cdot z)
+\end{align*}
+for every \(x, y, z \in R\).
+\end{definition}
+
+Usually one writes \q{\(ab\)} instead of \q{\(a \cdot b\)}. In order to simplify notations, we assume as convention \(\cdot\) has precedence on \(+\), in this sense: writing
+\[ab + cd\]
+we exactly mean
+\[(ab) + (cd) .\]
+
+As we have settled things, a ring \(R\) has two sides, the one of group and the one of monoid, coexisting together as stated by distributive laws. The identity of the \q{group part} is generically indicated as \(0\), while the symbol \(1\) is reserved for the identity of the \q{monoid side}. Notice, however, ring axioms does not ensure \(0 \ne 1\), as one may expect.
+
+\begin{lemma}
+For \(R\) ring, \(x 0 = 0 x = 0\) for every \(x \in R\).
+\end{lemma}
+
+\begin{proof}
+\[x 0 = \underbrace{x (0+0) = x0 + x0}_{\text{distributive laws}},\]
+so \(x0 = 0\), since \(R\) with \(+\) is a group.
+\end{proof}
+
+If \(0 = 1\), then \(R\) has a unique element (exercise), that is \(0 = 1\); clearly, this is an extreme situation. A ring that is a singleton is said {\em banal}.
+
+Since \((R, +)\) is a group, we write \(-x\) the unique element \(a \in R\) that satisfies \(x + a = a + x = 0\).
+
+\begin{definition}[Invertible elements]
+For \(R\) ring and \(x \in R\), we say \(x\) is {\em invertible} whenever there exists \(y \in R\), called {\em inverse} of \(x\), such that \(xy = yx = 1\).
+\end{definition}
+
+Provided \(x \in R\) has an inverse, it is unique and we indicate it as \(\inv x\) or \(\frac 1x\). For \(R\) ring, we consider the set of its invertible elements:
+\[R^\ast \coloneq \set{x \in R \mid x \text{ is invertible}} .\]
+
+\begin{proposition}
+For \(R\) ring, \(R^\ast\) with the operation induced by the monoid part of \(R\) is a group.
+\end{proposition}
+
+\begin{proof}
+Above all, \(R^\ast\) is not empty (at least \(1 \in R^\ast\)). Any \(b \in R^\ast\) has the inverse \(\inv b\), which itself has \(b\) as inverse, thus \(\inv b \in R^\ast\). Thus, for every \(a, b \in R^\ast\), the element \(b \inv a\) is the inverse of \(a \inv b\), hence it sis invertible.
+\end{proof}
+
+\begin{definition}
+A ring \(R\) is said {\em commutative} when \(xy = yx\) for every \(x, y \in R\).
+\end{definition}
+
+\begin{definition}[Fields]
+A {\em field} is a non banal and commutative ring whose all non zero elements invertible.
+\end{definition}
+
+\begin{definition}[Zero divisors]
+Let \(R\) be a ring. An element \(x \in R \setminus \set 0\) is said {\em divisor of zero} whenever there exist \(y \in R \setminus \set 0\) such that \(xy = yx = 0\).
+\end{definition}
+
+\begin{proposition}
+In a ring, invertible elements are not divisors of zero.
+\end{proposition}
+
+\begin{proof}
+\dots{}
+\end{proof}
+
+\begin{definition}[Integrity domains]
+An {\em integrity domain} is a non banal and commutative ring devoid of divisors of zero.
+\end{definition}
+
+\begin{lemma}
+For \(R\) ring and \(x \in R \setminus \set 0\) non divisor of zero. Then
+\[\phi_x : R \to R\,, \ \phi_x (y) \coloneq xy\]
+is a injective (group) endomorphism on the group side of \(R\). 
+\end{lemma}
+
+\begin{proof}
+\(\phi_x\) is an endomorphism by distributive laws. To prove injectivity, we examine the kernel of \(\phi_x\):
+\[\ker \phi_x = \underbrace{\set{y \in R \mid xy = 0} = \set 0}_{x \text{ is not a divisor of zero}} .\qedhere\]
+\end{proof}
+
+\begin{proposition}
+A finite integrity domain is a field.
+\end{proposition}
+
+\begin{proof}
+Let \(R\) be a finite integrity domain: we have to show that every \(x \in R \setminus \set 0\) is invertible. Since \(x\) is not a divisor of zero, then consider the injective endomorphism \(\phi_x\) of the previous lemma: since \(R\) is finite, \(\phi_x\) must be surjective too. In particular, \(\phi_x (y) = xy = 1\) for some \(y \in R\).
+\end{proof}

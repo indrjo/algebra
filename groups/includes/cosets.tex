@@ -1,0 +1,88 @@
+% !TEX program = lualatex
+% !TEX spellcheck = en_GB
+% !TEX root = ../groups.tex
+
+\section{Cosets}
+
+Let \(G\) be a group and \(H\) one of its subgroup. We simultaneously have two relations upon \(G\) so defined: for \(x, y \in G\)
+\begin{align*}
+x \call_H y & \lrarr \text{there exists } h \in H \text{ such that } xh = y \\
+x \calr_H y & \lrarr \text{there exists } h \in H \text{ such that } hx = y .
+\end{align*}
+Both are equivalence relations (the proof consists of elementary checks). Let us see what the \(\call_H\)-equivalence class of any \(x \in G\) is:
+\[\set{a \in G \mid x \call_H a} = \set{a \in G \mid xh = a \text{ for some } h \in H}.\]
+We indicate this set with \(xH\). The sets \(xH\), for \(x \in G\), are the {\em left cosets} of \(H\). The set
+\[\set{a \in G \mid x \calr_H a} = \set{a \in G \mid hx = a \text{ for some } h \in H}\]
+is the \(\calr_H\)-equivalence class of \(x \in G\), that we write as \(Hx\). The sets \(Hx\), for \(x \in G\), are the {\em right cosets} of \(H\).
+
+\begin{proposition}\label{prop:CosetsHaveTheSameCardinality}
+Let \(G\) be a group and \(H\) be one of its subgroups. Then there is a bijection from \(H\) to \(xH\) and \(yH\) for every \(x, y \in G\).
+\end{proposition}
+
+\begin{proof}
+The functions
+\begin{align*}
+& H \to xH\,, \ a \to xa \\
+& H \to Hy\,, \ a \to ay
+\end{align*}
+are bijective.
+\end{proof}
+
+\begin{proposition}
+Let \(G\) be a group and \(H\) a subgroup of \(G\). Then there is a bijection \(G/\call_H \to G/\calr_H\).
+\end{proposition}
+
+\begin{proof}
+We have the surjection \(\inv{(\cdot)} : G \to G\), \(x \to \inv x\), that has the following property: for every \(x, y \in G\) we have \(x \call_H y\) if and only if \(\inv x \calr_H \inv y\), which is quite straightforward. This function induces the following well-defined bijection
+\[f : G/\call_H \to G/\calr_H\,, \ xH \to H\inv x\]
+thanks to Corollary~\ref{cor:SetIso2}.
+\end{proof}
+
+\begin{definition}
+For \(G\) a finite group and \(H\) a subgroup of \(G\), the {\em index} of \(H\) in \(G\) is the number
+\[[G:H] \coloneq \lvert G/\call_H \rvert = \lvert G/\calr_H \rvert.\]
+\end{definition}
+
+\begin{proposition}[Lagrange's Theorem]\label{prop:LagrangesTheorem}
+Let \(G\) be a finite group and \(H\) a subgroup of \(G\). Then
+\[\abs G = [G:H] \abs H .\]
+In particular, \(\lvert H \rvert\) divides \(\lvert G \rvert\).
+\end{proposition}
+
+\begin{proof}
+\(G/\call_H\) (this argument holds for \(G/\calr_H\), too) has \([G:H]\) elements; such elements are cosets and, by Proposition~\ref{prop:CosetsHaveTheSameCardinality}, each of them has \(\abs H\) elements.
+\end{proof}
+
+\begin{corollary}\label{cor:OrderDividesCardinality}
+Every element of a group \(G\) has order that divides \(\abs G\).
+\end{corollary}
+
+\begin{proof}
+For \(x \in G\) the subgroup \(\gen x\) of \(G\) is finite, because so is \(G\), and has cardinality \(\ord x\) by Proposition~\ref{prop:OrdIsCardinality}.
+\end{proof}
+
+\begin{corollary}[Euler's Theorem]
+Let \(x \in \zz\) and \(n \in \nn^{\ge 1}\) coprime: then
+\[x^{\phi(n)} \equiv 1 \mod n .\]
+\end{corollary}
+
+\begin{proof}
+By Corollary~\ref{cor:OrderDividesCardinality}, the order of each element \(\bar x\) of \((\zz/n\zz)^*\) must divide the cardinality of \((\zz/n\zz)^*\), that is \(\phi(n)\). By Proposition~\ref{prop:OrdDividesN} we conclude
+\[\bar x^{\phi(n)} = \bar{x^{\phi(n)}} = \bar 1 .\qedhere\]
+\end{proof}
+
+\begin{corollary}\label{cor:GroupsWithPrimeCardAreCyclic}
+Groups whose cardinality is a prime number are cyclic.
+\end{corollary}
+
+\begin{proof}
+Let \(G\) a group with \(\abs G = p\) for some prime \(p\). Then, because of Corollary~\ref{cor:OrderDividesCardinality}, each of its element must have order \(1\) or \(p\). Here \(1\) is the unique element has order \(1\), whilst the others have order \(p\). Thus \(G\) is cyclic due to Proposition~\ref{prop:CyclicIffOrdIsCard}.
+\end{proof}
+
+\begin{exercise}
+For \(G\) finite group, \(H_1\) and \(H_2\) two of its subgroups. If \(\abs{H_1}\) and \(\abs{H_2}\) are relatively prime, then \(H_1 \cap H_2\) is the banal subgroup.
+\end{exercise}
+
+\begin{exercise}
+Let \(G\) be a finite group. Demonstrate that for \(p \ge 3\) prime number \( \abs{\set{x \in G \mid x^p = 1}}\) is odd. What about \(\set{x \in G \mid x^2 = 1}\)?
+\end{exercise}

@@ -1,0 +1,57 @@
+% !TEX program = lualatex
+% !TEX spellcheck = en_GB
+% !TEX root = ../groups.tex
+
+\section{Set Theory}
+
+\begin{note}
+This section can be skipped until you bump into some propositions of the sections \q{Cosets} and \q{Isomorphisms Theorems}.
+\end{note}
+
+\begin{proposition}\label{prop:SetIso1}
+Consider two sets \(X\) and \(Y\), a function \(f : X \to Y\) and an equivalence relation \(\sim\) over \(X\). If
+\[a \sim b \rarr f(a) = f(b) \quad\text{for every } a, b \in X ,\]
+then there exists one and only one function \(\bar f : X{/}{\sim} \to Y\) such that
+\[\begin{tikzcd}[column sep=tiny]
+X \ar["f", rr] \ar["p", swap, dr] & & Y \\
+& X{/}{\sim} \ar["{\bar f}", swap, ur]
+\end{tikzcd}\]
+commutes, where \(p : X \to X{/}{\sim}\) is the canonical projection. Moreover: 
+\begin{enumerate}
+\item \(\bar f\) is surjective if and only if so is \(f\);
+\item if also
+\[f(a) = f(b) \rarr a \sim b \quad\text{for every } a, b \in X ,\]
+then \(\bar f\) is injective.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Consider the relation
+\[\bar f \coloneq \set{(u, v) \in \mathcal (X{/}{\sim}) \times Y \mid p(x) = u \text{ and } f(x) = v \text{ for some } x \in X} :\]
+we will show that it is actually a function from \(X{/}{\sim}\) to \(Y\). Picked any \(u \in X{/}{\sim}\) (it is not empty), there is some \(x \in u\) and then we have the element \(f(x) \in Y\); in this case, \((u, f(x)) \in \bar f\). Now, let \((u, v)\) and \((u, v')\) be two any pairs of \(\bar f\). Then \(u = p(x)\) and \(v = f(x) = v'\) for some \(x \in u\), and so we conclude \(v = v'\). This function satisfies \(\bar f p = f\), cause of its own definition.\newline
+Now, the uniqueness part comes. Assume you have a function \(g : X{/}{\sim} \to Y\) such that \(gp = f\): then for every \(u \in X{/}{\sim}\) we have some \(x \in u\) and
+\[g(u) = g(p(x)) = f(x) = \bar f (p(x)) = \bar f(u) ,\]
+that is \(g = \bar f\).\newline
+The most of the work is done now, whereas points (1) and (2) are immediate.
+\end{proof}
+
+\begin{corollary}\label{cor:SetIso2}
+For \(X\) and \(Y\) sets, let \(\sim_X\) and \(\sim_Y\) be two equivalence relations on \(X\) and \(Y\) respectively and let \(f : X \to Y\) be a function such that
+\[a \sim_X b \rarr f(a) \sim_Y f(b) \quad\text{for every } a, b \in X .\]
+Then there exists one and only one function \(\bar f : X{/}{\sim_X} \to Y{/}{\sim_Y}\) such that
+\[\begin{tikzcd}
+X \ar["{p_X}", d, swap] \ar["f", r] & Y \ar["{p_Y}", d] \\
+X{/}{\sim_X} \ar["{\bar f}", r, swap]   & Y{/}{\sim_Y}
+\end{tikzcd}\]
+commutes, where \(p_X\) and \(p_Y\) are the canonical projections. Moreover:
+\begin{enumerate}
+\item \(\bar f\) is surjective if and only if so is \(f\);
+\item if also
+\[f(a) \sim_Y f(b) \rarr a \sim_X b \text{ for every } a, b \in X ,\]
+then \(\bar f\) is injective.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+Take the sets \(X\) and \(Y{/}{\sim_Y}\) with the function \(p_Y f : X \to Y{/}{\sim_Y}\) and use Proposition~\ref{prop:SetIso1}.
+\end{proof}

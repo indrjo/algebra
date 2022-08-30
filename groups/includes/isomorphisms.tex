@@ -1,0 +1,157 @@
+% !TEX program = lualatex
+% !TEX root = ../groups.tex
+% !TEX spellcheck = en_GB
+
+\section{Isomorphism Theorems}
+
+For \(G\) group and \(N\) normal subgroup of \(G\), we have the {\em canonical projection}
+\[\pi_N : G \to G/N\,, \ \pi_N(x) \coloneq xN .\]
+
+\begin{lemma}\label{lemma:GrpIso0}
+For \(G\) and \(H\) groups, \(f : G \to H\) homomorphism and \(N\) normal subgroup of \(G\), the following facts are equivalent:
+\begin{enumerate}
+\item \(N \subseteq \ker f\).
+\item There exists one and only one homomorphism \(\bar f : G/N \to H\) such that
+\[\begin{tikzcd}[column sep=tiny, ampersand replacement=\&]
+G \ar["f", rr] \ar["{\pi_N}", swap, dr] \& \& H \\
+\& G/N \ar["{\bar f}", swap, ur]
+\end{tikzcd}\]
+commutes. Moreover, \(\bar f\) is surjective if and only if so is \(f\).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+This implication \((1) \rarr (2)\) is the version of Proposition~\ref{prop:SetIso1} of Group Theory: in fact, \(G/N\) is \(G/\call_N\) --- or \(G/\calr_N\) which is the same, since \(N\) is normal --- and, because \(N \subseteq \ker f\), for every \(a, b \in G\) with \(a \call_N b\) we have \(f(b) = f(a)\). It only remains to prove that \(\bar f\) is actually a homomorphism, which is immediate.\newline
+Conversely, assuming (2), if \(x \in N\), then \(xN = N\) and so
+\[f(x) = \bar f (\pi_N (x)) = \bar f (N) = 1_H :\]
+that is, \(x \in \ker f\).
+\end{proof}
+
+The \(\bar f\) of above is often referred as the {\em homomorphism indued by \(f\)}.
+
+\begin{exercise}
+Prove: if \(\bar f\) is injective, then \(N = \ker f\). [Hint: calculate \(\ker \bar f\).]
+\end{exercise}
+
+\begin{proposition}[First Isomorphism Theorem]\label{proposition:GrpIso1}
+For \(G\) and \(H\) groups and \(f : G \to H\) homomorphism
+\[G/\ker f \cong f(G) .\]
+\end{proposition}
+
+\begin{proof}
+A lot of the work is done in the previous Lemma: we know then there is a homomorphism \(\bar f : G /\ker f \to H\) such that \(f = \bar f \pi_{\ker f}\). But also this happens: for every \(a, b \in G\) if \(f(a) = f(b)\) then \(a \call_{\ker f} b\). Hence, by Proposition~\ref{prop:SetIso1}, we have a (unique) injection from \(G/\call_{\ker f} = G/\ker f\) to \(H\).
+\end{proof}
+
+\begin{proposition}[Classification of cyclic groups]\label{prop:CyclicClassification}
+Let \(G\) be a cyclic group. If \(G\) is finite, then \(G \cong \zz/n\zz\) where \(n = \abs G\), otherwise \(G \cong \zz\).
+\end{proposition}
+
+\begin{proof}
+First of all, \(G = \gen x\) for some \(x \in G\). The function \(f : \zz \to G\), \(f(s) \coloneq x^s\) is a surjective homomorphism, hence \(\zz/\ker f \cong G\). But \(\ker f = n\zz\) for some \(n \in \nn\) by Corollary~\ref{cor:SubgroupsOfZ}. \(\zz/\set{0}\) is infinite since it is isomorphic to \(\zz\), whereas for \(n \in \nn^{\ge 1}\) we have \(\zz/n\zz\) is finite and has \(n\) elements.
+\end{proof}
+
+\begin{lemma}\label{lem:CartesianIso}
+Let \(G\) be a group and \(H, K\) two subgroups of \(G\) such that:
+\begin{enumerate}
+\item \(ab = ba\) for every \(a \in H\) and \(b \in K\);
+\item \(H \cap K = \set{1}\).
+\end{enumerate}
+Then \(HK\) is subgroup of \(G\), and \(H \times K \cong HK\).
+\end{lemma}
+
+\begin{proof}
+We show that \(HK\) is a subgroup of \(G\). Take any pair \(x, y \in HK\): then \(x = h_1k_1\) and \(y = h_2k_2\) for some \(h_1, h_2 \in H\) and \(k_1, k_2 \in K\). So
+\begin{align*}
+x \inv y & = \underbrace{(h_1k_1) (\inv k_2 \inv h_2) = (h_1k_1) (\inv h_2 \inv k_2)}_{\text{by (1)}} = \\
+& = \underbrace{h_1 (k_1 \inv h_2) \inv k_2 = h_1 (\inv h_2 k_1) \inv k_2}_{\text{thanks to (1) again}} = \\
+ & = (h_1 \inv h_2) (k_1 \inv k_2) ,
+\end{align*}
+thus \(x \inv y \in HK\) (by Lemma~\ref{lem:SubgroupsCond}). Now, we prove the function
+\[f : H \times K \to HK\,, \ (x, y) \to xy\]
+is homomorphism: in fact, for every \((x_1, y_1), (x_2, y_2) \in H \times K\)
+\begin{align*}
+f((x_1, y_1) (x_2, y_2)) & = f(x_1x_2, y_1y_2) = \\
+                         & = \underbrace{(x_1x_2)(y_1y_2) = (x_1y_1)(x_2y_2)}_{\text{by (1)}} = \\
+                         & = f(x_1, y_1) f(x_2, y_2) .
+\end{align*}
+Obviously, \(f\) is surjective. Observe now that for \((a, b) \in H \times K\) if \(ab = 1\), then \(a = \inv b \in K\) and \(b = \inv a \in H\); however, by (2) we must say \(a = b = 1\). We can conclude \(f\) is injective:
+\[\ker f = \set{(a, b) \in H \times K \mid ab = 1} = \set{1} .\qedhere\]
+\end{proof}
+
+\begin{proposition}[Chinese Remainder Theorem for Groups]\label{prop:CRT}
+Let \(m, n \in \nn^{\ge 2}\) with \(\gcd(m,n) = 1\). Every abelian group \(G\) with \(mn\) elements has two subgroups \(H_m\) and \(H_n\) of \(G\) with cardinality \(m\) and \(n\) respectively such that
+\[G \cong H_m \times H_n .\]
+\end{proposition}
+
+\begin{proof}
+Since \(G\) is abelian, we have the following two subgroups:
+\[H_m \coloneq \set{x \in G \mid x^m = 1}\,, \ H_n \coloneq \set{x \in G \mid x^n = 1} .\]
+Observe both have at least two elements, one is the identity and at there is at least another one by Proposition~\ref{prop:PreCauchysTheorem}.\newline
+Being \(G\) abelian, one immediately sees the elements of \(H_m\) commutes with the ones of \(H_n\); besides, \(H_m \cap H_n = \set{1}\), since \(m\) and \(n\) are relatively prime. Thus \(H_m \times H_n \cong H_m H_n\) by Lemma~\ref{lem:CartesianIso}. Thanks to Bezout's Lemma, \(am+bn = 1\) for some \(a, b \in \zz\), and consequently
+\[x = x^{am+bn} = x^{am} x^{bn} ,\]
+where \(x^{bn} \in H_m\) and \(x^{am} \in H_n\). So \(G = H_m H_n\), and then \(G \cong H_m \times H_n\).\newline
+It only remains to examine the size of these subgroups and, to do this, we look at the factorization of such cardinalities. If there were a prime number \(p\) that divides either of them, by Proposition~\ref{prop:PreCauchysTheorem} these subgroups would have some element of order \(p\) and then \(H_m \cap H_n\) would not be a singleton. This implies that \(\gcd(\abs{H_m}, \abs{H_n}) = 1\). Moreover, \(\abs{H_m}\) divides \(m\), because if \(\abs{H_m}\) divided \(n\), then \(H_m\) would be trivial; similar arguments imply \(\abs{H_n}\) divides \(n\). Eventually, we can conclude \(H_m\) and \(H_n\) does have \(m\) and \(n\) elements respectively.
+\end{proof}
+
+Probably, you are more familiar with the following version of the Chinese Remainder Theorem, which is a particular consequence of Proposition~\ref{prop:CRT}.
+
+\begin{corollary}
+For \(m, n \in \nn^{\ge 2}\) coprime numbers,
+\[\zz/mn\zz \cong \zz/m\zz \times \zz/n\zz .\]
+\end{corollary}
+
+\begin{proof}
+Since \(m\) and \(n\) are relatively prime, by Proposition~\ref{prop:CRT} we have
+\[\zz/mn\zz \cong H_m \times H_n\]
+for some subgroups \(H_m\) and \(H_n\) with \(\abs{H_m} = m\) and \(\abs{H_n} = n\). But \(\zz/mn\zz\) is cyclic, hence Proposition~\ref{prop:CyclicOneAndOnlySubgroup} implies there is a unique possibility: \(H_m = \zz/m\zz\) and \(H_n = \zz/n\zz\).
+\end{proof}
+
+\begin{exercise}[Important: abelian groups of order \(pq\)]
+For \(p\) and \(q\) diverse prime numbers, any abelian group of cardinality \(pq\) is isomorphic to \(\zz/pq\zz\) (in particular, it must be cyclic).
+\end{exercise}
+
+\begin{proposition}[Second Isomorphism Theorem]
+Let \(G\) be a group. If \(H\) is a subgroup of \(G\) and \(N\) is a normal subgroup of \(G\), then:
+\begin{enumerate}
+\item \(H \cap N\) is a normal subgroup of \(H\);
+\item \(N\) is a subgroup of \(G\) and \(N\) is a normal subgroup of \(HN\);
+\item \(H/(H \cap N) \cong HN/N\).
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+The proof of (1) and (2) is skipped since it is trivial, so we will prove (3). Take the function
+\[f : H \to HN/N\,, \ f(h) \coloneq hN .\]
+It is a homomorphism and, since \(N = nN\) for \(n \in N\), is surjective.
+Hence, by because of Proposition~\ref{proposition:GrpIso1}, we have \(G/\ker f \cong HN/N\), so we have to calculate the kernel of \(f\):
+\[\ker f = \set{g \in H \mid gN = N} = \set{g \in H \mid g \in N} = H \cap N .\qedhere\]
+\end{proof}
+
+\begin{proposition}[Third Isomorphism Theorem]
+Given a group \(G\) and two normal subgroups \(H\) and \(N\) of \(G\) such that \(N \subseteq H \subseteq G\). Then \(H/N\) is a normal subgroup of \(G/N\) and
+\[G/H \cong (G/N)/(H/N) .\]
+\end{proposition}
+
+\begin{proof}
+The fact that \(H/N\) is a normal subgroup of \(G/N\) is quite immediate. Consider now the homomorphism \(\pi_H\), whose kernel is \(\set{x \in G \mid xH = H} = H\). Since \(N \subseteq H\), by Lemma~\ref{lemma:GrpIso0} there is a homomorphism \(\pi_H^\ast : G/N \to G/H\) such that
+\[\begin{tikzcd}[column sep=tiny]
+G \ar["{\pi_H}", rr] \ar["\pi_N", swap, dr] & & G/H \\
+& G/N \ar["{\pi_H^\ast}", swap, ur]
+\end{tikzcd}\]
+commutes. Because \(\pi_H\) is surjective \(\pi_H^\ast\) is surjective too, and then by Proposition~\ref{proposition:GrpIso1} we have \((G/N)/\ker \pi_H^\ast \cong G/H\), where
+\begin{align*}
+\ker \pi_H^\ast &= \set{xN \in G/N \mid \pi_H^\ast(xN) = H} = \\
+                &= \set{xN \in G/N \mid xH = H} = \\
+                &= \set{xN \mid x \in H} = H/N .\qedhere
+\end{align*}
+\end{proof}
+
+\begin{exercise}
+For \(G\) group and \(N\) normal subgroup of \(G\) such that \(G/N\) is an infinite cyclic group show that for every \(n \in \nn^{\ge 1}\) there exists a normal subgroup \(H\) of \(G\) such that \([G:H] = n\).
+\end{exercise}
+
+\begin{exercise}
+Let \(G\) be a group and \(H, K\) two of its finite subgroups with the following properties: \(ab = ba\) for every \(a \in H\) and \(b \in K\).
+Show that
+\[\frac{\abs H \abs K}{\abs{H \cap K}} = \abs{HK} .\]
+\end{exercise}

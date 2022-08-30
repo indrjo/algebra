@@ -1,0 +1,102 @@
+% !TEX program = lualatex
+% !TEX spellcheck = en_GB
+% !TEX root = ../groups.tex
+
+\section{Group actions}
+
+\begin{definition}[Group actions]
+For \(G\) group and \(X\) set, an {\em action} of \(G\) (or \(G\)-{\em action}) on \(X\) is a homomorphism \(\phi : G \to \cals_X\). We write \(\phi_g\) instead of \(\phi(g)\).
+\end{definition}
+
+The fact \(\phi\) is a homomorphism can be stated explicitly: \(\phi_{gh} = \phi_g \phi_h\) for every \(g, h \in G\). In particular, by Proposition~\ref{prop:HomProps}, \(\phi_1\) is the identity function, \(\phi_{\inv g} = \inv\phi_g\) for every \(g \in G\). 
+
+\begin{definition}[Orbits and stabilizers]
+For \(G\) group, consider a set \(X\) with a \(G\)-action \(\phi\). For \(x \in X\), the {\em stabilizer} of \(x\) is the set
+\[\stab_\phi x \coloneq \set{g \in G \mid \phi_g(x) = x}\]
+whereas the {\em orbit} of \(x\) is
+\[\orb_\phi x \coloneq \set{y \in X \mid \phi_g(x) = y \text{ for some } g \in G}.\]
+\end{definition}
+
+\begin{proposition}
+Let \(G\) be group, \(X\) be set and \(\phi : G \to \cals_X\) be a \(G\)-action on \(X\). The stabilizers of the elements of \(X\) are subgroups of \(G\).
+\end{proposition}
+
+\begin{proof}
+For \(a, b \in \stab_\phi x\) we have
+\[\phi_{a \inv b}(x) = \phi_a (\phi_{\inv b} (x)) = \underbrace{\phi_a (\inv \phi_b(x)) = \phi_a (x)}_{\phi_b \in \cals_X \text{ and } \phi_b(x) = x} = x ,\]
+that is \(a \inv b \in \stab_\phi (x)\).
+\end{proof}
+
+\begin{proposition}
+For \(G\) group, \(X\) set with a \(G\)-action \(\phi : G \to \cals_X\) on it,
+\[\ker \phi = \bigcap_{x \in X} \stab_\phi x .\]
+\end{proposition}
+
+\begin{proof}
+\(\ker \phi = \set{g \in G \mid \phi_g = \id_X} = \set{g \in G \mid \phi_g(x) = x \text{ for every } x \in X}\).
+\end{proof}
+
+\begin{proposition}
+Let \(G\) be group, \(X\) be set and \(\phi\) be a \(G\)-action on \(X\). The orbits of the elements of \(X\) are equivalence classes induced by a suitable equivalence relation.
+\end{proposition}
+
+\begin{proof}
+The relation we are interested in is the one of {\em conjugacy}: we say \(x \in X\) is {\em conjugated} to \(y \in X\) whenever \(\phi_g (x) = y\) for some \(g \in G\). Quick calculations suffice to verify this.
+\end{proof}
+
+\begin{proposition}
+For \(G\) group, \(X\) set, \(\phi\) action of \(G\) on \(X\), we have
+\[\stab_\phi(\phi_g (x)) = g (\stab_\phi x) \inv g\]
+for every \(g \in G\) and \(x \in X\). 
+\end{proposition}
+
+\begin{proof}
+In fact, for every \(a \in G\)
+\begin{align*}
+a \in \stab_\phi (\phi_g (x)) & \lrarr \phi_g (x) = \phi_a (\phi_g (x)) = \phi_{ag} (x) \lrarr \\
+& \lrarr x = \phi_{\inv g a g} (x) \lrarr \inv g a g \in \stab_\phi x . \qedhere
+\end{align*}
+\end{proof}
+
+\begin{proposition}\label{prop:OrbsStabsCosets}
+Consider a group \(G\), a set \(X\) and \(\phi\) a \(G\)-action on \(X\). Then for every \(x \in X\) there exists a bijection form \(G/\call_{\stab_\phi x}\) to \(\orb_\phi x\). In particular, if \(G\) is a finite group, then \(\abs{\stab_\phi x} \abs{\orb_\phi x} = \abs G\).
+\end{proposition}
+
+\begin{proof}
+First of all, consider the surjective function
+\[f : G 	\to \orb_\phi x,\, f(g) := \phi_g(x) .\]
+Observe that, given \(g_1, g_2 \in G\) such that \(g_1 = g_2 h\) for some \(h \in \stab_\phi x\), we have
+\[f(g_2) = \underbrace{\phi_{g_2} (x) = \phi_{g_2} \left(\phi_h (x)\right)}_{\text{because } h \in \stab_\phi x} = \phi_{g_2h} (x) = f(g_2 h) = f(g_2) .\]
+Thus by Proposition~\ref{prop:SetIso1}, we have the surjective \(\bar f\) that makes commute the following diagram
+\[\begin{tikzcd}[column sep=tiny]
+G \ar["{\text{projection}}", dr, swap] \ar["f", rr] & & \orb_\phi x \\
+ & G{/}{\call_{\stab_\phi x}} \ar["{\bar f}", ur, swap]
+\end{tikzcd}\]
+(Recall how \(\call_H\) is defined for subgroups \(H\) of \(G\) if you find hard to get this.) Now, only injectivity remains to be proved. Take \(a, b \in G\) with \(\phi_a (x) = \phi_b (x)\): in this case \(x = \phi_{\inv b} (\phi_a (x)) = \phi_{\inv b a} (x)\); so \(\inv b a \in \stab_\phi (x)\), that is \(a \stab_\phi x = b \stab_\phi x\). Thanks to Proposition~\ref{prop:SetIso1} again, we can conclude the proof.
+\end{proof}
+
+\begin{corollary}\label{cor:ClassFormulaForSets}
+Let \(X\) be a finite set, \(G\) a group, \(\phi\) a \(G\)-action on \(X\) and \(F \subseteq X\) that has one element from each conjugacy class of \(X\). Then
+\[\abs X = \sum_{x \in F} [G : \stab_\phi x] .\]
+\end{corollary}
+
+%Here is a fact that we will need afterwards. Suppose given a set \(X\), a group \(G\) a group and a \(G\)-action \(\phi\) on \(X\). For \(g \in G\) the function
+%\begin{equation}
+%\bar\phi_g : 2^X \to 2^X\,,\ \bar\phi_g (A) := \set{\phi_g (x) \mid x \in A}
+%\label{eqn:InducedAction}\end{equation}
+%is a bijection. In fact, \(\bar\phi_g \bar\phi_{\inv g} = \bar\phi_{\inv g} \bar\phi_g = \id_{2^X}\).
+%
+%
+%\begin{lemma}
+%For \(X\) set, \(G\) group and \(\phi\) a \(G\)-action on \(X\), the function
+%\[\begin{aligned}
+%& \bar\phi : G \to \cals_{2^X} \\
+%& \text{with } \bar\phi_g \text{ defined as in~\ref{eqn:InducedAction}}
+%\end{aligned}\]
+%is a \(G\)-action on \(2^X\).
+%\end{lemma}
+%
+%\begin{proof}
+%Take \(g, h \in G\). For \(A \subseteq X\) we have
+%\[\bar\phi_{gh} (A) = \underbrace{\set{\phi_{gh}(x) \mid x \in A} = \set{\phi_g\phi_h(x) \mid x \in A}}_{\phi \text{ is a \(G\)-action on \(X\)}} = \phi_g\phi_h(A) .\qedhere\]
+%\end{proof}

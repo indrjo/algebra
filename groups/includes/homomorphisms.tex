@@ -1,0 +1,185 @@
+% !TEX program = lualatex
+% !TEX root = ../groups.tex
+% !TEX spellcheck = en_GB
+
+\section{Homomorphisms}
+
+\begin{definition}[Homomorphisms]
+Let \(G\) and \(H\) be two groups. A {\em homomorphism} from \(G\) to \(H\) is a function \(f : G \to H\) such that
+\[f(xy) = f(x) f(y) \text{ for every } x, y \in G .\] 
+\end{definition}
+
+\begin{proposition}
+For \(G_1\), \(G_2\) and \(G_3\) groups, if \(f : G_1 \to G_2\) and \(g : G_2 \to G_3\) are homomorphisms, then so is \(g f\).
+\end{proposition}
+
+\begin{proof}
+For every \(a, b \in G_1\) we have
+\[g(f(xy)) = g(f(x)f(y)) = g(f(x))g(f(y)).\qedhere\]
+\end{proof}
+
+\begin{proposition}\label{prop:HomProps}
+Let \(G\) and \(H\) be two groups and \(f : G \to H\) a homomorphism. Then
+\begin{enumerate}
+\item \(f\) maps the identity of \(G\) into that one of \(H\);
+\item for every \(x \in G\) we have \(f(\inv x) = \inv{f(x)}\);
+\item for every \(x \in G\) and \(n \in \zz\), we have \(f(x^n) = f(x)^n\);
+\item if \(x \in G\) is of finite order, then so is \(f(x)\) and \(\ord f(x)\) divides \(\ord x\).
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+We write \(1_G\) and \(1_H\) to mean the identities of \(G\) and \(H\), respectively.
+\begin{enumerate}
+\item \[f(1_G) = \underbrace{f(1_G 1_G) = f(1_G) f(1_G)}_{f \text{ is a homomorphism}},\]
+so \(1_H = f(1_G)\).
+\item For \(x \in G\) we have 
+\[\underbrace{f(x) f(\inv x) = f (x \inv x)}_{f \text{ is a homomorphism}} = \underbrace{f(1_G) = 1_H}_{\text{cause (1)}} = f(x) \inv{f(x)},\]
+hence \(f(\inv x) = \inv{f(x)}\).
+\item For \(n = 0\) or \(n = -1\) the work is already done in (1) and (2). Suppose \(n \ge 1\) and proceed by induction on \(n\). For \(n = 1\) the statement is trivially true. Assuming \(f(x^k) = f(x)^k\), we have
+\[f(x^{k+1}) = \underbrace{f(x^kx) = f(x^k)f(x)}_{f \text{ is a homomorphism}} = f(x)^kf(x) = f(x)^{k+1}.\]
+Finally, if \(n \le -2\), then
+\[f(x^n) = \underbrace{f(\inv{(x^{-n})}) = \inv{f(x^{-n})}}_{\text{since (2)}};\]
+but \(-n \ge 2\), so
+\[\inv{f(x^{-n})} = \inv{(f(x)^{-n})} = f(x)^n .\]
+\item For every \(x \in G\) we have \(x^{\ord x} = 1_G\), then, because (1),
+\[1_H = \underbrace{f(x^{\ord x}) = {f(x)}^{\ord x}}_{\text{by (3)}},\]
+that is \(\ord x\) is a multiple of \(\ord f(x)\), by Proposition~\ref{prop:OrdDividesN}. \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{proposition}\label{prop:SubgroupsToSubgroups}
+Let \(G_1\) and \(G_2\) be two groups and \(f : G_1 \to G_2\) a homomorphism. Then
+\begin{enumerate}
+\item \(f(H_1)\) is a subgroup of \(G_2\) for every subgroup \(H_1\) of \(G_1\);
+\item \(\inv f(H_2)\) is a subgroup of \(G_1\) for every subgroup \(H_2\) of \(G_2\);
+\item for every normal subgroup \(N\) of \(G_2\) the set \(\inv f (N)\) is a normal subgroup of \(G_1\).
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\begin{enumerate}
+\item Let \(x, y \in f(H_1)\): in this case, there are \(a, b \in H_1\) such that \(f(a) = x\) and \(f(b) = y\). We have
+\[x \inv y = f(x) \inv {f(y)} = f(x) f(\inv y) = f(x \inv y)\]
+and thus \(x \inv y \in f(H_1)\): thanks to Proposition~\ref{lem:SubgroupsCond}, we have concluded.
+
+\item Take \(x, y \in \inv f(H_2)\), that is \(f(x), f(y) \in H_2\). Now, since \(H_2\) is a subgroup of \(G_2\) and by Proposition~\ref{lem:SubgroupsCond}, we have
+\[H_2 \owns f(x) \inv{f(y)} = f(x)f(\inv y) = f(x \inv y)\]
+and so \(x \inv y \in H_2\). Again cause Proposition~\ref{lem:SubgroupsCond}, \(H_2\) is a subgroup of \(G_1\).
+
+\item Consider \(x \in G_1\) and \(h \in G_1\) such that \(f(h) \in N\): since \(N\) is normal
+\[N \owns f(x) f(h) \inv{f(x)} = f(x h \inv x).\]
+Thus \(x h \inv x \in \inv f(N)\), and we have shown \(\inv f(N)\) is normal.\qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{proposition}\label{prop:SurjectivityNormality}
+Let \(G_1\) and \(G_2\) be two groups and \(f : G_1 \to G_2\) a surjective homomorphism. Then for every normal subgroup \(H\) of \(G_1\) the subgroup \(f(H)\) is normal too.
+\end{proposition}
+
+\begin{proof}
+Yet to \TeX{}-ify\dots{}
+\end{proof}
+
+\begin{proposition}
+For \(G\) group and \(N\) normal subgroup of \(G\), the {\em canonical projection}
+\[\pi_N : G \to G/N\,, \ \pi_N(x) \coloneq xN\]
+is a homomorphism.
+\end{proposition}
+
+\begin{proof}
+Yet to \TeX{}-ify\dots{}
+\end{proof}
+
+\begin{proposition}[Kernel of homomorphisms]
+For \(G\) and \(G'\) groups and \(f : G \to G'\) homomorphism,
+\[\ker f \coloneq \set{x \in G \mid f(x) = 1_{G'}}\]
+is a normal subgroup of \(G\). (As usual, here \(1_{G'} \in G'\) is the identity of \(G'\).)
+\end{proposition}
+
+For \(f\) homomorphism, \(\ker f\) has a special role and, consequently, it deserves a dedicated name: we refer to it as the {\em kernel} of \(f\).
+
+\begin{proof}
+Yet to \TeX{}-ify\dots{}
+\end{proof}
+
+\begin{exercise}
+Any homomorphism \(\zz \to \zz/n\zz\) has kernel that contains \(n\zz\).
+\end{exercise}
+
+\begin{proposition}
+For \(G\) and \(G'\) groups and \(f : G \to G'\) homomorphism
+\[\inv f (\set{f(x)}) = x \ker f \text{ for every } x \in G .\]
+\end{proposition}
+
+\begin{proof}
+Yet to \TeX{}-ify\dots{}
+\end{proof}
+
+\begin{proposition}
+Let \(G\) and \(G'\) be two groups and \(f : G \to G'\) a homomorphism. Then \(f\) is injective if and only if \(\ker f = \set{1_{G'}}\).
+\end{proposition}
+
+\begin{proof}
+Yet to \TeX{}-ify\dots{}
+\end{proof}
+
+\begin{proposition}
+For \(G\) finite group and \(G'\) group, a homomorphism \(f : G \to G'\) is injective if and only if \(\ord x\) divides \(\ord f(x)\) for every \(x \in G\).
+\end{proposition}
+
+\begin{proof}
+Yet to \TeX{}-ify\dots{}
+\end{proof}
+
+\begin{proposition}
+For \(G\) group and \(G'\) generated by some \(S \subseteq G'\), a homomorphism \(f : G \to G'\) is surjective if and only if \(S \subseteq f(G)\).
+\end{proposition}
+
+\begin{proof}
+Yet to \TeX{}-ify\dots{}
+\end{proof}
+
+\begin{exercise}
+How many (and what are the) homomorphisms \(\zz \to \zz\)? How many of them are injective? How many of them are surjective?
+\end{exercise}
+
+\begin{exercise}
+How many (and what are the) homomorphisms \(\zz/m\zz \to \zz/n\zz\)? How many of them are injective? How many of them are surjective?
+\end{exercise}
+
+\begin{proposition}[Correspondence Theorem]
+For \(G\) and \(G'\) groups and \(f : G \to G'\) surjective homomorphism, there exists a bijection between the subgroups of \(G\) containing \(\ker f\) and the subgroups of \(G'\). Moreover, such bijection maps normal subgroups into normal subgroups.
+\end{proposition}
+
+\begin{proof}
+Thanks to Proposition~\ref{prop:SubgroupsToSubgroups}, we know images and preimages of subgroups via homomorphisms are subgroups. A little criticism comes with normal subgroups: whereas preimages of normal subgroups are normal, nothing in general can be said about their images; but Proposition~\ref{prop:SurjectivityNormality} helps us, since we have assumed \(f\) is surjective. Observe also each subgroup of \(G'\) must contain the identity of \(G'\), hence the respective preimages must contain \(\ker f\).\newline
+That said, we write \(S\) for the family of the subgroups of \(G\) containing \(\ker f\), while \(S'\) is the family of the subgroups of \(G'\), and consider the following pair of functions
+\begin{align*}
+& \zeta : S \to S'\,,\ \zeta(A) \coloneq f(A) \\
+& \xi : S' \to S\,, \ \xi(B) \coloneq \inv f(B)
+\end{align*}
+The aim is to show these functions are inverse.\newline
+In general --- a set-theoretic fact ---, \(f(\inv f(B)) \subseteq B\) for every \(B \in S'\). But because \(f\) is surjective, also the inverse inclusion holds. We have shown that \(\zeta \xi = \id_{S'}\).\newline
+%It remains to prove \(\xi \zeta = \id_S\), that is \(\inv f(f(A)) = A\) for every \(A \in S\).
+Again by Set Theory, \(A \subseteq \inv f(f(A))\) for every \(A \in S\) is true. Take \(x \in \inv f(f(A))\), viz \(f(x) = f(y)\) for some \(y \in A\): we have \(x\inv y \in \ker f\), but \(\ker f \subseteq A\), so \(x \inv y \in A\). We can conclude \(x \in A\), since \(y \in A\). 
+\end{proof}
+
+\begin{corollary}
+For \(G\) group and \(N\) normal subgroup of \(G\), there exists a bijection between the subgroups of \(G\) containing \(N\) and the subgroups of \(G/N\). Furthermore, such bijection maps normal subgroups into normal subgroups.
+\end{corollary}
+
+\begin{proof}
+Just consider the surjective homomorphism
+\[\pi_N : G \to G/N\,, \ \pi_N(x) \coloneq xN .\qedhere\]
+\end{proof}
+
+We conclude the section with a theorem concerning finite groups that can be demonstrated with the concepts exposed so far.
+
+\begin{proposition}[Cauchy's Theorem for abelian groups]\label{prop:PreCauchysTheorem}
+Let \(G\) be a finite abelian group. Then for every prime \(p \in \nn\) that divides \(\abs G\) there exists \(x \in G\) such that \(\ord x = p\).
+\end{proposition}
+
+\begin{proof}
+We proceed by induction on the cardinality of groups. By Proposition~\ref{cor:GroupsWithPrimeCardAreCyclic}, any group of order \(2\) is cyclic and the element is not the identity has order \(2\). Let \(G\) be a finite group and \(x \in G\) such that \(x \ne 1\). Consequently, we have the cyclic subgroup \(H \coloneq \gen x\), that must be normal; in this case, the group \(G/H\) is abelian too. Now thanks to Proposition~\ref{prop:LagrangesTheorem}, \(\abs G = \abs H \abs{G/H}\): so each prime \(p\) that divides \(\abs G\) must divide \(\abs H\) or \(\abs{G/H}\). If \(p\) dvides \(\abs H\), then \(H\) has an element of order \(p\) by Corollary~\ref{cor:CyclicGroupsHavePhiNElemsOfOrdN}. If \(p\) divides \(\abs{G/H} < \abs G\), then by induction \(\ord (gH) = p\) for some \(g \in G\). But, by Proposition~\ref{prop:HomProps}, \(\ord (gH)\) divides \(\ord g\). Again by Corollary~\ref{cor:CyclicGroupsHavePhiNElemsOfOrdN}, there is an element of \(\gen g \subseteq G\) of order \(p\).
+\end{proof}

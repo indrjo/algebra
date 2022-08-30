@@ -1,0 +1,55 @@
+% !TEX program = lualatex
+
+\documentclass[ structure = article
+              , pagelayout = compact
+              , maketitlestyle = standard
+              , secstyle = center
+              , secfont = roman
+              , liststyle = aligned
+              ]{suftesi}
+
+\usepackage[no-math]{fontspec}
+\setmainfont{Linux Libertine O}
+
+\usepackage{polyglossia}
+\setmainlanguage[variant=uk]{english}
+
+\usepackage[english=british]{csquotes}
+\newcommand\q\enquote
+
+\usepackage{hyperref}
+\hypersetup{breaklinks,hidelinks}
+
+\usepackage{ libertinust1math
+           , MnSymbol
+           , extarrows
+           , amsthm
+           }
+\usepackage[bb=ams]{mathalfa}
+
+\newcounter{mycounter}
+\counterwithin{mycounter}{section}
+\theoremstyle{definition}
+\newtheorem{definition}[mycounter]{Definition}
+\newtheorem{lemma}[mycounter]{Lemma}
+\newtheorem{proposition}[mycounter]{Proposition}
+\newtheorem{corollary}[mycounter]{Corollary}
+\newtheorem{note}[mycounter]{Note}
+\newtheorem{example}[mycounter]{Example}
+\newtheorem{exercise}[mycounter]{Exercise}
+
+\renewcommand\theequation{\thesection.\arabic{equation}}
+
+\usepackage{tikz}
+\usetikzlibrary{ calc
+               , babel
+               , cd
+               }
+\tikzcdset{ row sep/normal=.7cm
+          , column sep/normal=.7cm
+          , arrow style=tikz
+          , diagrams={>={To[length=3.5pt,width=4pt]}}
+          , shorten=-2pt
+          }
+
+\setcounter{section}{-1}

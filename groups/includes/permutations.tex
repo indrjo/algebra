@@ -1,0 +1,44 @@
+% !TEX program = lualatex
+% !TEX root = ../groups.tex
+% !TEX spellcheck = en_GB
+
+\section{Permutations}
+
+Given a set \(X\), consider the set
+\[\cals_X \coloneq \set{f : X \to X \mid f \text{ is bijective}}\]
+whose elements are called {\em permutations}. The composition of two elements of \(\cals_X\) yields one element of \(\cals_X\). Such operation is associative; \(\cals_X\) has
+\[\id_X : X \to X \text{ defined by } \id_X(x) = x\] which really is the identity of \(\cals_X\) in a group-theoretic sense; eventually, since the elements of \(\cals_X\) are bijective function, the inverse of every \(f \in \cals_X\) exists, and it is \(\inv f\). Thus \(\cals_X\) with \(\id_X\) and the composition does form a group, the {\em symmetric group} of \(X\).
+
+We will almost exclusively focus on permutations of finite sets. In case \(X\) is \(\set{1, \dots{}, n}\) for some \(n \in \nn\) we write \(\cals_n\). It is important to note that if \(X\) has \(n\) elements, then \(\cals_X\) has \(n!\) elements. 
+
+For \(X\) a finite set and different \(x_1, \dots{}, x_n \in X\), with \(n \ge 2\), we denote by
+\[[x_1, \dots{}, x_n]_X\]
+the permutation which maps \(x_n\) into \(x_1\), \(x_i\) into \(x_{i+1}\) for \(i \in \set{1, \dots{}, n-1}\) and the elements of \(X \setminus \set{x_1, \dots{}, x_n}\) into themselves. The requirement \(n \ge 2\) is made for the following reason: \([a]_X\) would be the identity, whatever \(a \in X\) is. All these permutations are called {\em cycles}. Two cycles \([x_1, \dots{}, x_m]_X\) and \([y_1, \dots{}, y_n]_X\) are said {\em disjoint} whenever \(x_i \ne y_j\) for every \(i \in \set{1, \dots{}, m}\) and \(j \in \set{1, \dots{}, n}\).
+
+Observe that \(\cals_X\) is not abelian if \(X\) has at least \(3\) elements. For example, take three different \(a, b, c \in X\): \([a, b]_X [b, c]_X (b) = c\) but \([b, c]_X [a, b]_X (b) = a\). However, disjoint cycles do commute.
+
+\begin{proposition}\label{proposition:FactorInCycles}
+For \(X\) finite set, every \(\phi \in \cals_X\) is a composition of disjoint cycles; such factorization is unique up to the order of composition of the cycles.
+\end{proposition}
+
+\begin{proof}
+We proceed by induction on the cardinality of \(X\). For singletons, the statement is trivially true. Assume the statement is true for sets with less than \(n\) elements and take \(X\) with \(n\) elements. The statement is trivially true for \(\id_X\), so let us take \(\phi \in \cals_X \setminus \set{\id_X}\). Choose one \(x \in X\) and let us consider
+\[\tld X := \set{\phi^k(x) \mid k \in \nn} .\]
+Observe that, since \(X\) is finite, the function
+\[\nn \to X\,,\ i \to \phi^i(x)\]
+cannot be injective: thus, \(\phi^i(x) = x\) for some \(i \in \nn^{\ge 1}\). We have then the cycle
+\[\eta := [x, \dots{}, \phi^{k-1}(x)]_X\]
+where \(k := \min \set{i \in \nn^{\ge 1} \mid \phi^i(x) = x}\). Since \(\phi\) is a bijection, it induces a permutation \(\tld \phi\) of \(X \setminus \tld X\), which has less than \(n\) elements. Such permutation, by inductive hypothesis, can be factored into disjoint cycles of \(X \setminus \tld X\), namely \(\pi_1 \cdots \pi_s\). The cycles \(\pi_i\) can be extended to cycles \(\pi_i'\) of \(X\) in the following way:
+\[\pi_i'(x) := \begin{cases} \pi_i(x) & \text{if } x \notin \tld X \\ x & \text{otherwise} \end{cases}.\]
+By construction, \(\phi = \eta\pi_1' \cdots \pi_s'\), where the cycles \(\pi_i'\) are all disjoint from \(\eta\).
+\end{proof}
+
+\begin{proposition}
+Permutations of finite sets can be written as composition of a finite number of transpositions. This decomposition is not unique, though. However, if \(\alpha_1 \cdots{} \alpha_m\) and \(\beta_1 \cdots{} \beta_n\) are two decompositions into transpositions of the same permutation, then \(m \equiv n \mod 2\).
+\end{proposition}
+
+\begin{proof}
+Let \(X\) be a finite set, and consider the cycle \([x_1, \dots{}, x_n]_X\): then
+\[[x_1, \dots{}, x_n]_X = [x_1, x_n]_X \cdots [x_1, x_2]_X .\]
+Proposition~\ref{proposition:FactorInCycles} implies any permutation can be decomposed into cycles. [\dots{}]
+\end{proof}

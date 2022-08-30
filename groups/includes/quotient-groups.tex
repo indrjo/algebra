@@ -1,0 +1,87 @@
+% !TEX program = lualatex
+% !TEX spellcheck = en_GB
+% !TEX root = ../groups.tex
+
+\section{Quotient groups}
+
+Consider a group \(G\) and an equivalence relation \(\sim\) on it: we have the quotient set \(G/\sim\). Is it a group? Not always, but we really do want to have \q{quotient groups}. We stick to the case where \(\sim\) is compatible with the operation with the operation on a group, that is
+\[a \sim b \text{ and } c \sim d \rarr ac \sim bd \quad \text{for every } a, b, c, d \in G.\]
+Above all, such \(G/\sim\) must have a magmatic structure, that is having a well-defined operation
+\begin{equation}(G/\sim) \times (G/\sim) \to G/\sim\,, \ (\bar x, \bar y) \to \bar x \ast \bar y \coloneq \bar{xy}.\label{eqn:QuotOp}
+\end{equation}
+The compatibility of \(\sim\) fits the tasks. To appreciate this, imagine \(\sim\) is not compatible. There exists \(a, b, c, d \in G\) such that \(a \sim b\), \(c \sim d\) and not \(ac \sim bd\). In this case we would have \(\bar a \ast \bar c = \bar b \ast \bar d\) but \(\bar{ac} \ne \bar{bd}\).\newline
+We overcame the initial hurdle, because the group structure naturally follows without any other nuisance:
+
+\begin{proposition}\label{prop:QuotientGroupEquivRel}
+If \(G\) is a group and \(\sim\) is an equivalence relation on \(G\) compatible with its operation, then \(G/\sim\) with the operation~\eqref{eqn:QuotOp} is a group.
+\end{proposition}
+
+\begin{proof}
+Straightforward and quite boring\dots{} daily routine.
+\end{proof}
+
+The relations \(\call_H\) and \(\calr_H\) have a particular role in Algebra.
+
+\begin{proposition}\label{prop:LRCompatible}
+Let \(G\) be a group and \(H\) a subgroup of \(G\). Then \(\call_H\) is compatible with the operation of \(G\) if and only if 
+\begin{equation}
+xh\inv x \in H \text{ for every } x \in G, h \in H .\label{eqn:NormalSubGrp}
+\end{equation}
+The same holds for \(\calr_H\).
+\end{proposition}
+
+\begin{proof}
+Obviously, \(x \call_H xh\) for every \(x \in G\) and \(h \in G\). If \(\call_H\) is compatible with the operation \(G\) comes with, then \(x \inv x \call_H x h \inv x\), that is \(1 \call_H x h \inv x\). In this case, \(x h \inv x = k\) for some \(k \in H\), so \(xh\inv x \in H\).\newline
+Assume now~\eqref{eqn:NormalSubGrp}. Consider \(a, b, c, d \in G\) such that \(a \call_H b\) and \(c \call_H d\). We have \(ahck=bd\) for some \(h, k \in H\). But \(\inv chc \in H\), that is \(hc = c h'\) for some \(h' \in H\); thus \(bd = (ac)(h'k)\), viz \(ac \call_H bd\), and we have finished.
+\end{proof}
+
+So the subgroups \(H\) satisfies~\eqref{eqn:NormalSubGrp} have a special role: they are the ones and the only ones such that \(G/\call_H\) and \(G/\calr_H\) have a group structure in the sense we have explained above. Such subgroups deserve a special name.
+
+\begin{definition}[Normal subgroups]
+For \(G\) group, a subgroup \(H\) of \(G\) is said {\em normal} whenever \(xh\inv x \in H\) for every \(x \in G\) and \(h \in H\).
+\end{definition}
+
+However, more is true:
+
+\begin{proposition}
+Let \(G\) be a group and \(H\) a subgroup of \(H\). Then the following facts are equivalent:
+\begin{enumerate}
+\item \(H\) is normal;
+\item \(xH = Hx\) for every \(x \in G\);
+%\item \(xH \subseteq Hx\) for every \(x \in G\);
+\item \(xH\inv x = H\) for every \(x \in G\).
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Left as exercise, but quite simple.
+\end{proof}
+
+\begin{corollary}
+Let \(G\) be a group and \(H\) a finite subgroup of \(G\). If \(H\) is the unique subgroup of \(G\) that has cardinality \(n\), then it is \(H\) is normal.
+\end{corollary}
+
+\begin{proof}
+If \(H\) is a subgroup of \(G\), so is \(x H \inv x\) for each \(x \in G\). Besides, both have the same cardinality, hence \(H = xH\inv x\).
+\end{proof}
+
+\begin{corollary}
+Let \(G\) be a group and \(H\) a subgroup of \(G\). If \([G:H] = 2\), then \(H\) is normal.
+\end{corollary}
+
+\begin{proof}
+One element of \(G/\call_H\) is \(H\) itself and, since \(G/\call_H\) is a partition of \(G\), the other one is \(G \setminus H\); the same occurs in \(G/\calr_H\). Hence \(xH = H = Hx\) if \(x \in H\), otherwise \(xH = G \setminus H = Hx\). We can conclude \(H\) is normal.
+\end{proof}
+
+\begin{definition}
+For \(G\) group and \(H\) a normal subgroup of \(G\), the group
+\[G/H \coloneq G/\call_H = G/\calr_H = \set{xH \mid x \in G}\]
+is the {\em quotient group} of \(G\) through \(H\). It is a group in the sense the set that \(G/H\) has the operation
+\begin{align*}
+G/H \times G/H & \to G/H \\
+(xH, yH) & \to (xH)(yH) \coloneq (xy)H
+\end{align*}
+(this operation is well-defined by Proposition~\ref{prop:QuotientGroupEquivRel} and Proposition~\ref{prop:LRCompatible}) \(H\) is the identity and \(\inv{(xH)} = \inv x H\) for every \(x \in G\).
+\end{definition}
+
+
