@@ -80,23 +80,43 @@ Let \(X\) be a finite set, \(G\) a group, \(\phi\) a \(G\)-action on \(X\) and \
 \[\abs X = \sum_{x \in F} [G : \stab_\phi x] .\]
 \end{corollary}
 
-%Here is a fact that we will need afterwards. Suppose given a set \(X\), a group \(G\) a group and a \(G\)-action \(\phi\) on \(X\). For \(g \in G\) the function
-%\begin{equation}
-%\bar\phi_g : 2^X \to 2^X\,,\ \bar\phi_g (A) := \set{\phi_g (x) \mid x \in A}
-%\label{eqn:InducedAction}\end{equation}
-%is a bijection. In fact, \(\bar\phi_g \bar\phi_{\inv g} = \bar\phi_{\inv g} \bar\phi_g = \id_{2^X}\).
-%
-%
-%\begin{lemma}
-%For \(X\) set, \(G\) group and \(\phi\) a \(G\)-action on \(X\), the function
-%\[\begin{aligned}
-%& \bar\phi : G \to \cals_{2^X} \\
-%& \text{with } \bar\phi_g \text{ defined as in~\ref{eqn:InducedAction}}
-%\end{aligned}\]
-%is a \(G\)-action on \(2^X\).
-%\end{lemma}
-%
-%\begin{proof}
-%Take \(g, h \in G\). For \(A \subseteq X\) we have
-%\[\bar\phi_{gh} (A) = \underbrace{\set{\phi_{gh}(x) \mid x \in A} = \set{\phi_g\phi_h(x) \mid x \in A}}_{\phi \text{ is a \(G\)-action on \(X\)}} = \phi_g\phi_h(A) .\qedhere\]
-%\end{proof}
+We have actions of a group on itself too. For \(G\) group, there is an important \(G\)-action on \(G\):
+\[\text{inn} : G \to \cals_G ,\]
+where the function \(\text{inn}_g : G \to G\) is defined by \(\text{inn}_g(x) = g x\inv g\).\footnote{Actually, \(\text{inn}_g\) is an automorphism of \(G\), but here we only care it is a bijection.} It is useful to give some new notation in this case:
+\begin{align*}
+& C_G(x) \coloneq \stab_{\text{inn}} x = \set{g \in G \mid g x \inv g = x} = \set{g \in G \mid gx = xg} \\
+& [x]_G \coloneq \orb_{\text{inn}} x = \set{y \in G \mid y = g x \inv g \text{ for some } g \in G} .
+\end{align*}
+In this case we have an important property.
+
+\begin{proposition}[Class Formula for groups]\label{prop:ClassFormulaForGroups}
+For \(G\) finite group, let \(F \subseteq G\) that has one element from each conjugacy class of \(G\). Then \(\calz G \subseteq F\) and \(\set{\calz G} \cup \set{[x]_G \mid x \in F \setminus \calz G}\) is a partition of \(G\). In particular, if \(G\) is finite, we have
+\begin{equation}\abs G = \abs{\mathcal Z G} + \sum_{x \in F \setminus \mathcal Z G} [G:C_G(x)] .\label{eqn:ClassForm}\end{equation}
+\end{proposition}
+
+\begin{proof}
+\begin{enumerate}
+\item If \(x \in \calz G\), then there exists \(a \in F\) such that \(x \in \orb_\lambda a\), that is \(x = g a \inv g\) for some \(g \in G\). Thus \(a = \inv g x g = x\) and \(x \in F\) as well.
+\item Follows from what we have just shown. In order to prove the identity~\eqref{eqn:ClassForm} also Corollary~\ref{cor:ClassFormulaForSets} is needed.\qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{corollary}
+Let \(G\) be a group with \(p^n\) elements, where \(p\) is a prime number. Then \(p\) divides \(\abs{\calz G}\); in particular, \(\calz G\) cannot be a trivial group.
+\end{corollary}
+
+\begin{proof}
+Consider \(R \subseteq G\) such that \(\set{[x]_G \mid x \in R}\) is a partition of \(G\). Obviously, \(p\) cannot divide the cardinality of any \([x]_G\) with \(x \in \calz G\), because they are singletons. If \(p\) does not divide \(\abs{[x]_G} = \abs G / \abs{C_G(x)}\) for some \(x \in R \setminus \calz G\), then \(\abs{C_G (x)} = \abs G\) and so \(C_G(x) = G\). But in this case, \(g x \inv g = x\), viz \(gx = xg\), for every \(g \in G\), and then \(x \in \calz G\). Absurd. \(p\) divides also non banal conjugacy classes. The conclusion we want follows immediately.
+\end{proof}
+
+\begin{corollary}
+For \(p\) prime number, any group with \(p^2\) elements is abelian.
+\end{corollary}
+
+\begin{proof}
+Let \(G\) be a group with \(\abs G = p^2\). By the previous corollary, \(\calz G\) must have \(p\) or \(p^2\) elements. If it has \(p\), then \(\abs{G / \calz G} = p\) and consequently \(G/\calz G\) is cyclic (Lemma~\ref{cor:GroupsWithPrimeCardAreCyclic}). This is equivalent to saying \(G = \calz G\), which cannot happen since the twos have a different number of elements. In conclusion, the unique alternative survives is \(\abs{\calz G} = p^2\); in particular \(\calz G = G\) since the groups are both finite.
+\end{proof}
+
+\begin{exercise}
+Now you are aware that, for \(p\) prime number, any group \(G\) of order \(p^2\) must be abelian, you can go deeper: show that \(G \cong \zz/p^2\zz\) if it is cyclic, \(G \cong \zz/p\zz \times \zz/p\zz\) otherwise. (Hint: if \(G\) is not cyclic, there exist \(x, y \in G\) such that \(\gen x \cap \gen y = \set{1}\).)
+\end{exercise}
