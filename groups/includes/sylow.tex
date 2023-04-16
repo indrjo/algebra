@@ -67,12 +67,21 @@ s_p \text{ divides } k .
 
 \begin{proof}
 Let \(X\) be the family of the subgroups of \(G\) with cardinality \(p^s\), and consider the action of \(G\) on \(X\)
-\[\eta : G \to \cals X\,, \ \eta_g (A) = \inv g A g .\]
-Because of the Second Sylow Theorem, there is some \(S \in X\) such that \(\orb_\eta (S) = X\), and we can write
-\[s_p = \underbrace{\abs{\orb_\eta S} = \frac{\abs G}{\abs{\stab_\eta S}}}_{\text{by Proposition~\ref{prop:OrbsStabsCosets}}}.\]
-But \(\abs{\stab_\eta S} \ge \abs S = p^s\) and \(\abs{\stab_\eta S}\) divides \(\abs G = p^s k\), hence \(s_p\) does divide \(k\), being \(p \ndivides k\). \NotaInterna{I cannot use Lemma~\ref{lem:PreSylowTheorem2} here, because \(G\) has not cardinality \(p^r\) with \(r \ge 1\). Another action? Maybe \(\eta\) restricted to some Sylow \(p\)-subgroup\dots{}} Besides,
-\[X_0 \coloneq \set{H \in X \mid \inv g H g = H \text{ for every } g \in G}\]
-is a singleton: it has at least one element because
-\[s_p = \abs X \equiv \abs{X_0} \bmod p ,\]
-so if it were empty, \(s_p\) would be a multiple of \(p\), absurd; \(X_0\) has at most one element, since two any \(H_1, H_2 \in X_0\) are conjugated and then, by how \(X_0\) is defined, equal. Thanks to Lemma~\ref{lem:PreSylowTheorem2}, we conclude \(s_p \equiv 1 \bmod p\).
+\begin{align*}
+& \eta : G \to \cals X\\
+& \eta_g (H) := \inv g H g .
+\end{align*}
+Because of the Second Sylow Theorem, the action \(\eta\) has a unique orbit, \(X\) itself, which has cardinality \(s_p\). Thus for every \(H \in X\),
+\[s_p = \abs X = \underbrace{\abs{\orb_\eta H} = \frac{\abs G}{\abs{\stab_\eta H}}}_{\text{by Proposition~\ref{prop:OrbsStabsCosets}}}.\]
+But \(\abs{\stab_\eta H} \ge \abs H = p^s\) and \(\abs{\stab_\eta H}\) divides \(\abs G = p^s k\), hence \(s_p\) does divide \(k\), being \(p \ndivides k\). For the remaining part, we need to consider the action \(\eta\) restricted to one the Sylow \(p\)-subgroups, call it \(S\):
+\begin{align*}
+& \theta : S \to \cals X\\
+& \theta_g (H) := \inv g H g .
+\end{align*}
+If we consider
+\[X_0 \coloneq \set{H \in X \mid \inv g H g = H \text{ for every } g \in S}\]
+then we have by Lemma~\ref{lem:PreSylowTheorem2} we have
+%is a singleton. It has at least one element because
+\[s_p = \abs X \equiv \abs{X_0} \bmod p .\]
+We show now that \(X_0\) is a singleton. In fact, if it were empty, \(p\) would divide \(s_p\), which itself divides \(k\), hence the absurd because \(p \ndivides k\) by assumption. On the other hand, \NotaInterna{what?}
 \end{proof}
