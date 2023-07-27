@@ -56,9 +56,6 @@ For further considerations and motivations we need to move to a more general set
 \end{equation}
 %
 Whenever we say a function \(f : X \to X\) and one \(a \in X\) induce a sequence \(x : \nn \to X\) we mean that \(x\) satisfies~\eqref{eqn:recursion}. Different choices of \(a\) induce different walks on \(X\). Consider now \(a, b \in X\), that together with \(f\), induce two sequences \(x, y : \nn \to X\) respectively. Suppose now such sequences intersect at some point, that is \(x_i = y_j\) for some \(i, j \in \nn\). Consequently, \(x_{i+k} = y_{j+k}\) for every \(k \in \nn\), of course, but what about  before \(i\) and \(j\)? If in addition \(f : X \to X\) is injective, then
-%\[x_0 = y_{j-i} \ \text{if } i \le j\]
-%and
-%\[y_0 = x_{i-j} \ \text{if } i > j .\]
 \begin{align*}
 & x_0 = y_{j-i} \ \text{if } i \le j \\
 & y_0 = x_{i-j} \ \text{if } i > j .
@@ -68,8 +65,6 @@ In other words, if two such sequences intersect, then one of them is included in
 There is a nice theorem that says: if a set \(X\) is finite, then every injective function \(X \to X\) is bijective. Indeed, the next step is to assume \(X\) is finite. Sequence on \(X\) cannot be injective --- otherwise \(X\) is not finite! ---, hence there are \(i, j \in \nn\) with \(i \ne j\) for which \(x_i = x_j\): it easily follows \(x_0 = x_{\abs{i-j}}\). So, no matter where you decide to start, after some steps you will return to the start. Now,
 \[\nu := \min\set{j \ge 1 \mid x_j = x_0}\]
 and then for every \(k \in \nn\) there is a unique \(r \in \nn\) with \(0 \le r \le \nu-1\) and such that \(x_k = x_r\) (you can easily verify that \(r\) is the remainder of the Euclidean division of \(k\) by \(\nu\)). This is a less direct way to say that such the sequence we are studying is {\em periodic} of period \(\nu\). It is worth to observe that \(\nu\) is the cardinality of \(\set{x_0, \dots{}, x_{\nu-1}}\). It suffices to prove that for every \(i, j \in \nn\), with \(i, j \le \nu-1\), if \(x_i = x_j\) then \(i = j\). In fact, \(x_i = x_j\) implies \(x_0 = x_{\abs{i-j}}\). But \(\abs{i-j}\) cannot be equal to \(0\), because \(\abs{i-j} \le \nu-1\), thus it must be \(0\). The number \(\nu\) is an invariant in the following sense: if \(x' : \nn \to X\) is sequence induced by \(f : X \to X\) and some \(x_i\), then \(\set{x_0, \dots{}, x_{\nu-1}} = \set{x'_0, \dots{}, x'_{\nu-1}}\).
-
-%If you want to make yourself a pictorial representation of all this, have a look at Figure~\ref{fig:paths}.
 
 Now that we have grasped some ideas, we need notation to work efficiently. For \(X\) a finite set and pairwise different \(x_1, \dots{}, x_s \in X\), we denote by
 \[\left( x_1, \dots{}, x_s \right)_X\]
@@ -85,7 +80,7 @@ The group \(\cals_X\) is not abelian if \(X\) has at least \(3\) elements. Howev
 For example, take three different \(a, b, c \in X\): \((a, b) (b, c) (b) = c\) but \((b, c) (a, b) (b) = a\).
 \end{proof}
 
-Our notation comes in aid when we have to write permutations and perform computations with them.
+%Our notation comes in aid when we have to write permutations and perform computations with them.
 
 \begin{proposition}\label{proposition:FactorInCycles}
 For \(X\) finite set, every \(\phi \in \cals_X\) is a composition of disjoint cycles; such factorization is unique up to the order of composition of the cycles.
@@ -95,9 +90,9 @@ For \(X\) finite set, every \(\phi \in \cals_X\) is a composition of disjoint cy
 Nothing new, but it is best we rewrite all with the new terms and notation and provide a practical way to perform such factorization. Recursively:
 \begin{enumerate}
 \item \(X_0 := X\)
-\item Having \(X_n\), examine its cardinality. If \(X_n = \nil\), then terminate here. Otherwise, choose some \(a \in X_n\) and write the cycle \(\phi_n \in \cals_X\) starting from \(a\). Consider now \(X_{n+1} := X\setminus X_n\) and prepare to go through the loop again.
+\item Having \(X_k\), examine its cardinality. If \(X_k = \nil\), then terminate here. Otherwise, choose some \(a \in X_k\) and write the cycle \(\phi_k \in \cals_X\) starting from \(a\). Consider now \(X_{k+1} := X\setminus X_k\) and prepare to go through the loop again.
 \end{enumerate}
-Observe that being \(X\) finite, the algorithm terminates with a finite decomposition in disjoint cycles \(\phi_i\). Observe that some of them may be identities, but who cares?
+Being \(X\) finite, the algorithm terminates with a finite decomposition in disjoint cycles \(\phi_i\). Observe also that some of them may be identities, but who cares?
 \end{proof}
 
 \begin{example}
@@ -107,13 +102,10 @@ We follow the arrows to write the decomposition into cycles of \(f\). One cycle 
 Thus \(f = (1, 3, 5)(2, 4) = (2, 4)(1, 3, 5)\). 
 \end{example}
 
-There exists a more subtle factorization: it has some drawback but outlines some nice invariant. We call {\em transposition} any permutation of the form \((a, b)\) with \(a \ne b\).
+There exists a more subtle factorization: it has some drawback but outlines some nice invariant. We call {\em transposition} any permutation of the form \((a, b)\) with \(a \ne b\). In other words, a transposition swaps two elements leaving the others as they are.
 
 \begin{proposition}
-Permutations of finite sets can be written as composition of a finite number of transpositions. Such factorization is not unique, though, but if
-\[\alpha_1 \cdots{} \alpha_s \quad \text{and} \quad \beta_1 \cdots{} \beta_t\]
-are two decompositions into transpositions of the same permutation, then 
-\[s \equiv t \mod 2 .\]
+Permutations of finite sets can be written as composition of a finite number of transpositions. Such factorization is not unique, though, but if \(\alpha_1 \cdots{} \alpha_s \) and \(\beta_1 \cdots{} \beta_t\) are two decompositions into transpositions of the same permutation, then \(s \equiv t \mod 2\).
 \end{proposition}
 
 \begin{proof}
@@ -132,7 +124,7 @@ Now, if \(\alpha_1 \cdots{} \alpha_s = \beta_1 \cdots{} \beta_t\) then
 \[\underbrace{\sgn\alpha_1 \cdots{} \sgn\alpha_s}_{(-1)^s} = \underbrace{\sgn\beta_1 \cdots{} \sgn\beta_t}_{(-1)^t} .\qedhere\]
 \end{proof}
 
-The homomorphism defined in the proof is the {\em sign} and assumes only two values, \(-1\) and \(1\). This results in a partition of \(\cals_X\) in two classes of the same size. To prove this claim, we first recognise \(\cals_n\) has a particular subgroup, and then show its cardinality is half of \(\abs{\cals_n}\).
+The homomorphism \(\sgn\) defined in the proof is the {\em sign} and assumes only two values, \(-1\) and \(1\). A permutation is said to be {\em even} or {\em odd} according as its sign is \(1\) or \(-1\). It follows that \(\cals_n\) is partitioned in two classes of the same size. To prove this claim, we first realize that \(\cals_n\) has a subgroup whose cardinality is half of that of \(\cals_n\).
 
 \begin{definition}
 The \(n\)-th {\em alternating group} is
@@ -144,7 +136,7 @@ The \(n\)-th {\em alternating group} is
 \end{proposition}
 
 \begin{proof}
-The kernel of \(\sgn : \cals_X \to \rr^\times\) is \(A_n\) by definition. Using Proposition~\ref{proposition:GrpIso1}, we have \({\cals_n}{/}{A_n} \cong \set{-1, 1}\).
+The kernel of \(\sgn : \cals_n \to \rr^\times\) is \(A_n\) by definition. Using Proposition~\ref{proposition:GrpIso1}, we have \({\cals_n}{/}{A_n} \cong \set{-1, 1}\).
 \end{proof}
 
 Here is a quite handy method to compute the sign of a permutation \(f\):
@@ -155,9 +147,9 @@ Here is a quite handy method to compute the sign of a permutation \(f\):
 \end{enumerate}
 
 \begin{exercise}
-There is another handy way to determine the sign of the elements of \(\cals_n\). This method takes advantage of the order \(<\) of natural numbers. Show that
-\[\sgn f = \abs{\set{(i, j) \in \set{1, \dots{}, n}^2 \mid i < j \text{ and } f(i) > f(j)}} .\]
-For example, if you have permutation the following permutation
+There is another way to determine the sign of the elements of \(\cals_n\). This method takes advantage of the order \(<\) of natural numbers. Show that
+\[\sgn f = (-1)^{\abs{\set{(i, j) \in \set{1, \dots{}, n}^2 \mid i < j \text{ and } f(i) > f(j)}}} .\]
+This may seem unpractical, but you can do things quickly if you have space on your paper. For instance, if we have a permutation drawn as follows
 \[\begin{tikzpicture}
 \foreach \i/\j in {1/2, 2/4, 3/5, 4/1, 5/3, 6/6} {
 	\node (x\i) [circle] at (\i cm, .75cm) {\(\i\)};
@@ -165,5 +157,11 @@ For example, if you have permutation the following permutation
 	\draw [thick, white!45!black] (x\i) -- (y\j);
 }
 \end{tikzpicture}\]
-let \(c\) be the times the lines cross: the sign of \(f\) is \((-1)^c\). In this case, we have \(5\) intersections and the sign is \((-1)^5 = -1\). 
+we have \(5\) intersections: the sign is \((-1)^5 = -1\). A hint to prove the equality above: consider the function
+\begin{align*}
+& \theta : \cals_n \to \rr^\times \\
+& \theta(f) := \prod_{1 \le i < j \le n} \frac{f(i)-f(j)}{i-j}
+\end{align*}
+%\[\theta : \cals_n \to \rr^\times\,, \ \theta(f) := \prod_{1 \le i < j \le n} \frac{f(i)-f(j)}{i-j}\]
+is a group homomorphism and assumes the value \(-1\) for transpositions. Why is this enough to conclude \(\theta\) is the sign homomorphism?
 \end{exercise}
