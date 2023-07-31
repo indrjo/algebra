@@ -68,7 +68,15 @@ and then for every \(k \in \nn\) there is a unique \(r \in \nn\) with \(0 \le r 
 
 Now that we have grasped some ideas, we need notation to work efficiently. For \(X\) a finite set and pairwise different \(x_1, \dots{}, x_s \in X\), we denote by
 \[\left( x_1, \dots{}, x_s \right)_X\]
-the permutation of \(X\) mapping \(x_s\) into \(x_1\), \(x_i\) into \(x_{i+1}\) for \(i \in \set{1, \dots{}, s-1}\) and the elements of \(X \setminus \set{x_1, \dots{}, x_s}\) into themselves. Sometimes, when it is clear from the context, the reference to \(X\) may be dropped and simply write \(\left( x_1, \dots{}, x_s \right)\). All these permutations are called {\em cycles}. The natural number \(s\) is the {\em length} of the cycle. All cycles of length \(1\) are equal and are the identity.
+the permutation of \(X\) mapping \(x_s\) into \(x_1\), \(x_i\) into \(x_{i+1}\) for \(i \in \set{1, \dots{}, s-1}\) and the elements of \(X \setminus \set{x_1, \dots{}, x_s}\) into themselves. Sometimes, when it is clear from the context, the reference to \(X\) may be dropped and simply write \(\left( x_1, \dots{}, x_s \right)\). All these permutations are called {\em cycles}. The natural number \(s\) is the {\em length} of the cycle. A cycle of length \(1\) is the identity.
+
+\begin{proposition}
+If a cycle has length \(s\), the it has order \(s\).
+\end{proposition}
+
+\begin{proof}
+Let \(f := (x_1, \dots, x_s)\) be a cycle of \(X\). We have already shown that \(s\) consecutive applications of \(f\) to \(x_i\) gives \(x_i\) again for the first time.
+\end{proof}
 
 Two cycles \(\left( x_1, \dots{}, x_s \right)\) and \(\left( y_1, \dots{}, y_t \right)\) are said {\em disjoint} whenever \(x_i \ne y_j\) for every \(i \in \set{1, \dots{}, s}\) and \(j \in \set{1, \dots{}, t}\).
 
@@ -82,17 +90,21 @@ For example, take three different \(a, b, c \in X\): \((a, b) (b, c) (b) = c\) b
 
 %Our notation comes in aid when we have to write permutations and perform computations with them.
 
-\begin{proposition}\label{proposition:FactorInCycles}
-For \(X\) finite set, every \(\phi \in \cals_X\) is a composition of disjoint cycles; such factorization is unique up to the order of composition of the cycles.
+\begin{proposition}[Cyclic decomposition]\label{proposition:FactorInCycles}
+For \(X\) finite set, every \(f \in \cals_X\) is a composition of disjoint cycles. Such factorization is unique up to the order of composition of the cycles.
 \end{proposition}
 
 \begin{proof}
-Nothing new, but it is best we rewrite all with the new terms and notation and provide a practical way to perform such factorization. Recursively:
+Nothing new, we rewrite all with the new notation. Recursively:
 \begin{enumerate}
 \item \(X_0 := X\)
-\item Having \(X_k\), examine its cardinality. If \(X_k = \nil\), then terminate here. Otherwise, choose some \(a \in X_k\) and write the cycle \(\phi_k \in \cals_X\) starting from \(a\). Consider now \(X_{k+1} := X\setminus X_k\) and prepare to go through the loop again.
+\item Having \(X_k\), examine its cardinality. If \(X_k = \nil\), then terminate here. Otherwise, choose some \(a \in X_k\) and write the cycle
+\[\phi_k := \left(a_{k, 1}, \dots{}, a_{k, s_k}\right)\]
+starting from it. As we walk \(X_k\), eliminate elements:
+\[X_{k+1} := X_k \setminus \set{a_{k, 1}, \dots{}, a_{k, s_k}}\]
+so that we can prepare to go through the loop again.
 \end{enumerate}
-Being \(X\) finite, the algorithm terminates with a finite decomposition in disjoint cycles \(\phi_i\). Observe also that some of them may be identities, but who cares?
+Being \(X\) finite, the algorithm terminates with a finite decomposition in disjoint cycles \(\phi_i\). Observe also that some of them may be identities, but can be neglected.
 \end{proof}
 
 \begin{example}
@@ -102,7 +114,9 @@ We follow the arrows to write the decomposition into cycles of \(f\). One cycle 
 Thus \(f = (1, 3, 5)(2, 4) = (2, 4)(1, 3, 5)\). 
 \end{example}
 
-There exists a more subtle factorization: it has some drawback but outlines some nice invariant. We call {\em transposition} any permutation of the form \((a, b)\) with \(a \ne b\). In other words, a transposition swaps two elements leaving the others as they are.
+Proposition~\ref{proposition:FactorInCycles} says that if we want the compute the inverse of a permutation, we can invert every cycle it is made of.
+
+There is another factorization: such task cannot be performed in a unique way, but we come up with a nice invariant. We call {\em transposition} any permutation of the form \((a, b)\) with \(a \ne b\). In other words, a transposition swaps two elements leaving the others as they are.
 
 \begin{proposition}
 Permutations of finite sets can be written as composition of a finite number of transpositions. Such factorization is not unique, though, but if \(\alpha_1 \cdots{} \alpha_s \) and \(\beta_1 \cdots{} \beta_t\) are two decompositions into transpositions of the same permutation, then \(s \equiv t \mod 2\).
@@ -110,7 +124,7 @@ Permutations of finite sets can be written as composition of a finite number of 
 
 \begin{proof}
 First of all, we observe that a cycle \((x_1, \dots{}, x_s)\) of length \(s \ge 2\) can be factored into \(s-1\) transpositions:
-\[(x_1, \dots{}, x_s) = (x_1, x_n) \cdots (x_1, x_2) .\]
+\[(x_1, \dots{}, x_s) = (x_1, x_s) \cdots (x_1, x_2) .\]
 Proposition~\ref{proposition:FactorInCycles} implies any permutation can be decomposed into cycles. Decomposing cycles of a permutation in the way we just showed is the most viable. However, transpositions can be factored into three non disjoint transpositions:
 \[(a, b) = (a+1, b) (a, a+1) (a+1, b) .\]
 Reiterating, a you can decompose a transposition into \(3n\) transpositions for any arbitrary \(n \in \nn\). A slick way to prove the congruence above is the following. What we have said so far is enough to say that \(\cals_X\) is a free group generated by the set \(T\) of transpositions of \(X\). Thanks to the universal property of free groups, for the function \(\sigma : T \to \rr^\times\) constant to \(-1\) there is a unique group homomorphism \(\sgn : \cals_X \to \rr^\times\) for which commutes the diagram
@@ -121,7 +135,8 @@ T \ar[r, hookrightarrow] \ar["\sigma", dr, swap] & \cals_X \ar["\sgn", d] \\
 Now, if \(\alpha_1 \cdots{} \alpha_s = \beta_1 \cdots{} \beta_t\) then
 %\(\sgn \left(\alpha_1 \cdots{} \alpha_s\right) = \sgn \left(\beta_1 \cdots{} \beta_t \right)\), which leads to
 , being \(\sgn\) a homomorphism,
-\[\underbrace{\sgn\alpha_1 \cdots{} \sgn\alpha_s}_{(-1)^s} = \underbrace{\sgn\beta_1 \cdots{} \sgn\beta_t}_{(-1)^t} .\qedhere\]
+\[\underbrace{\sgn\alpha_1 \cdots{} \sgn\alpha_s}_{(-1)^s} = \underbrace{\sgn\beta_1 \cdots{} \sgn\beta_t}_{(-1)^t} .\]
+\((-1)^{s-t} = 1\) happens if and only if \(s-t\) is a multiple of \(2\).
 \end{proof}
 
 The homomorphism \(\sgn\) defined in the proof is the {\em sign} and assumes only two values, \(-1\) and \(1\). A permutation is said to be {\em even} or {\em odd} according as its sign is \(1\) or \(-1\). It follows that \(\cals_n\) is partitioned in two classes of the same size. To prove this claim, we first realize that \(\cals_n\) has a subgroup whose cardinality is half of that of \(\cals_n\).
@@ -139,15 +154,17 @@ The \(n\)-th {\em alternating group} is
 The kernel of \(\sgn : \cals_n \to \rr^\times\) is \(A_n\) by definition. Using Proposition~\ref{proposition:GrpIso1}, we have \({\cals_n}{/}{A_n} \cong \set{-1, 1}\).
 \end{proof}
 
-Here is a quite handy method to compute the sign of a permutation \(f\):
+We conclude this section giving some method to compute the sign of any permutation \(f\). We can use the last theorem:
 \begin{enumerate}
 \item Decompose \(f\) into cycles, say \(\phi_1\), \dots{}, \(\phi_k\).
 \item If \(\phi_i\) has length \(s_i\), its sign is \((-1)^{s_i-1}\). Thus
 \[\sgn f = \prod_{i=1}^k (-1)^{s_i-1} = (-1)^{\sum_{i=1}^k s_i -k} .\]
 \end{enumerate}
 
+If we work with elements of \(\cals_n\), another way do determine this number is the following, because it requires the order \(<\) of natural numbers.
+
 \begin{exercise}
-There is another way to determine the sign of the elements of \(\cals_n\). This method takes advantage of the order \(<\) of natural numbers. Show that
+Prove that
 \[\sgn f = (-1)^{\abs{\set{(i, j) \in \set{1, \dots{}, n}^2 \mid i < j \text{ and } f(i) > f(j)}}} .\]
 This may seem unpractical, but you can do things quickly if you have space on your paper. For instance, if we have a permutation drawn as follows
 \[\begin{tikzpicture}
