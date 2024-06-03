@@ -1,0 +1,233 @@
+% !TEX program = lualatex
+% !TEX spellcheck = it_IT
+% !TEX root = ../campi.tex
+
+\section{Campi di spezzamento}
+
+%\section{Radice di un polinomio in un'estensione}
+%Dato \(f\in K[X]\) (che posso supporre irriducibile e monico), esiste un'estensione \(K\subseteq L\) tale che \(f\) abbia una radice \(\alpha\in L\)? \\
+%Se la risposta è s\`\i, \(f=\polmin_{\alpha,K}\); inoltre posso supporre \(L=K(\alpha)\), e in questo caso \(L\iso K[X]/(f)\).
+%
+%\begin{prop}
+%\(f\in K[X]\) irriducibile e monico, \(\pi : K[X]\to L:=K[X]/(f)\) proiezione al quoziente, \(\alpha:=\pi(X)\in L\) \(\implies\) \(\pi\rest{K} : K\to L\) estensione, \(L=K(\alpha)\) e \(f=\polmin_{\alpha,K}\) (quindi \(f\) ha una radice in \(L\)).
+%\end{prop}
+%
+%\begin{proof}
+%\(f\) irriducibile \(\implies\) \((f)\) ideale massimale \(\implies\) \(L\) campo. \\
+%\(\pi\rest{K}\) estensione perché omomorfismo di anelli con \(K\) e \(L\) campi. \\
+%\(\pi\) omomorfismo di \(K\) algebre tale che \(\pi(X)=\alpha\) \(\implies\) \(\pi(g)=g(\alpha)\) \(\all g\in K[X]\) \(\implies\) \(L=\{g(\alpha)\st g\in K[X]\}=K[\alpha]=K(\alpha)\). \\
+%\(f\) irriducibile e monico, \(f(\alpha)=\pi(f)=0\) \(\implies\) \(f=\polmin_{\alpha,K}\).
+%\end{proof}
+
+In generale, un \(f \in K[X]\) non nullo può non avere tutte le radici all'interno del campo \(K\). Successivamente abbiamo visto che si può costruire una chiusura algebrica in cui ogni polinomio a coefficienti in quel campo ha radici. Coi campi di spezzamento facciamo un passo indietro: dato \(f \in K[X]\), aggiungere al campo \(K\) quanto basta per poter scrivere \(f\) come prodotto di polinomi di grado \(1\). Quindi è una costruzione che parte da un fissato polinomio.
+
+\begin{defi}[Campo di spezzamento]
+Sia \(K\) un campo e \(f \in K[X]\) non nullo. Un {\em campo di spezzamento} di \(f\) è un'estensione \(i : K \to K_f\) tale che:
+\begin{enumerate}
+\item \(f\) si {\em spezza} su \(K_f\), vale a dire esistono \(c \in K^\ast\) e \(\alpha_1, \dots{}, \alpha_n \in K_f\) tali che 
+\[i_\ast (f) = c\prod_{k=1}^n(X-\alpha_k) .\]
+Con il solito abuso possiamo pure scrivere \(f\) invece di \(i_\ast(f)\) a patto di ricordarsi che il polinomio così fattorizzato è visto come elemento di \(K_f[X]\), anello in cui si può effettivamente scrivere questa fattorizzazione.
+\item \(K_f = K\left( \alpha_1, \dots{}, \alpha_n \right)\), ovvero \(i : K \to K_f\) è una estensione generata dalle radici di \(f\) in \(K_f\).
+\end{enumerate}
+Tecnicamente, un campo di spezzamento è un'estensione \(K \to K_f\), ma talvolta si chiama campo di spezzamento anche solo il campo \(K_f\).
+\end{defi}
+
+%\begin{osse}
+%\(K\subseteq L\) estensione tale che \(f=c\prod_{i=1}^n(X-\alpha_i)\in K[X]\) si spezza su \(L\) \(\implies\) \(\exiun K\subseteq L_0\subseteq L\) estensione tale che \(K\subseteq L_0\) è un campo di spezzamento di \(f\); inoltre \(L_0=K(\alpha_1,\dots,\alpha_n)\). \\
+%Infatti \(f\) si spezza su \(K(\alpha_1,\dots,\alpha_n)\), e se \(K\subseteq L'\subseteq L\) è un'estensione tale che \(f\) si spezza su \(L'\), allora \(\alpha_1,\dots,\alpha_n\in L'\) (per l'unicit\`a della fattorizzazione in \(L[X]\)), per cui \(K(\alpha_1,\dots,\alpha_n)\subseteq L'\).
+%\end{osse}
+
+%\section{Esistenza del campo di spezzamento}
+
+\begin{esem}
+Consideriamo il polinomio \(X^2+1 \in \Q[X]\). Come polinomio a coefficienti complessi ha due radici, \(i\) e \(-i\). Il campo di spezzamento si costruisce aggiungendo le radici, cioè \(\Q(i, -i)\). Certo, due generatori sono sovrabbondanti perché si verifica subito che \(\Q(i) = \Q(i, -i)\). Sicuramente il polinomio in esame ha radici in \(\C\), ma è il campo di spezzamento è definito come il più piccolo che si può ottenere aggiungendo le radici di quel polinomio.
+\end{esem}
+
+\nota{Fare altri esempi.}
+
+Abbiamo già visto come dato un qualsiasi polinomio irriducibile \(p \in K[X]\), allora in \(\frac{K[X]}{\gen p}\) una radice di \(p\) è \(X + \gen p\). Questo è anche vero per ogni polinomio non nullo, visto che \(K[X]\) è un dominio a fattorizzazione unica. Possiamo reiterare questo processo fino ad aggiungere tutte le radici e questo è il risultato del seguente teorema.
+
+\begin{teor}[Esistenza campo di spezzamento]\label{teor:EsistenzaCampoSpezzamento}
+Sia \(K\) un campo e \(f \in K[X]\) non nullo. Allora
+\begin{enumerate}
+\item Esiste un campo di spezzamento \(K \hookrightarrow K_f\) di \(f\).
+\item \(\left[K_f:K\right] \le (\deg f)!\).
+\item Se \(f\) è pure irriducibile in \(K[X]\), allora \(\deg f\) divide \(\left[K_f:K\right]\).
+\end{enumerate}
+\end{teor}
+
+\begin{proof}
+Il terzo punto non richiede particolare sforzo, perciò lo liquidiamo subito. Scriviamo \(f = c g\) con \(c \in K\) e \(g \in K[X]\) monico: se \(f\) è irriducibile, lo è anche \(g\) e quindi \(g\) è il polinomio minimo delle sue radici in \(K_f\) (Proposizione~\ref{prop:EquivalentiPolinomioMinimo}). In particolare, se \(\alpha \in K_f\) è una qualsiasi di queste, abbiamo che
+\[\left[K_f:K\right] = \left[K_f:K(\alpha)\right] \underbrace{[K(\alpha):K]}_{= \deg g = \deg f} .\]
+Proviamo i primi due punti simultaneamente per induzione sul grado del polinomio \(n := \deg f\). Se \(n=0\), allora il polinomio è un elemento invertibile e quindi basta prendere \(K_f = K\); è ovvio anche che \(1 = \left[K_f:K\right] \le (\deg f)!\). Sia ora \(n>0\). Scegliamo \(g \in K[X]\) irriducibile che divide \(f\), esiste poiché \(K[X]\) è un dominio a fattorizzazione unica. Possiamo assumere senza perdere nulla anche che \(f\) e \(g\) siano monici. Sappiamo che un campo che ha sicuramente qualche radice di \(g\) e quindi di \(f\) è
+\[E := \frac{K[X]}{\gen g} .\]
+Abbiamo visto anche come \(E\) può essere visto come il campo \(K(\alpha)\), dove \(\alpha\) è una delle radici di \(g\) in \(E\). Abbiamo, vale a dire, un'estensione
+\[ i : K \to E = K(\alpha_1) \]
+con \(\alpha_i \in E\) radice di \(f\). Quindi il polinomio \(f\) visto come elemento di \(E[X]\) è divisibile per \(X-\alpha_1\). Più rigorosamente:
+\[i_\ast(f) = (X-\alpha_1) f_1 \text{ per qualche } f_1 \in E[X] .\]
+Qui \(f_1\) ha grado \(\deg f -1\) e quindi, per induzione esiste un campo di spezzamento
+\[j : E \to L := E\left(\alpha_2, \dots{}, \alpha_n\right)\]
+in cui \(j_\ast(f_1) = (X-\alpha_2) \cdots{} (X-\alpha_n)\) con \(\alpha_2, \dots{}, \alpha_n \in L\). Mostriamo ora come la composizione delle estensioni \(K \mor i E \mor j L\) è un campo di spezzamento per \(f\). Infatti
+\[(ji)_\ast(f) = j_\ast\left( i_\ast(f) \right) = (X-j(\alpha_1)) j_\ast(f_1) = (X-j(\alpha_1))(X-\alpha_2) \cdots (X-\alpha_n) .\]
+%Ecco la fattorizzazione in \(L[X]\) di \(f\):
+%\[f = (X-\alpha_1)\cdots{}(X-\alpha_n) .\]
+Da costruzione poi \(L = E\left(\alpha_2, \dots{}, \alpha_n\right) = K\left(\alpha_1, \alpha_2, \dots{}, \alpha_n\right)\). Vediamo il secondo punto: per il passo induttivo possiamo scrivere
+\[[L : K] = \underbrace{[L : E]}_{\le (n-1)!} \underbrace{[E : K]}_{= \deg g} \le n! . \qedhere\]
+\end{proof}
+
+%\begin{proof}
+%Procediamo per induzione sul grado del polinomio \(n := \deg f\). Se \(n=0\), allora il polinomio è un elemento invertibile e quindi basta prendere \(K_f = K\); è ovvio anche che \(1 = \left[K_f:K\right] \le (\deg f)!\). Sia ora \(n>0\). Scegliamo \(g \in K[X]\) irriducibile che divide \(f\), esiste poiché \(K[X]\) è un dominio a fattorizzazione unica. Possiamo assumere senza perdere nulla anche che \(f\) e \(g\) siano monici. Sappiamo che un campo che ha sicuramente qualche radice di \(g\) e quindi di \(f\) è
+%\[E := \frac{K[X]}{\gen g} .\]
+%Abbiamo visto anche come \(E\) può essere visto come il campo \(K(\alpha)\), dove \(\alpha\) è una delle radici di \(g\) in \(E\). Quindi il polinomio \(f\) visto come elemento di \(E[X]\) è fattorizzabile come
+%\[f = (X-\alpha_1) f_1 \text{ per qualche } f_1 \in E[X] .\]
+%Quest'ultimo ha grado \(\deg f -1\) e quindi, per induzione esiste un campo di spezzamento \(E \subseteq L := E\left(\alpha_2, \dots{}, \alpha_n\right)\) in cui \(f_1 = (X-\alpha_2) \cdots{} (X-\alpha_n)\) con \(\alpha_2, \dots{}, \alpha_n \in L\). Ecco la fattorizzazione in \(L[X]\) di \(f\):
+%\[f = (X-\alpha_1)\cdots{}(X-\alpha_n) .\]
+%Da costruzione, \(L = E\left(\alpha_2, \dots{}, \alpha_n\right) = K\left(\alpha_1, \alpha_2, \dots{}, \alpha_n\right)\). Vediamo il secondo punto: per il passo induttivo possiamo scrivere
+%\[[L : K] = \underbrace{[L : E]}_{\le (n-1)!} \underbrace{[E : K]}_{= \deg g} \le n! . \qedhere\]
+%\end{proof}
+
+\nota{Fare anche un esempio concreto per spiegare la dimostrazione sopra?}
+
+%\section{Esistenza della chiusura algebrica}
+
+%\begin{lemm}
+%\(K\) campo \(\implies\) \(\exi K\to K'\) estensione tale che ogni polinomio non costante a coefficienti in \(K\) ha una radice in \(K'\).
+%\end{lemm}
+%\begin{teor}
+%Ogni campo \(K\) ha una chiusura algebrica \(K\subseteq\calg{K}\).
+%\end{teor}
+%\begin{proof}
+%\begin{itemize}
+%\item Posto \(K_0:=K\), per il Lemma induttivamente \(\all n\in\N\) \(\exi K_n\subseteq K_{n+1}\) estensione tale che \(f\in K_n[X]\setminus K\) \(\implies\) \(f\) ha una radice in \(K_{n+1}\).
+%\item \(L:=\bigcup_{n\in\N}K_n\) campo ({\em esercizio}) tale che \(K\subseteq L\) estensione con \(L\) algebricamente chiuso: \(f\in L[X]\setminus L\) \(\implies\) \(\exi n\in\N\) tale che \(f\in K_n[X]\) \(\implies\) \(f\) ha una radice in \(K_{n+1}\subseteq L\).
+%\item \(\calg{K}:=\calg[L]{K}\) tale che \(K\subseteq\calg{K}\) chiusura algebrica di \(K\) (gi\`a visto).
+%\end{itemize}
+%\end{proof}
+%
+%\begin{proof}
+%\(U:=\{f\in K[X]\st\text{\)f\( irriducibile e monico}\}\), \(A:=K[X_f\st f\in U]\).
+%\smallskip
+%
+%\(I:=(f(X_f)\st f\in U)\subsetneq A\) ideale: per assurdo \(I=A\) \(\implies\) \(\exi f_1,\dots,f_n\in U\) distinti e \(g_1,\dots,g_n\in A\) tali che
+%\[
+%h:=\sum_{l=1}^nf_i(X_{f_i})g_i=1.
+%\]
+%\(K\subseteq L\) campo di spezzamento di \(\prod_{i=1}^nf_i\) \(\implies\) \(\all i=1,\dots,n\) \(\exi\alpha_i\in L\) tale che \(f_i(\alpha_i)=0\). Valutando \(h=1\) in
+%\[
+%X_f=
+%\begin{cases}
+%\alpha_i & \text{se \(f=f_i\) per qualche \(i=1,\dots,n\)} \\
+%0 & \text{altrimenti}  
+%\end{cases}
+%\]
+%si ottiene \(0=1\) in \(L\), assurdo.
+%\end{proof}
+%
+%\(\exi J\subset A\) ideale massimale tale che \(I\subseteq J\) \(\implies\) \(K':=A/J\) campo e \(\pi\rest{K} : K\to K'\) (con \(\pi : A\to K'\) proiezione) estensione di campi con la propriet\`a richiesta: dato \(f\in K[X]\setminus K\), posso supporre \(f\in U\) \(\implies\) \(f(\pi(X_f))=\pi(f(X_f))=0\) perché \(f(X_f)\in I\subseteq J=\ker(\pi)\).
+
+
+%\section{Omomorfismi e isomorfismi di estensioni}
+%
+%\begin{defi}
+%\(i : K\to L\) e \(i' : K\to L'\) estensioni. Un {\em omomorfismo di estensioni di \(K\)} (o semplicemente un {\em \(K\)-omomorfismo}) da \(i\) a \(i'\) è un omomorfismo di \(K\)-algebre, cioè un omomorfismo di anelli \(j : L\to L'\) tale che \(i'=j\comp i\). \\
+%Un tale omomorfismo è un {\em isomorfismo di estensioni di \(K\)} (o semplicemente un {\em \(K\)-isomorfismo}) se \(j\) è un isomorfismo.
+%\end{defi}
+%\begin{osse}
+%\(i : K\to L\) estensione induce omomorfismo di anelli
+%\[
+%i : K[X]\to L[X] \qquad f=\sum_{n\ge0}a_nX^n\mapsto i(f)=\sum_{n\ge0}i(a_n)X^n.
+%\]
+%Spesso si scriver\`a ancora \(f\) invece di \(i(f)\in L[X]\). Se \(\alpha\in L\), l'identificazione tra \(f(\alpha)=\sum_{n\ge0}a_n\alpha^n\) e \(i(f)(\alpha)=\sum_{n\ge0}i(a_n)\alpha^n\) è coerente con la struttura di \(K\)-spazio vettoriale su \(L\).
+%\end{osse}
+%
+%\begin{prop}
+%\(K\subseteq K'\) e \(i : K\to L\) estensioni, \(\alpha\in K'\) algebrico su \(K\), \(\beta\in L\). Allora esiste un \(K\)-omomorfismo \(j : K(\alpha)\to L\) tale che \(j(\alpha)=\beta\) \(\iff\) \(\polmin_{\alpha,K}(\beta)=0\); inoltre se esiste è unico.
+%\end{prop}
+%
+%\begin{proof}
+%\(\alpha\) algebrico su \(K\) \(\implies\) \(K(\alpha)=K[\alpha]\iso K[X]/(\polmin_{\alpha,K})\). Dunque va dimostrato che \(\exi\) (unico) \(K\)-omomorfismo \(K[X]/(\polmin_{\alpha,K})\to L\) tale che \(\cl{X}\mapsto\beta\) \(\iff\) \(\polmin_{\alpha,K}(\beta)=0\).
+%Per il teorema di omomorfismo per anelli dare un omomorfismo di anelli \(\cl{\varphi} : K[X]/(\polmin_{\alpha,K})\to L\) equivale a dare un omomorfismo di anelli \(\varphi : K[X]\to L\) tale che \((\polmin_{\alpha,K})\subseteq\ker(\varphi)\), e chiaramente \(\cl{\varphi}\) è un \(K\)-omomorfismo \(\iff\) \(\varphi\)  è un omomorfismo di \(K\)-algebre.
+%Poiché \(\all\beta\in L\) \(\exiun\varphi : K[X]\to L\) omomorfismo di \(K\)-algebre tale che \(\varphi(X)=\beta\), per concludere basta osservare che per un tale \(\varphi\) \((\polmin_{\alpha,K})\subseteq\ker(\varphi)\) \(\iff\) \(0=\varphi(\polmin_{\alpha,K})=\polmin_{\alpha,K}(\beta)\).
+%\end{proof}
+
+
+
+%\section{Unicità del campo di spezzamento}
+
+\begin{teor}[Unicità campo di spezzamento]\label{teor:UnicitaCampoDiSpezzamento}
+Sia \(i : K \to K_f\) campo di spezzamento di un \(f \in K[X]\) non nullo e \(j : K \to L\) estensione. Allora esiste almeno un morfismo di estensioni \(h : K_f \to L\)
+\[\begin{tikzcd}[column sep=small]
+K_f \ar["h", rr] & & L \\
+& K \ar["i", ul] \ar["j", ur, swap]
+\end{tikzcd}\]
+se e solo se \(f\) si spezza su \(L\). In particolare, il campo di spezzamento di un polinomio non nullo è unico a meno di isomorfismi. 
+\end{teor}
+
+\begin{proof}
+Allora esistono \(c \in K^\ast\) e \(\alpha_1, \dots{}, \alpha_n \in K_f\), con \(n := \deg f\), tali che \(i_\ast(f) = c\prod_{l=1}^n(X-\alpha_l)\) e \(K_f = K(\alpha_1,\dots,\alpha_n)\).\newline
+%\begin{itemize}
+%\item[\(\implies\)] 
+Se abbiamo un morfismo di estensioni \(h : K_f \to L\), allora
+\[j_\ast(f) = (h i)_\ast (f) = \underbrace{h_\ast i_\ast (f) = h_\ast \left( c \prod_{l=1}^n (X-\alpha_l) \right)}_{f \text{ si spezza su } K_f} = h(c) \prod_{l=1}^n \left(X-h\left(\alpha_l\right)\right) .\]
+Vediamo il viceversa per induzione. La base dell'induzione \(n=0\) funziona perché \(K_f \iso K\) e possiamo scegliere \(h = j i^{-1}\). Passiamo al passo induttivo. Sia \(n > 0\). Il polinomio minimo \(m \in K[X]\) di \(\alpha_1\) si spezza su \(L\), cioè \(j_\ast(m)\) si scrive come prodotto di fattori lineari. Se indichiamo con \(\beta \in L\) una delle radici di \(m\), allora esiste un morfismo di estensioni \(k : K(\alpha_1) \to L\) che manda \(\alpha_1\) in \(\beta\).
+\[\begin{tikzcd}[column sep=small]
+K_f  & & L \\
+K(\alpha_1) \ar["{i_2}", u] \ar["k", urr, swap] \\
+& K \ar["{i_1}", ul] \ar["j", uur, swap]
+\end{tikzcd}\]
+%\item[\(\impliedby\)] Per induzione su \(n\): \(n=0\) \(\implies\) \(K'=K\) e \(i'=i\). \\
+%\(n>0\) \(\implies\) \(\polmin_{\alpha_1,K}\) si spezza su \(L\) (perché \(\polmin_{\alpha_1,K}\dvd f\) e \(f\) si spezza su \(L\)) \(\implies\) \(\exi\beta\in L\) tale che \(\polmin_{\alpha_1,K}(\beta)=0\) \(\implies\) per la Proposizione \(\exi\) \(K\)-omomorfismo \(j : K(\alpha_1)\to L\) (tale che \(j(\alpha_1)=\beta\)) \(\implies\)
+Poiché \(\alpha_1 \in K(\alpha_1)\) è una radice di \(i_{1\ast}(f)\), allora
+\[i_{1\ast}(f) = (X-\alpha_1) g \text{ per qualche } g \in K(\alpha_1)[X] .\]
+%Consideriamo ora il polinomio di grado \(n-1\) a coefficienti in \(K(\alpha_1)\)
+%\[ g := \prod_{l=2}^n(X-\alpha_l) .\]
+%tale che \(\deg(g)=n-1\),
+Il polinomio \(g\) è di grado \(n-1\). Osserviamo come \(i_2 : K(\alpha_1) \to K_f\) campo di spezzamento di \(g\) e \(g\) si spezza su \(L\), perché \(g\) divide \(f\) e \(f\) si spezza su \(L\). Per induzione esiste un morfismo di estensioni da \(i_2\) a \(k\) che chiamiamo \(h : K_f \to L\). Segue subito che \(h\) è un morfismo di estensioni come nell'enunciato.
+%\end{itemize}
+\end{proof}
+
+%\begin{coro}
+%\(K\) campo, \(f\in K[X]\setminus\{0\}\) \(\implies\) un campo di spezzamento di \(f\) esiste e è unico a meno di \(K\)-isomorfismo.
+%\end{coro}
+%
+%\begin{proof}
+%Esistenza gi\`a vista. \\
+%Se \(K\subseteq K'\) e \(i : K\to L\) sono due campi di spezzamento di \(f\), per il Teorema \(\exi\) \(K\)-omomorfismo \(i' : K'\to L\). Sempre per il Teorema \(f\) si spezza su \(i'(K')\subseteq L\) \(\implies\) \(i'(K')=L\). 
+%\end{proof}
+%
+%\begin{osse}
+%Segue dal Corollario che il grado \([K':K]\) di un campo di spezzamento \(K\subseteq K'\) di \(f\in K[X]\setminus\{0\}\) dipende solo da \(f\).
+%\end{osse}
+
+%\begin{teor}
+%\(K\subseteq L\) estensione algebrica, \(i : K\to\calg{K}\) chiusura algebrica di \(K\) \(\implies\) esiste un \(K\)-omomorfismo \(j : L\to\calg{K}\).
+%\end{teor}
+%
+%\begin{osse}
+%\(L\subseteq L'\) estensione algebrica, \(L\) algebricamente chiuso \(\implies\) \(L=L'\): \(\alpha\in L'\) \(\implies\) \(\polmin_{\alpha,L}\in L[X]\) irriducibile e monico con una radice in \(L\) \(\implies\) \(\deg(\polmin_{\alpha,L})=1\) \(\implies\) \(\polmin_{\alpha,L}=X-\alpha\) \(\implies\) \(\alpha\in L\).
+%\end{osse}
+%
+%\begin{coro}
+%\(K\) campo \(\implies\) una chiusura algebrica di \(K\) è unica a meno di \(K\)-isomorfismo.
+%\end{coro}
+%
+%\begin{proof}
+%\(K\subseteq L\) e \(i : K\to\calg{K}\) chiusure algebriche di \(K\) \(\implies\) per il Teorema \(\exi\) \(K\)-omomorfismo \(j : L\to\calg{K}\). \\
+%\(j\) estensione algebrica (perché \(i\) lo è), \(L\) algebricamente chiuso \(\implies\) \(j\) \(K\)-isomorfismo per l'Osservazione.  
+%\end{proof}
+%
+%\begin{proof}
+%Nell'insieme parzialmente ordinato e \(\ne\emptyset\)
+%\[
+%\{(L',j')\st\text{\(K\subseteq L'\subseteq L\) estensioni, \(j' : L'\to\calg{K}\) \(K\)-omomorifsmo}\}
+%\]
+%(in cui \((L',j')\le(L'',j'')\) \(\iff\) \(L'\subseteq L''\) e \(j''\rest{L'}=j'\)) ogni catena \(\{(L_{\lambda},j_{\lambda})\st\lambda\in\Lambda\}\) ha un maggiorante \((\tilde{L},\tilde{j})\) con \(\tilde{L}:=\bigcup_{\lambda\in\Lambda}L_{\lambda}\) e
+%\[
+%\tilde{j} : \tilde{L}\to\calg{K} \qquad \alpha\mapsto j_{\lambda}(\alpha)\qquad\text{se }\alpha\in L_{\lambda}
+%\]
+%({\em esercizio}). Per il lemma di Zorn esiste un elemento massimale \((L_0,j_0)\), e basta dimostrare \(L_0=L\). \\
+%\(\alpha\in L\) \(\implies\) \(\alpha\) algebrico su \(K\) \(\implies\) \(\alpha\) algebrico su \(L_0\). \\
+%\(\calg{K}\) algebricamente chiuso \(\implies\) \(\exi\beta\in\calg{K}\) tale che \(\polmin_{\alpha,L_0}(\beta)=0\) \(\implies\) per la Proposizione \(\exi\) \(L_0\)-omomorfismo \(j'_0 : L_0(\alpha)\to\calg{K}\) (tale che \(j'_0(\alpha)=\beta\)) \(\implies\) \((L_0,j_0)\le(L_0(\alpha),j'_0)\) \(\implies\) \(L_0=L_0(\alpha)\) per la massimalit\`a di \((L_0,j_0)\) \(\implies\) \(\alpha\in L_0\).
+%\end{proof}
+
+

@@ -1,0 +1,27 @@
+% !TEX program = lualatex
+% !TEX spellcheck = it_IT
+% !TEX root = ../campi.tex
+
+\section{Discriminante polinomi}
+
+Abbiamo visto che, assegnata un'estensione \(K \mor i L\) e un \(f \in K[X]\) con \(r\) radici in un campo \(L\), allora \(\Gal[K]L \le S_r\). Scriviamo le sue radici (anche ripetendole in caso di radici multiple) enumerandole in qualche modo
+\[\alpha_1, \dots{}, \alpha_n\]
+e introduciamo il {\em discriminante} di \(f\)
+\[\delta_f := \prod_{1 \le i < j \le n} (\alpha_i - \alpha_j) .\]
+Questo numero gode di qualche semplice proprietà:
+\begin{enumerate}
+\item \(f\) ha radici multiple se e solo se \(\delta_f = 0\).
+\item \(\sigma\left(\delta_f\right) = \sgn\left(\sigma|_{\{\alpha_1, \dots, \alpha_r\}}\right) \delta_f\) per ogni \(\sigma \in \Gal[K]L\).
+\end{enumerate}
+
+\begin{prop}
+Sia \(K\) un campo e \(f \in K[X]\) non nullo e separabile di grado \(n\). Indichiamo con \(G_f\) il gruppo di Galois di \(f\). Allora:
+\begin{enumerate}
+\item \(\delta_f^2 \in K\).
+\item \(G_f \le A_n\) se e solo se \(\delta_f \in K\).
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+\nota{Usare risultati della sezione precedente.}
+\end{proof}

@@ -1,0 +1,201 @@
+% !TEX program = lualatex
+% !TEX spellcheck = it_IT
+% !TEX root = ../campi.tex
+
+\section{Estensioni di campi}
+
+Abbiamo visto (Proposizione~\ref{prop:OmomorfismiCampiSonoIniettivi}) che gli omomorfismi di campi sono tutti iniettivi. Presi due campi \(K\) e \(L\), se esiste un omomorfismo \(K \to L\), allora \(L\) contiene al suo interno una copia isomorfa a \(K\). Quindi, anche se \(K\) non è propriamente un sottoinsieme di \(L\), possiamo dire che \(K\) è contenuto in \(L\) oppure che \(L\) contiene \(K\). In ogni caso, si è scelta una nuova parola per indicare questa inclusione.
+
+\begin{defi}
+Un'{\em estensione} (di campi) è un omomorfismo di campi.
+\end{defi}
+
+Per abuso di notazione, spesso un'estensione di campi \(i : K \to L\) viene indicata semplicemente con \(K \subseteq L\), come in \cite{aluffi:algebra}, anche quando non è proprio un'inclusione insiemistica. Esistono altre notazioni: per esempio in \cite{milne:fields} si usa \(L/K\) mentre in \cite{leinster:fields} viene impiegato \(L:K\). Esiste anche \(K \hookrightarrow L\) una combinazione di \(\subset\) e \(\to\).
+
+Abbiamo già visto alcuni esempi banali di estensioni di campi. Un tipo di estensioni è ispirato all'Esempio~\ref{esem:AlgebristaC}.
+
+\begin{cons}
+Se \(K\) è un campo, allora \(K[X]\) è un dominio ad ideali principali. Se oltre a \(K\) abbiamo un \(p \in K[X]\) non nullo e irriducibile, allora \(\frac{K[X]}{\gen p}\) è un campo. Un'estensione molto naturale quindi è
+\[K \to \frac{K[X]}{\gen p}\,,\ r \mapsto r + \gen p .\]
+Questa costruzione è molto interessante.
+\end{cons}
+
+\begin{prop}
+Se \(K\) è un campo e \(p \in K[X]\) è non nullo e irriducibile, allora sotto l'estensione
+\[K \to \frac{K[X]}{\gen p}\,,\ r \mapsto r + \gen p \]
+\(p\) visto come elemento di \(\frac{K[X]}{\gen p}\) ha almeno uno zero.
+\end{prop}
+
+Si pensi per esempio a \(\R \hookrightarrow \C\) con \(X^2+1\): in \(\R\) non ci sono radici, ma sicuramente ce n'è qualcuna in \(\C = \frac{\R[X]}{\gen{X^2+1}}\). La dimostrazione non è niente di diverso dal conto fatto nell'Esempio~\ref{esem:AlgebristaC}.
+
+\begin{cons}
+Sia \(i : K \to L\) una estensione di campi e \(\alpha \in L\) con polinomio minimo \(m \in K[X]\). Abbiamo quindi un'estensione
+\[K \to \frac{K[X]}{\gen m}\]
+come nell'esempio precedente.
+%Come abbiamo visto nella Proposizione~\ref{prop:ValutazionePolinomi}, abbiamo l'omomorfismo indotto \(\tilde i : K[X] \to L\) tale che \(\tilde i (r) = r\) per ogni \(r \in K\) e \(\tilde i (X) = \alpha\). (Qui avremmo dovuto scrivere più correttamente \(\tilde i(r) = i(r)\), ma abbiamo impiegato l'abuso di cui abbiamo parlato: \(r\) è propriamente un elemento di \(K \subseteq K[X]\) ma sotto l'omomorfismo iniettivo \(i : K \to L\) useremo lo stesso simbolo per riferirci all'elemento di \(L\) a cui \(r\) viene identificato sotto \(i\).) Ora, a causa del {\scshape Primo Teorema di Isomorfismo}, l'omomorfismo \(\tilde i : K[X] \to L\) induce un certo omomorfismo iniettivo \[\frac{K[X]}{\ker \tilde i} \to L .\]
+%Essendo \(K\) un campo, \(K[X]\) è un dominio a ideali principali, quindi il nucleo di \(\ker \tilde i\) è generato da una qualche \(p \in K[X]\). Supponiamo che questo nucleo non sia banale: questo significa che \(p\) è un polinomio non nullo che valutato in \(\alpha\) è uguale \(0\). Inoltre \(L\) è un campo, e quindi lo deve essere anche \(\frac{K[X]}{\gen p}\). Ne deduciamo che \(p\) deve essere anche irriducibile. Pertanto riepilogando:
+%\begin{quotation}
+%un'estensione \(K \to L\) e un \(\alpha \in L\) per cui esiste \(p \in K[X]\) monico e irriducibile che si annulla in \(\alpha\) inducono l'estensione 
+%\[K \to \frac{K[X]}{\gen p}\,,\ r \mapsto r + \gen p .\]
+%\nota{Discutere su questo.}
+%\end{quotation}
+\end{cons}
+
+Un altro modo di avere estensioni di campi a partire da un'estensione \(i : K \to L\) e da \(\alpha \in L\) è il seguente.
+
+\begin{cons}[Estensioni generate]
+Sia \(i : K \to L\) un'estensione di campi e \(S\) un sottoinsieme qualunque di \(L\). Definiamo \(K(S)\) come il più piccolo sottocampo di \(L\) che contiene sia \(K\) che \(S\). Un piccolo abuso qui: tecnicamente \(K(\alpha)\) è il più piccolo sottocampo di \(L\) contenente sia l'immagine di \(K\) tramite \(i\) che \(S\). Nel caso in cui \(S\) sia un singoletto \(\{\alpha\}\), allora scriviamo \(K(\alpha)\) al posto di \(K(\{\alpha\})\). Quindi un'ovvia estensione è data da \(i : K \to L\) stessa:
+\[K \to K(S)\,,\ r \mapsto i(r) .\]
+\end{cons}
+
+\begin{prop}
+Sia \(i : K \to E := K(U)\) un estensione generata da un \(U \subseteq E\) e \(j : K \to L\) un'estensione di campi. Mostrare che se \(f(a) = g(a)\) per ogni \(a \in K \cup U\) [tecnicamente parlando, \(a \in i K \cup U\)], allora \(f = g\).
+\end{prop}
+
+\begin{proof}
+Prendiamo in esame l'insieme
+\[A := \{a \in E \mid f(a) = g(a)\}\]
+perché se mostriamo che \(A = E\), allora abbiamo concluso. Per ipotesi, \(A\) contiene \(K\) [più precisamente \(i K\)] e \(U\). Inoltre \(A\) è un sottocampo di \(E\) e quindi da definizione di estensione generata abbiamo che \(E \subseteq A\). Ma è anche \(A \subseteq E\) visto come è definito \(A\).
+\end{proof}
+
+Una classe importante di estensioni, ovviamente, sono quelle in cui \(S\) è un insieme finito. Hanno un un nome.
+
+\begin{defi}[Estensioni finitamente generate]
+Un'estensione \(i : K \to L\) è detta {\em finitamente generata}, qualora esiste \(S \subseteq L\) finita tale che \(L = K(S)\). Nel caso in cui \(S = \{\alpha\}\), l'estensione \(K \to L = K(\alpha)\) è detta {\em semplice}.
+\end{defi}
+
+Un esempio di estensione semplice è già stato visto.
+
+\begin{esem}
+Sia \(K\) un campo e \(m \in K[X]\) irriducibile. L'estensione \(K \hookrightarrow \frac{K[X]}{\gen m}\) che abbiamo già menzionato è generata. Si vede abbastanza rapidamente. Indichiamo con \(K\left(X + \gen m\right)\) il più piccolo sottocampo di \(\frac{K[X]}{\gen m}\) contente \(K\) (propriamente l'immagine di \(i\)) e \(X + \gen m\). Ora, gli elementi di \(\frac{K[X]}{\gen m}\) sono della forma \(p + \gen m\) con \(p \in K[X]\), cioè combinazioni lineari di \(X^k +\gen m\): quindi possiamo concludere che
+\[\frac{K[X]}{\gen m} = K\left(X + \gen m\right) .\]
+In questo senso, l'estensione \(K \hookrightarrow \frac{K[X]}{\gen m}\) è semplice.
+\end{esem}
+
+\begin{eser}
+Considerando l'inclusione \(\Q \subseteq \C\), sai dire se \(\sqrt3 \in \Q\left(\sqrt2\right)\)?
+\end{eser}
+
+Una cosa che si fa spesso sia nelle considerazioni pratiche che negli esercizi è quello di spezzare un estensione fintamente generata in estensioni intermedie.
+
+\begin{prop}
+Sia \(i : K \to L = K(S \cup T)\) un'estensione generata dall'unione di due insiemi. Allora si può fattorizzare come segue:
+\[K \mor{\tilde i} K(S) \hookrightarrow K(S \cup T) .\]
+con \(\tilde i (r) = i(r)\).
+\end{prop}
+
+\begin{proof}
+\nota{Facile. Ma da presentare meglio.}
+\end{proof}
+
+\begin{prop}
+Sia \(i : K \to L\) un'estensione e \(\alpha_1, \dots{}, \alpha_n \in L\), con \(n \ge 2\). Allora
+\[K\left(\alpha_1, \dots{}, \alpha_{n-1}, \alpha_n\right) = K\left(\alpha_1, \dots{}, \alpha_{n-1}\right)\left(\alpha_n\right). \]
+\end{prop}
+
+\begin{proof}
+Esercizio.
+\end{proof}
+
+Cioè le estensioni finitamente generate possono essere introdotte iterativamente a partire dalla costruzione di estensione semplice.
+
+Scopriremo molto presto l'importanza di questa costruzione, anche perché sotto certe ipotesi le estensioni generate hanno una descrizione esplicita molti semplice e maneggevole. 
+
+\begin{defi}[Morfismi di estensioni]
+Prendiamo sue estensioni di campo
+\[\begin{tikzcd}[column sep=small]
+L_1 & & L_2 \\
+& K \ar["i", ul] \ar["j", ur, swap] &
+\end{tikzcd}\]
+Una morfismo di estensioni da \(i\) a \(j\) è un qualsiasi omomorfismo \(f : L_1 \to L_2\) per cui commuta
+\[\begin{tikzcd}[column sep=small]
+L_1 \ar["f", rr] & & L_2 \\
+& K \ar["i", ul] \ar["j", ur, swap] &
+\end{tikzcd}\] 
+\end{defi}
+
+Per dire più concretamente come sono fatte un certo tipo di estensioni semplici serve un po' di lavoro preliminare.
+
+\begin{prop}\label{prop:IsomorfismoEstensioneGenerataDaElementoAlgebrico}
+Sia \(i : K \to L\) una estensione e \(\alpha \in L\) con polinomio minimo \(m \in K[X]\). In precedenza abbiamo visto l'estensione di campi
+\[K \hookrightarrow \frac{K[X]}{\gen m}\,,\ r \mapsto r + \gen m .\]
+Allora esiste una e una sola omomorfismo \(f : \frac{K[X]}{\gen m} \to L\) tale che
+\[\begin{tikzcd}[column sep=small]
+\frac{K[X]}{\gen m} \ar["f", rr] & & L \\
+& K \ar[hookrightarrow, ul] \ar["i", ur, swap] &
+\end{tikzcd}\]
+commuta e \(f(X+ \gen m) = \alpha\). In particolare, \(f\) ha immagine \(K(\alpha)\) e quindi
+\[\frac{K[X]}{\gen m} \iso K(\alpha) .\]
+\end{prop}
+
+\begin{proof}
+Grazie al {\scshape Primo Teorema di Isomorfismo}, l'omomorfismo di valutazione in \(\alpha\)
+\[v_\alpha : K[X] \to L \,,\ p \mapsto i_\ast (p)(\alpha)\]
+si fattorizza mediante la proiezione al quoziente in questo modo:
+\[\begin{tikzcd}[column sep=small]
+K[X] \ar["\pi", dr, swap] \ar["{v_\alpha}", rr] & & L \\
+& \frac{K[X]}{\gen m} \ar["{\bar v_\alpha}", ur, swap]
+\end{tikzcd}\]
+Le estensioni di campi dell'enunciato si ottengono componendo \(v_\alpha\) e \(\pi\) con l'inclusione \(K \hookrightarrow K[X]\): la \(f\) dell'enunciato è proprio quella che abbiamo indicato qui con \(\bar v_\alpha\). Con questa informazione è facile verificare che che \(f = \bar v_\alpha\) è un morfismo di estensioni e che manda \(X + \gen m\) in \(\alpha\).\newline
+Rimane da provare l'isomorfismo che coinvolge l'estensione generata da \(\alpha\), e per farlo proveremo che \(\im f = K(\alpha)\). L'immagine di \(f : \frac{K[X]}{\gen m} \to L\) è un sottocampo di \(L\) che contiene \(K\) e \(\alpha \in L\): quindi \(K(\alpha) \subseteq \im f\), da definizione di estensione generata. D'altra parte, le immagini di \(f\) sono polinomi di grado \(< \deg m\) di \(K[X]\) valutati in \(\alpha\): quindi è anche vero che \(\im f \subseteq K(\alpha)\).
+\end{proof}
+
+\begin{rich}
+Sia \(K\) un campo e \(p \in K[X]\) non nullo. \(K[X]\) è un dominio euclideo e questo significa che gli elementi di \(\frac{K[X]}{\gen p}\) sono precisamente le classi laterali
+\[g + \gen p \quad\text{con } g \in K[X] \text{ e } \deg g \le \deg p -1 .\]
+\end{rich}
+
+Ecco quindi come sono fatte concretamente le estensioni semplici \(K \to K(\alpha)\) quando \(\alpha\) è algebrico.
+
+\begin{coro}\label{coro:KAlgebricoEsplicito}
+Sia \(i : K \to L\) una estensione e \(\alpha \in L\) con polinomio minimo \(m \in K[X]\). Allora
+\[K(\alpha) = \left\{ p(\alpha) \mid p \in K[X], \deg p \le \deg m -1 \right\} .\]
+\end{coro}
+
+Rimaniamo ancora un po' su quanto detto nella Proposizione precedente.
+
+\begin{coro}
+Sia \(i : K \to L\) una estensione e \(m \in K[X]\) monico e irriducibile. Considera anche l'usuale estensione \(K \hookrightarrow \frac{K[X]}{\gen m}\), \(r \mapsto r + \gen m\). Allora esiste una biezione
+\[\{\alpha \in L \mid \alpha \text{ radice di } m\} \leftrightarrow \left\{\text{omomorfismi di estensioni } \frac{K[X]}{\gen m} \to L\right\} .\]
+Cioè: esistono tanti modi di incorporare \(\frac{K[X]}{\gen m}\) all'interno di \(L\) quante sono le radici di \(p\) in \(L\).
+\end{coro}
+
+\begin{esem}
+Consideriamo l'inclusione \(\Q \hookrightarrow \C\) e \(X^2+1 \in \Q[X]\) che è un polinomio monico e irriducibile. Le radici sono due, \(i\) e \(-i\), e quindi il quoziente \(\frac{\Q[X]}{\gen{X^2+1}}\) ha le seguenti copie all'interno di \(\C\): \(\Q(i)\) e \(\Q(-i)\). Osserviamo però che \(\Q(i)\) e \(\Q(-i)\) sono uguali (esercizio), ma questo non conta perché noi stiamo considerando il numero di estensioni \(\frac{\Q[X]}{\gen{X^2+1}} \to \C\).
+\end{esem}
+
+Quindi quante estensioni \(K(\alpha) \to L\) ci sono? Basta rimaneggiare sfruttare l'isomorfismo che abbiamo appena visto:
+
+\begin{coro}\label{coro:NumeroMorfismiEstensioniDaKAlgebrico}
+Sia \(i_1 : K \to L_1\) un'estensione e \(\alpha \in L_1\) con polinomio minimo \(m \in K[X]\). Sia \(i_2  : K \to L_2\) un'estensione. Se con \(K(\alpha)\) indichiamo il più piccolo sottocampo di \(L_1\) contenente \(i_1 K\) e \(\alpha\), allora esiste una biezione
+\[\{\text{radici di } m \text{ in } L_2\} \leftrightarrow \left\{\text{omomorfismi di estensioni } K(\alpha) \to L_2\right\} .\]
+\end{coro}
+
+Questo Corollario permette di contare il numero di morfismi di estensioni da un'estensione semplice \(K \to K(\alpha)\) con \(\alpha\) algebrico. Ritorneremo più in là su questo conteggio dal Lemma~\ref{lemm:NumeroMorfismiEstensioniDaEstensioneFinita} a seguire perché è centrale per la {\scshape Teoria di Galois}.
+
+\begin{proof}
+Per la Proposizione precedente, ogni \(\beta \in L_2\) che soddisfa \(i_{2\ast} (m) (\beta) = 0\) induce uno e un solo morfismo di estensioni
+\[\begin{tikzcd}[column sep=small]
+\frac{K[X]}{\gen m} \ar["f", rr] & & L_2 \\
+& K \ar[hookrightarrow, ul] \ar["{i_2}", ur, swap]
+\end{tikzcd}\]
+che manda \(X + \gen m\) in \(\beta\). Sempre per la stessa Proposizione, si \(K(\alpha) \iso \frac{K[X]}{\gen m}\).
+\end{proof}
+
+\begin{eser}
+Siano \(L_1\) e \(L_2\) due campi di caratteristica \(0\) e \(f : L_1 \to L_2\) un omomorfismo di campi. Siano \(j_1 : \Q \to L_1\) e \(j_2 : \Q \to L_2\) indotte dagli omomorfismi \(\Z \to L_1\) e \(\Z \to L_2\) come nel Lemma~\ref{lemm:CampoFrazioni}. Mostrare che
+\[\begin{tikzcd}[column sep=small]
+L_1 \ar["f", rr] & & L_2 \\
+& \Q \ar["{j_2}", ul] \ar["{j_2}", ur, swap]
+\end{tikzcd}\]
+commuta, cioè \(f\) è un morfismo di estensioni da \(j_1\) a \(j_2\).
+\end{eser}
+
+\begin{eser}
+Sia \(i : K \to E := K(U)\) un estensione generata da un \(U \subseteq E\) e \(j : K \to L\) un'estensione di campi. Se abbiamo due morfismi di estensioni
+\[\begin{tikzcd}[column sep=small]
+K(U) \ar["f", rr, shift left] \ar["g", shift right, rr, swap] & & L \\
+& K \ar["i", ul] \ar["j", ur, swap] 
+\end{tikzcd}\]
+Mostrare che se \(f(a) = g(a)\) per ogni \(a \in U\), allora \(f = g\).
+\end{eser}

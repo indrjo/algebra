@@ -1,0 +1,132 @@
+% !TEX program = lualatex
+% !TEX spellcheck = it_IT
+% !TEX root = ../campi.tex
+
+\section{Esercizi 1}
+
+Un classico esercizio è quello di calcolare il grado di estensioni finitamente generate, cosa che spesso passa per la ricerca di polinomi minimi (quindi criteri di irriducibilità).
+
+\begin{eser}
+\begin{enumerate}
+\item Mostrare che \([\Q(\sqrt{2},i):\Q]=4\).
+\item Mostrare che \([\Q(\sqrt{2},\sqrt{3}):\Q]=4\).
+\item Mostrare che \(\Q(\sqrt{2}+\sqrt{3})=\Q(\sqrt{2},\sqrt{3})\).
+\item Determinare il polinomio minimo di \(\sqrt{2}+\sqrt{3}\) in \(\Q[X]\).
+\end{enumerate}
+\end{eser}
+
+\begin{proof}[Svolgimento]
+\begin{enumerate}
+\item Possiamo considerare le seguenti estensioni consecutive
+\[\begin{tikzcd}
+\Q \ar[r, hookrightarrow] & \Q\left(\sqrt 2\right) \ar[r, hookrightarrow] &  \Q\left(\sqrt 2\right)(i) = \Q\left(\sqrt 2, i\right)
+\end{tikzcd}\]
+ed usare la Proposizione~\ref{prop:GradoEstensioneKAlgebrico} per determinare il grado di ciascuna di si queste. Un polinomio razionale irriducibile e monico che ha come radice \(\sqrt2\) è \(X^2-2\): ecco il polinomio minimo di \(\sqrt2\). Cerchiamo ora un \(p \in \Q\left(\sqrt2\right) [X]\) monico e irriducibile che abbia \(i\) come radice. Il polinomio \(X^2-2 \in \Q[X]\) continua ad essere irriducibile pure in \(\Q\left(\sqrt2\right)\): poiché \(\sqrt 2\) è algebrico su \(\Q\), sappiamo che
+\[\Q\left(\sqrt2\right) = \left\{ a+b\sqrt2 \mid a, b \in \Q \right\}\]
+e qui non si possono trovare le radici di \(X^2-2\) visto come elemento di \(\Q\left(\sqrt2\right)[X]\). Questo basta per l'irriducibilità, visto che si tratta di un polinomio di grado 2 e a coefficienti in un campo che non ha radici nello stesso campo. Quindi il grado delle estensioni è
+\[\begin{tikzcd}
+\Q \ar["2", r, hookrightarrow, swap] & \Q\left(\sqrt 2\right) \ar["2", r, hookrightarrow, swap] &  \Q\left(\sqrt 2\right)(i) = \Q\left(\sqrt 2, i\right)
+\end{tikzcd}\]
+e l'estensione \(\Q \subseteq \Q\left(\sqrt 2, i\right)\) è di grado \(4\).
+Il lettore potrebbe provare invece a considerare le estensioni
+\[\begin{tikzcd}
+\Q \ar[r, hookrightarrow] & \Q(i) \ar[r, hookrightarrow] & \Q\left(\sqrt 2, i\right)
+\end{tikzcd}\]
+per risolvere l'esercizio.
+%\(\polmin_{\sqrt{2}}=X^2-2\) \(\implies\) \([\Q(\sqrt{2}):\Q]=2\), \(\polmin_i=X^2+1\) \(\implies\) \([\Q(i):\Q]=2\). Dunque \(l:=[\Q(\sqrt{2},i):\Q]\) tale che \(2=\mcm(2,2)\dvd l\dvd2\cdot2=4\) \(\implies\) \(l=2\) o \(4\). Per assurdo \(l=2\) \(\implies\) \([\Q(\sqrt{2},i):\Q(\sqrt{2})]=1\) \(\implies\) \(\Q(\sqrt{2},i)=\Q(\sqrt{2})\) \(\implies\) \(i\in\Q(\sqrt{2})\subset\R\), assurdo.
+\item Possiamo considerare le estensioni consecutive
+\[\begin{tikzcd}
+\Q \ar[r, hookrightarrow] & \Q\left(\sqrt 2\right) \ar[r, hookrightarrow] &  \Q\left(\sqrt 2\right)\left(\sqrt 3\right) = \Q\left(\sqrt 2, \sqrt 3\right)
+\end{tikzcd} \]
+e provare a fare come nel punto precedente. Conosciamo già il grado della prima estensione, perciò concentriamoci sulla seconda. Un elemento di \(\Q[X]\) che ha come radice \(\sqrt3\) è \(X^2-3\): vediamo se come elemento di \(\Q\left(\sqrt2\right)[X]\) continua a essere irriducibile. È un polinomio a coefficienti nel campo \(\Q\left(\sqrt2\right)\) di grado \(2\), quindi controlliamo se le sue radici sono \(\Q\left(\sqrt2\right)\). Ora, poiché \(\sqrt2\) è algebrico su \(\Q\), possiamo scrivere
+\[\Q\left(\sqrt2\right) = \left\{a+b\sqrt2 \mid a, b \in \Q\right\} .\]
+Vediamo allora se \(\sqrt3 = a+b\sqrt2\) per qualche \(a, b \in \Q\): non è il caso perché
+\[\sqrt3 = a+b\sqrt2 \Rightarrow 3 = a^2+2b^2+2ab\sqrt2 \Rightarrow \underbrace{\frac{3-a^2-2b^2}{2ab}}_{\in \Q} = \underbrace{\sqrt2}_{\notin \Q} .\]
+Possiamo quindi concludere che pure l'estensione \(\Q\left(\sqrt 2\right) \subseteq \Q\left(\sqrt 2, \sqrt 3\right)\) in esame ha grado \(2\).
+%\nota{Continua\dots{}}
+%Analogamente al punto 1, \([\Q(\sqrt{2},\sqrt{3}):\Q]=2\) o \(4\). Per assurdo sia \(2\) \(\implies\) \(\sqrt{3}\in\Q(\sqrt{2})\). Poiché \(\Q(\sqrt{2})\iso\Q[X]/(X^2-2)\), che ha come \(\Q\)-base \(\{\cl{1},\cl{X}\}\), \(\Q(\sqrt{2})\) ha come \(\Q\)-base \(\{1,\sqrt{2}\}\) \(\implies\) \(\exiun a,b\in\Q\) tali che \(\sqrt{3}=a+b\sqrt{2}\) \(\implies\) \(3=(a+b\sqrt{2})^2=a^2+2b^2+2ab\sqrt{2}\) \(\implies\) \(a^2+2b^2=3\) e \(2ab=0\) \(\implies\) \(a=0\) e \(2b^2=3\) o \(b=0\) e \(a^2=3\), assurdo.
+\item Ovviamente \(\alpha := \sqrt2+\sqrt3 \in \Q\left(\sqrt2,\sqrt3\right)\), e quindi \(\Q(\alpha)\subseteq\Q\left(\sqrt2,\sqrt3\right)\). Per dimostrare l'inclusione inversa, basta verificare che \(\sqrt2,\sqrt3 \in \Q(\alpha)\). Possiamo per esempio ragionare così: l'inversa di \(\alpha\) è \(\alpha^{-1} = -\sqrt2 + \sqrt3\) e possiamo scrivere
+\[\sqrt2 = \frac{\alpha - \alpha^{-1}}{2} \quad\text{e}\quad \sqrt3 = \frac{\alpha+\alpha^{-1}}{2} .\]
+E questo basta per concludere che \(\sqrt 2, \sqrt3 \in \Q(\alpha)\).
+%Possiamo fare le seguenti manipolazioni algebriche senza uscire da \(\Q(\alpha)\):
+%\begin{align*}
+%& \alpha^2=5+2\sqrt{6}\in\Q(\alpha) \\
+%& \sqrt{6}=(\alpha^2-5)/2\in\Q(\alpha) \\
+%& \alpha\sqrt{6}=2\sqrt{3}+3\sqrt{2}\in\Q(\alpha) \\
+%& 2\sqrt{3}+3\sqrt{2}-2\alpha=\sqrt{2}\in\Q(\alpha) \\
+%& \alpha-\sqrt{2}=\sqrt{3}\in\Q(\alpha) .
+%\end{align*}
+%\item Come visto nel punto 3, \(2\sqrt{6}=\alpha^2-5\) \(\implies\)
+%\[
+%24=(\alpha^2-5)^2=\alpha^4-10\alpha^2+25
+%\]
+%\(\implies\) \(\alpha^4-10\alpha^2+1=0\) \(\implies\) \(\alpha\) è radice di \(f:=X^4-10X^2+1\in\Q[X]\) \(\implies\) \(\polmin_{\alpha}\dvd f\). Per i punti 3 e 2
+%\[
+%\deg(\polmin_{\alpha})=[\Q(\alpha):\Q]=[\Q(\sqrt{2},\sqrt{3}):\Q]=4=\deg(f)
+%\]
+%\(\implies\) \(\polmin_{\alpha}\) e \(f\) sono associati \(\implies\) \(\polmin_{\alpha}=f\) perché sono entrambi monici.
+\item Come al solito cerchiamo prima di tutto un polinomio che abbia come radice \(\alpha := \sqrt2 + \sqrt3\).
+\begin{align*}
+& \alpha^2=5+2\sqrt{6} \\
+& (\alpha^2 - 5)^2 = 24 \\
+& \alpha^4 -10\alpha^2+1 = 0 .
+\end{align*}
+Quindi ecco un possibile polinomio minimo: \(X^4 -10X^2+1 = 0\). I possibili candidati a radici sono \(1\) e \(-1\), ma nessuno tra questi lo è. Quindi se \(X^4 -10X^2+1 = 0\) è riducibile, allora deve essere fattorizzabile in due polinomi di grado \(2\). Nemmeno questa è una possibilità perché \(Y^2-10Y+1 = 0\) è un polinomio di grado \(2\) a coefficienti in \(\Q\) che non ha radici in \(\Q\).\qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{eser}[Estensioni di \(\Q\)]
+\begin{enumerate}
+\item Mostrare che  per ogni \(n\ge 1\) esiste \(\alpha \in \R\) tale che \([\Q(\alpha):\Q] = n\).
+%\item \([\calg{\Q}:\Q]=\infty\).
+\item \([\R:\Q] = [\C:\Q]=\infty\).
+%\item L'estensione \(\Q\subseteq\calg{\Q}\) non è finitamente generata.
+\end{enumerate}
+\end{eser}
+
+\begin{proof}[Svolgimento]
+\begin{enumerate}
+\item L'idea è di trovare degli \(\alpha_n \in \R\) radici di polinomi irriducibili \(p_n \in \Q[X]\) tali che \(\deg p_n = n\). Infatti, grazie alla Proposizione~\ref{prop:GradoEstensioneKAlgebrico} si ha \([\Q\left(\alpha_n\right) : \Q] = \deg p_n\). Ad esempio, i numeri \(\alpha_n := \sqrt[n]{2}\) hanno rispettivamente come polinomio minimo \(X^n-2 \in \Q[X]\). La verifica che questi polinomi siano tutti irriducibili è lasciato come esercizio.
+%\item \(\all n>0\), dato \(\alpha\) come nel punto 1, \(\alpha\in\calg[\C]{\Q}=\calg{\Q}\) \(\implies\) \(\Q\subseteq\Q(\alpha)\subseteq\calg{\Q}\) estensioni \(\implies\) \([\calg{Q}:\Q]\ge[\Q(\alpha):\Q]=n\).
+\item Se l'estensione \(\Q \to \R\) fosse di grado \(n\), allora abbiamo visto che si può costruire una estensione \(\Q \subseteq \Q(\alpha)\) di grado \(n+1\), ma ciò non è possibile. Il fatto che pure \(\Q \subseteq \C\) è di grado infinito segue immediatamente. \qedhere
+%\(\Q \subseteq\calg{\Q}\subseteq\C\) estensioni \(\implies\) \([\C:\Q]\ge[\calg{Q}:\Q]=\infty\). \\
+%\(\Q\subseteq\R\subseteq\C\) estensioni, \([\C:\R]=2\), per assurdo \([\R:\Q]=n<\infty\) \(\implies\) \([\C:\Q]=2n<\infty\), assurdo.
+%\item è algebrica ma non finita (per il punto 2).
+\end{enumerate}
+\end{proof}
+
+\begin{eser}[\tsumura{399}]
+Dimostra che \(X^3-2\) è irriducibile sul campo \(\Q(i)\).
+\end{eser}
+
+\begin{proof}[Svolgimento]
+È un polinomio di grado \(3\) a coefficienti in un campo: basta quindi far vedere che non ha radici in quel campo. Sia \(\alpha \in \Q(i)\) una qualsiasi delle radici di \(X^3-2\). In particolare si ha l'inclusione \(\Q(\alpha) \subseteq \Q(i)\) e si può scrivere
+\[[\Q(i):\Q(\alpha)][\Q(\alpha):\Q] = [\Q(i):\Q] .\]
+Calcoliamo prima quello che siamo immediatamente in grado di fare. \([\Q(\alpha):\Q]\) perché \(X^3-2 \in \Q[X]\) è il polinomio minimo di \(\alpha\) e \([\Q(i):\Q] = 2\) perché \(X^2+1 \in \Q[X]\) è polinomio minimo di \(i\). E siamo caduti in un assurdo perché \(3 \nmid 2\). 
+\end{proof}
+
+\begin{eser}
+Siano \(K \subseteq K' \subseteq L\) due estensioni e \(\alpha \in L\). Sia anche \([K':K]=n\) e \([K(\alpha):K]=m\).
+\[\begin{tikzcd}[column sep=small]
+& K' \ar[dr, hookrightarrow] \\
+K \ar["n", ur, hookrightarrow] \ar["m", hookrightarrow, dr, swap] & & L \\
+& K(\alpha) \ar[ur, hookrightarrow]
+\end{tikzcd}\]
+\begin{enumerate}
+\item Dimostrare che \(\mcm(m,n) \mid [K'(\alpha):K] \le mn\). (Dunque \([K'(\alpha):K]=mn\) se \(\mcd(m,n)=1\).)
+\item Far vedere che \([K'(\alpha):K] \nmid mn\) se \(K=\Q\), \(L=\C\), \(K'=\Q(\beta)\) con \(\alpha\) e \(\beta\) radici distinte di \(X^3-2\).
+\end{enumerate}
+\end{eser}
+
+\begin{proof}[Svolgimento]
+\nota{Da riscrivere.}
+\begin{enumerate}
+\item \(m':=[K'(\alpha):K']\le m\), \(K\subseteq K'\subseteq K'(\alpha)\) estensioni \(\implies\) \(l:=[K'(\alpha):K]=[K'(\alpha):K'][K':K]=m'n\le mn\). \(K\subseteq K(\alpha)\subseteq K'(\alpha)\) estensioni \(\implies\) \(m\dvd l\); \(n\dvd l=m'n\) \(\implies\) \(\mcm(m,n)\dvd l\). 
+\item \(\polmin_{\alpha}=\polmin_{\beta}=X^3-2\) (perché monico e irriducibile in \(\Q[X]\)) \(\implies\) \(m=[\Q(\alpha):\Q]=\deg(\polmin_{\alpha})=3\) e analogamente \(n=3\). \\
+\(\omega:=\alpha\beta^{-1}\in\C\) tale che \(K'(\alpha)=\Q(\alpha,\beta)=\Q(\beta,\omega)\).\\
+\(\omega^3=\alpha^3\beta^{-3}=1\) \(\implies\) \(\omega\) radice di \(X^3-1=(X-1)f\) con \(f:=(X^2+X+1)\) monico e irriducibile in \(\Q[X]\); \(\omega\ne1\) \(\implies\) \(\omega\) radice di \(f\) \(\implies\) \(\polmin_{\omega}=f\) \(\implies\) \([\Q(\omega):\Q]=\deg(\polmin_{\omega})=2\). \\
+\([K'(\alpha):\Q]=[\Q(\beta,\omega):\Q]=3\cdot2=6\ndvd mn=9\). \qedhere
+\end{enumerate}
+\end{proof}
+
+

@@ -1,0 +1,285 @@
+% !TEX program = lualatex
+% !TEX spellcheck = it_IT
+% !TEX root = ../campi.tex
+
+\section{Grado di estensioni}
+
+Presa un'estensione \(i : K \to L\), possiamo vedere \(L\) come uno spazio vettoriale su \(K\). L'operazione interna è l'operazione di addizione di \(L\), mentre la moltiplicazione per scalare deve essere introdotta:
+\begin{align*}
+K \times L &\to L \\
+(k, l) &\mapsto i(k)l
+\end{align*}
+Con un abuso, possiamo identificare \(K\) con la sua immagine sotto \(i\) in \(L\) e quindi scrivere \enquote{\(kl\)} al posto di \enquote{\(i(k)l\)}, rendendo così la moltiplicazione per scalare un affare interno a \(L\) stesso. È un abuso di notazione così radicato e comodo che anche noi faremo lo stesso facendo attenzione e cercando di essere il più chiari possibile.
+
+%Quindi abbiamo fatto entrare in gioco l'Algebra Lineare. Le funzioni lineari in questo contesto sono molto interessanti. Siano
+%\[\begin{tikzcd}[column sep=tiny]
+%L_1  & & L_2 \\
+%& K \ar["i", ul] \ar["j", ur, swap]  & 
+%\end{tikzcd}\]
+%due estensioni di uno stesso campo. Abbiamo quindi due spazi vettoriali \(L_1\) e \(L_2\). Una funzione lineare \(f : L_1 \to L_2\) è una funzione tale che
+%\[f(i(a)x+i(b)y) = j(a)f(x) + j(b)f(y) \quad\text{per ogni } a,b \in K \text{ e } x,y \in L .\]
+%%Con l'abuso di linguaggio menzionato, possiamo scrivere
+%%\[f(ax+by) = af(x) + bf(y) \quad\text{per ogni } a,b \in K \text{ e } x,y \in L .\]
+%È facile verificare che \(f : L_1 \to L_2\) è lineare se e solo se soddisfa
+%\begin{align*}
+%& f(x + y) = f(x) + f(y) \quad\text{per ogni } x,y \in L \\
+%& f(i(a)) = j(a)         \quad\text{per ogni } a \in K
+%\end{align*}
+%%
+%Se adottiamo l'abuso di linguaggio poco fa menzionato, possiamo riscrivere la seconda identità come
+%\[f(a) = a \quad\text{per ogni } a \in K\]
+%cioè \(f\) fissa gli elementi di \(K\). 
+
+\begin{defi}
+Il {\em grado} di un'estensione di campi \(i : K \to L\) è la dimensione \(L\) come spazio vettoriale su \(K\) e si indica con \([L:K]\). L'estensione si dice {\em finita} qualora la dimensione di \(L\) è finita.
+\end{defi}
+
+%Se \(K\subseteq L\) non è finita, scriveremo semplicemente \([L:K]=\infty\).
+
+Quindi se \(i : K \to L\) è un'estensione di grado \(n < \infty\), allora esistono degli elementi \(\alpha_1, \dots{}, \alpha_n \in L\) che formano una base di \(L\) e quindi \(L\) come campo vettoriale è isomorfo a \(K^n\). Quando si scrive \([L:K]\) senza che appaia alcun riferimento a \(i\) è proprio per questa ragione: una volta fissati \(K\) e \(L\), tutte le estensioni \(K \to L\) hanno lo stesso grado.
+
+%\begin{figure}
+%\centering
+%\begin{tikzpicture}
+%\foreach \f/\i in {F/0, K/1, L/2} {
+%  \node [circle] (\f) at +({1.4*\i},0) {\(\f\)};
+%}
+%\draw [->, semithick] (F) -- node[auto]{\scriptsize \([K:F]\)} (K);
+%\draw [->, semithick] (K) -- node[auto]{\scriptsize \([L:K]\)} (L);
+%\draw [decoration={brace, mirror}, decorate] (F.south) -- node[auto, swap]{\scriptsize \([L:F]\)} (L.south);
+%\end{tikzpicture}
+%\[\underbrace{F \mor{[K:F]} K \mor{[L:K]} L}_{[L:K]}\]
+%\caption{Grado di una composizione di estensioni}
+%\end{figure}
+
+\begin{prop}
+Siano \(F\subseteq K\subseteq L\) sue estensioni consecutive. 
+\begin{enumerate}
+\item Se \(F\subseteq L\) è un'estensione finita, allora anche \(F \subseteq K\) e \(K\subseteq L\) lo sono
+\item Se \(\left\{\alpha_1, \dots{}, \alpha_m\right\}\) è una base di \(K\) come spazio vettoriale su \(F\) e \(\left\{\beta_1, \dots{}, \beta_n\right\}\) è una base di \(L\) come spazio vettoriale su \(K\), allora
+\[\left\{\alpha_i \beta_j \mid i = 1, \dots{}, m, j = 1,\dots{}, n \right\}\]
+è una base di \(L\) come spazio vettoriale su \(F\). In particolare, se \(F \subseteq K\) e \(K\subseteq L\) sono entrambe finite, allora pure \(F \subseteq L\) lo è. Inoltre \marginpar{\[\underbrace{F \mor{[K:F]} K \mor{[L:K]} L}_{[L:K]}\]}
+\begin{equation}
+[L:F]=[L:K][K:F] .\label{form:GradoDiComposizioneEstensioni}
+\end{equation}
+\end{enumerate}
+\end{prop}
+
+%\marginpar{\begin{tikzpicture}
+%\foreach \f/\i in {F/0, K/1, L/2} {
+%  \node [circle] (\f) at +(0,{1.4*\i}) {\(\f\)};
+%}
+%\draw [->, semithick] (F) -- node[auto]{\rotatebox{-90}{\scriptsize \([K:F]\)}} (K);
+%\draw [->, semithick] (K) -- node[auto]{\rotatebox{-90}{\scriptsize \([L:K]\)}} (L);
+%\draw [decoration={brace, mirror}, decorate] (F.south east) -- node[auto, swap]{\rotatebox{-90}{\scriptsize \([L:F]\)}} (L.north east);
+%\end{tikzpicture}}
+
+La formula~\ref{form:GradoDiComposizioneEstensioni} ricorda una proprietà dell'indice dei sottogruppi in un gruppo: vedremo in seguito che è una importante coincidenza.
+
+\begin{proof}
+Sia \(F \subseteq L\) un'estensione finita. L'estensione \(F \subseteq K\) è ovviamente finita perché \(K\) è un sottospazio vettoriale di \(L\). Inoltre \(L\) come spazio vettoriale su \(F\) possiede una base \(\left\{ \alpha_1, \dots{}, \alpha_n \right\} \subseteq L\) e quindi gli elementi di \(L\) possono essere anche ottenute come combinazioni lineari con coefficienti in \(K\). Pertanto anche l'estensione \(K \subseteq L\) è finita.\newline
+%\([K:F]\le[L:F]\) (perché \(K\) è un \(F\)-sottospazio vettoriale di \(L\)) e \([L:K]\le[L:F]\) (perché ogni insieme di generatori di \(L\) su \(F\) lo è anche su \(K\)), dunque basta dimostrare l'ultima affermazione. \\
+Viceversa \nota{forse è meglio riscriverla\dots{}} siano \([K:F]=m\) e \([L:K]=n\), cioè \(K \iso F^m\) come spazi vettoriali su \(F\) e \(L \iso K^n\) come spazi vettoriali su \(K\) e quindi anche su \(F\). Allora 
+\[L \iso \left(F^m\right)^n\iso F^{mn}\] 
+come spazi vettoriali su \(F\). Concludiamo quindi che \([L:F]=mn\).
+\end{proof}
+
+\nota{I morfismi di estensioni sono applicazioni lineari. Parlare di questo e delle conseguenze sugli endomorfismi di estensioni finite: cioè sono automorfismi.}
+
+%\begin{osse}
+%\(\{\alpha_1,\dots,\alpha_m\}\) \(F\)-base di \(K\) e \(\{\beta_1,\dots,\beta_n\}\) \(K\)-base di \(L\) \(\implies\) \(\{\alpha_i\beta_j\st i=1,\dots,m\text{ e } j=1,\dots,n\}\) \(F\)-base di \(L\): basta dimostrare che è un insieme di generatori, il che è vero perché ogni elemento di \(L\) è della forma \(\sum_{j=1}^nb_j\beta_j\) con \(b_j=\sum_{i=1}^ma_{i,j}\alpha_i\) e \(a_{i,j}\in F\).
+%\end{osse}
+
+%\begin{osse}
+%\begin{itemize}
+%\item \([L:K]\) non va confuso con l'indice di \(K<L\).
+%\item \([L:K]>0\) e \([L:K]=1\) \(\iff\) \(K=L\).
+%\end{itemize}
+%\end{osse}
+%\begin{esem}
+%\begin{itemize}
+%\item \([\C:\R]=2\) perché \(\{1,i\}\) è una \(\R\)-base di \(\C\).
+%\item \([K(X):K]=\infty\) perché \(\{X^n\st n\in\N\}\subset K[X]\subset K(X)\) è \(K\)-linearmente indipendente.
+%\end{itemize}
+%\end{esem}
+
+
+%\section{Estensioni notevoli}
+
+%\begin{itemize}
+%\item \(B\) anello commutativo, \(A\subseteq B\) sottoanello, \(U\subseteq B\) \(\implies\) \\
+%\(A[U]\) indica il pi\`u piccolo sottoanello di \(B\) contenente \(A\) e \(U\), cioè l'intersezione di tutti i sottoanelli di \(B\) contenenti \(A\) e \(U\). Inoltre è facile vedere che
+%\[
+%A[U]=\{f(b_1,\dots,b_n)\st f\in A[X_1,\dots,X_n],\ b_1,\dots,b_n\in U\}.
+%\]
+%In particolare \(A[b]:=A[\{b\}]=\{f(b)\st f\in A[X]\}\) \(\all b\in B\).
+%\item \(K\subseteq L\) estensione, \(U\subseteq L\) sottoinsieme \(\implies\) \\
+%\(K(U)\) indica il pi\`u piccolo sottocampo di \(L\) contenente \(K\) e \(U\), cioè l'intersezione di tutti i sottocampi di \(L\) contenenti \(K\) e \(U\). Chiaramente \(K[U]\subseteq K(U)\) e è facile vedere che
+%\[
+%K(U)=\left\{\alpha\beta^{-1}\st\alpha,\beta\in K[U],\ \beta\ne0\right\}\iso Q(K[U])
+%\]
+%(l'inclusione \(K[U]\to K(U)\) si estende a un omomorfismo iniettivo \(Q(K[U])\to K(U)\), che è anche suriettivo). \\
+%Ovviamente \(K\subseteq K(U)\) è un'estensione, detta {\em generata da \(U\)} (su \(K\)).
+%\end{itemize}
+%
+%\begin{defi}
+%Un'estensione \(K\subseteq L\) è {\em finitamente generata} se \(\exi U\subseteq L\) finito tale che \(L=K(U)\). L'estensione è {\em semplice} se \(\exi\alpha\in L\) tale che \(L=K(\alpha):=K(\{\alpha\})\).
+%\end{defi}
+%
+%\begin{esem}
+%Un'estensione \(K\subseteq L\) è semplice se \([L:K]=p\) primo: date estensioni \(K\subseteq K'\subseteq L\), da
+%\[
+%p=[L:K]=[L:K'][K':K]
+%\]
+%segue \([L:K']=1\) e \([K':K]=p\) o \([L:K']=p\) e \([K':K]=1\), e quindi \(K'=L\) o \(K'=K\). \\
+%Allora \(L=K(\alpha)\) \(\all\alpha\in L\setminus K\).
+%\end{esem}
+
+
+
+%\section{Elementi algebrici e elementi trascendenti}
+
+%\begin{defi}
+%\(K\subseteq L\) estensione. Si dice che \(\alpha\in L\) è {\em algebrico su \(K\)} se \(\exi0\ne f\in K[X]\) tale che \(f(\alpha)=0\). \\
+%Altrimenti si dice che \(\alpha\) è {\em trascendente su \(K\)}.
+%\end{defi}
+%
+%\begin{prop}
+%\(K\subseteq L\) estensione, \(\alpha\in L\).
+%\begin{enumerate}
+%\item \(\alpha\) trascendente su \(K\) \(\implies\) \(K[\alpha]\iso K[X]\) e \(K(\alpha)\iso K(X)\) come \(K\)-algebre.
+%\item \(\alpha\) algebrico su \(K\) \(\implies\) \(\exiun\polmin_{\alpha}=\polmin_{\alpha,K}\in K[X]\) monico (detto {\em polinomio minimo} di \(\alpha\) su \(K\)) tale che
+%\[
+%\{f\in K[X]\st f(\alpha)=0\}=(\polmin_{\alpha}).
+%\]
+%Inoltre \(\polmin_{\alpha}\) è irriducibile in \(K[X]\) e \(K[\alpha]=K(\alpha)\iso K[X]/(\polmin_{\alpha})\) come \(K\)-algebre.
+%\end{enumerate}
+%\end{prop}
+%
+%\begin{proof}
+%\(g : K[X]\to L\), \(f\mapsto f(\alpha)\) è un omomorfismo di \(K\)-algebre (è l'unico tale che \(X\mapsto \alpha\)); inoltre \(\im(g)=\{f(\alpha)\st f\in K[X]\}=K[\alpha]\) e \(\ker(g)=\{f\in K[X]\st f(\alpha)=0\}\).
+%\begin{enumerate}
+%\item \(\ker(g)=\{0\}\) \(\implies\) \(K[X]\iso\im(g)=K[\alpha]\) (come \(K\)-algebre), quindi anche \(K(X)=Q(K[X])\iso Q(K[\alpha])\iso K(\alpha)\).
+%\item \(\ker(g)\) ideale non nullo di \(K[X]\) dominio a ideali principali tale che \(K[X]^*=K^*\) \(\implies\) \(\exiun\polmin_{\alpha}\in K[X]\) monico tale che \(\ker(g)=(\polmin_{\alpha})\) \(\implies\) per il primo teorema di isomorfismo
+%\[
+%K[\alpha]=\im(g)\iso K[X]/\ker(g)=K[X]/(\polmin_{\alpha})
+%\]
+%come anelli, ma è facile vedere che l'isomorfismo (essendo indotto da \(g\)) è anche di \(K\)-algebre. \\
+%\(K[\alpha]\subseteq L\) sottoanello \(\implies\) \(K[\alpha]\iso K[X]/(\polmin_{\alpha})\) dominio \(\implies\) \((\polmin_{\alpha})\) ideale primo non nullo \(\implies\) \(\polmin_{\alpha}\) irriducibile e \((\polmin_{\alpha})\) ideale massimale \(\implies\) \(K[\alpha]\iso K[X]/(\polmin_{\alpha})\) campo \(\implies\) \(K[\alpha]=K(\alpha)\) (dato che in ogni caso \(K[\alpha]\subseteq K(\alpha)\)). \qedhere
+%\end{enumerate}
+%\end{proof}
+
+Vediamo ora il grado delle estensioni che abbiamo fino ad ora introdotto.
+
+\begin{esem}
+Sia \(K\) un campo e \(p \in K[X]\) non nullo. Allora \(\frac{K[X]}{\gen p}\) è uno spazio vettoriale su \(K\) di grado \(\deg p\) perché una sua base è
+\[\left\{1 + \gen p, X + \gen p, \dots{}, X^{\deg p -1} + \gen p\right\} .\]
+\end{esem}
+
+Questo è interessante perché se \(p\) è irriducibile, allora abbiamo il grado dell'estensione di campi \(K \to \frac{K[X]}{\gen p}\), \(r \mapsto r + \gen p\). Ecco come prosegue la cosa grazie alla Proposizione~\ref{prop:IsomorfismoEstensioneGenerataDaElementoAlgebrico}.
+
+\begin{prop}\label{prop:GradoEstensioneKAlgebrico}
+Sia \(i : K \to L\) un'estensione e \(\alpha \in L\) con polinomio minimo \(m \in K[X]\). Allora il grado dell'inclusione \(K \hookrightarrow K(\alpha)\) è uguale a \(\deg m\).
+\end{prop}
+
+\begin{proof}
+In realtà il Corollario~\ref{coro:KAlgebricoEsplicito} ha già fatto tutto il lavoro: una base di \(K(\alpha)\) come spazio vettoriale su \(K\) è \(\left\{1, \alpha, \dots{}, \alpha^{\deg m -1}\right\}\).
+\end{proof}
+
+Abbiamo appena compreso che il calcolo del grado di una estensione \(K \hookrightarrow K(\alpha)\) con \(\alpha\) algebrico passa per il calcolo del polinomio minimo di \(\alpha\). Quindi il lettore deve capire che è necessario una certa familiarità con i criteri di irriducibilità di polinomi.
+
+Non è difficile ora formulare delle condizioni equivalenti all'essere elementi algebrici in termini del grado di un'opportuna estensione. 
+
+\begin{prop}
+Sia \(i : K \to L\) un'estensione e \(\alpha \in L\). Allora sono equivalenti:
+\begin{enumerate}
+\item \(\alpha\) è algebrico su \(K\).
+\item \(K \hookrightarrow K(\alpha)\) è finita. In questo caso \([K(\alpha):K]\) è il grado del polinomio minimo di \(\alpha\) su \(K[X]\).
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+Se \(\alpha\) è algebrico, allora ammette un polinomio minimo \(m \in K[X]\) e quindi siamo nelle ipotesi della Proposizione precedente. Il viceversa richiede un po' di Algebra Lineare. Se \([K(\alpha):K] = n < \infty\), allora sicuramente gli \(n+1\) elementi
+\[1, \alpha, \dots{}, \alpha^{n-1}, \alpha^n\]
+sono linearmente dipendenti. Cioè esistono \(a_0, \dots{}, a_n \in K\) non tutti nulli per cui
+\[a_0 + a_1 \alpha + \dots{} + a_n \alpha^n = 0 .\]
+Abbiamo quindi trovato un polinomio non nullo che sia annulla in \(\alpha\).  
+\end{proof}
+
+
+%\begin{proof}
+%\begin{itemize}
+%\item[\(1\implies2\)] Per la parte 2 della Proposizione.
+%\item[\(2\implies3\)] \(K[\alpha]=K(\alpha)\) campo \(\implies\) \(K[\alpha]\niso K[X]\) \(\implies\) \\
+%\(\alpha\) algebrico su \(K\) per la parte 1 della Proposizione \(\implies\) \(K(\alpha)\iso K[X]/(\polmin_{\alpha})\) per la parte 2 della Proposizione \(\implies\) \([K(\alpha):K]=\dim_K(K[X]/(\polmin_{\alpha}))=\deg(\polmin_{\alpha})\) per il Lemma.
+%\item[\(3\implies1\)] Per la parte 1 della Proposizione, dato che \(\dim_K(K(X))=\infty\).
+%\end{itemize}
+%\end{proof}
+%
+%
+%
+%\begin{proof}
+%\begin{itemize}
+%\item \(d:=\deg(f)\), \(K[X]_{<d}:=\{g\in K[X]\st g=0\text{ o }\deg(g)<d\}\) \(K\)-sottospazio vettoriale di \(K[X]\) tale che \(\dim_K(K[X]_{<d})=d\) (una base di \(K[X]_{<d}\) è \(\{X^i\st 0\le i<d\}\)).
+%\item La funzione
+%\[
+%\begin{split}
+%\psi : K[X] & \to K[X] \\
+%g & \mapsto r \text{ con \(g=qf+r\), \(q\in K[X]\) e \(r\in K[X]_{<d}\)}
+%\end{split}
+%\]
+%è ben definita e \(K\)-lineare ({\em esercizio}).
+%\item \(\im(\psi)= K[X]_{<d}\) (perché \(\psi(g)=g\) se \(g\in K[X]_{<d}\)) e \(\ker(\psi)=\{qf\st q\in K[X]\}=(f)\) \(\implies\)
+%\[
+%K[X]/(f)=K[X]/\ker(\psi)\iso\im(\psi)=K[X]_{<d}
+%\]
+%come \(K\)-spazi vettoriali per il primo teorema di isomorfismo \(\implies\) \(\dim_K(K[X]/(f))=\dim_K(K[X]_{<d})=d\).\qedhere
+%\end{itemize}
+%\end{proof}
+%
+%\begin{osse}
+%Una \(K\)-base di \(K[X]/(f)\) è \(\{X^i+(f)\st 0\le i<d\}\).
+%\end{osse}
+
+\begin{defi}
+Un'estensione \(K \subseteq L\) è detta {\em algebrica} quando ogni elemento di \(L\) è algebrico su \(K\).
+\end{defi}
+
+\begin{prop}\label{prop:EstensioneFinitaEquivalenti}
+Sia \(K \subseteq L\) un'estensione. Allora sono equivalenti:
+\begin{enumerate}
+\item \(K \subseteq L\) è finita;
+\item \(K \subseteq L\) è algebrica e finitamente generata;
+\item Esistono \(\alpha_1, \dots{}, \alpha_n \in L\) algebrici su \(K\) tali che \(L = K(\alpha_1,\dots,\alpha_n)\).
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+%Proviamo le implicazioni \(1 \implies 2\), \(2 \implies 3\) e \(3 \implies 1\). 
+%\begin{itemize}[leftmargin=*]
+%\item
+(\(1 \implies 2\)) Sia \(\alpha \in L\). Allora \([K(\alpha):K] \le [L:K(\alpha)] [K(\alpha):K] = [L:K] < \infty\). Ora, poiché \([L:K] = n < \infty\), allora \(L\) come spazio vettoriale su \(K\) è generato da \(n\) elementi linearmente indipendenti \(\alpha_1, \dots{}, \alpha_n \in L\). Pertanto \(L=K(\alpha_1,\dots,\alpha_n)\) immediatamente dalla definizione di estensione generata.\newline
+%\item
+(\(2 \implies 3\)) Ovvia.\newline
+%\item
+(\(3\implies1\)) Se \(\alpha_i\) è algebrico su \(K\), allora \(\alpha_i\) lo è anche su \(K_i:=K(\alpha_1,\dots,\alpha_{i-1})\). Quindi per ogni \(i=1,\dots,n\) si ha
+\[[L:K]=\prod_{i=1}^n[K_{i+1}:K_i]<\infty .\qedhere\]
+%\end{itemize}
+\end{proof}
+
+\nota{Come cambia il polinomio minimo su al variare di \(F\) in \(K \subseteq F \subseteq L\)?}
+%\begin{osse}
+%\(K\subseteq K'\subseteq L\) estensioni, \(\alpha\in L\) algebrico su \(K\) \(\implies\) \\
+%\(\alpha\) algebrico su \(K'\) e \([K'(\alpha):K']\le[K(\alpha):K]<\infty\): \\
+%\(\polmin_{\alpha,K}\in K[X]\subseteq K'[X]\) tale che \(\polmin_{\alpha,K}(\alpha)=0\) \(\implies\) \(\polmin_{\alpha,K'}\dvd\polmin_{\alpha,K}\) in \(K'[X]\) \(\implies\) \(\deg(\polmin_{\alpha,K'})\le\deg(\polmin_{\alpha,K})\).
+%\end{osse}
+
+\begin{prop}
+Siano \(F\subseteq K\subseteq L\) estensioni. Allora \(F\subseteq L\) è algebrica se e solo se \(F \subseteq K\) e \(K \subseteq L\) lo sono.
+\end{prop}
+
+\begin{proof}
+Una implicazione dovrebbe essere semplice a questo punto. Viceversa, siano \(F \subseteq K\) e \(K \subseteq L\) algebriche e mostriamo che \([F(\alpha):F] < \infty\) per ogni \(\alpha \in L\). Poiché \(K \subseteq L\) è algebrica esiste un \(p \in K[X]\) non nullo che abbia \(\alpha\) come radice: indichiamo con \(a_0, \dots{}, a_n \in K\) i coefficienti del polinomio. Quindi \(\alpha\) è algebrico su \(F\left(a_0, \dots{}, a_n\right)\). Per l'implicazione \(3 \implies 1\) della Proposizione precedente, si ha \(F \subseteq F\left(a_0, \dots{}, a_n\right)\) è finita. Anche \(F\left(a_0, \dots{}, a_n\right) \subseteq F\left(a_0, \dots{}, a_n\right)(\alpha) = F\left(a_0, \dots{}, a_n, \alpha\right)\) è finita. Componendo le due estensioni finite, si ottiene l'estensione finita \(F \subseteq F\left(a_0, \dots{}, a_n, \alpha\right)\). Possiamo a questo punto scrivere
+\[\underbrace{[F\left(a_0, \dots{}, a_n, \alpha\right) : F]}_{< \infty} = [F\left(a_0, \dots{}, a_n, \alpha\right) : F(\alpha)] [F(\alpha) : F]\]
+da cui si ha che \([F(\alpha):F] < \infty\).
+\end{proof}

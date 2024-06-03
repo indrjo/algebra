@@ -1,0 +1,78 @@
+% !TEX program = lualatex
+% !TEX spellcheck = it_IT
+% !TEX root = ../campi.tex
+
+\section{Estensioni normali}
+
+\begin{defi}
+Un'estensione algebrica \(K \hookrightarrow L\) è {\em normale} quando il polinomio minimo di ogni elemento di \(L\) si spezza su \(L\).
+\end{defi}
+
+%\nota{Definizioni equivalenti?}
+
+\begin{prop}\label{prop:EstensioniNormaliEquivalenti}
+Sia \(i : K \to L\) un'estensione. Allora sono equivalenti:
+\begin{enumerate}
+\item \(i : K \to L\) è normale.
+\item Ogni \(f \in K[X]\) irriducibile che ha una radice in \(L\) si spezza in \(L\). 
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+(\(1 \Rightarrow 2\)) Sia \(f \in K[X]\) irriducibile e indichiamo con \(\alpha \in L\) una delle sue radici. Siano \(g \in K[X]\) monico e \(c \in K^\ast\) tali che \(f = c g\). Ora \(\alpha\) è radice di \(g\) e \(g\) è irriducibile: quindi, grazie alla Proposizione~\ref{prop:EquivalentiPolinomioMinimo}, \(g\) è proprio il polinomio minimo di \(\alpha\). Assumendo \((1)\), possiamo concludere che \(f\) si spezza completamente in \(L\).\newline
+(\(2 \Rightarrow 1\)) Banale.
+\end{proof}
+
+%\begin{esem}
+%\(K\subseteq\calg{K}\) chiusura algebrica di \(K\) \(\implies\) \(K\subseteq\calg{K}\) è normale.
+%\end{esem}
+
+Molto presto vedremo altre definizioni di estensioni normali, forse più interessanti per la piega che prenderanno le cose.
+
+\begin{prop}
+Un'estensione finita è normale se e solo se è il campo di spezzamento di un polinomio non nullo.
+\end{prop}
+
+Un verso è banale, l'altro dovrebbe sorprenderti: un campo di spezzamento di {\em un} polinomio non nullo consente di spezzare completamente tutti i polinomi minimi. Non è banale, richiederà del lavoro non indifferente, e manca solo di introdurre la separabilità per poter parlare delle {\em estensioni di Galois}, il fine di queste pagine.
+
+\begin{proof}%[Dimostrazione di \(\implies\)]
+(\(\Rightarrow\)) Esercizio.\newline
+(\(\Leftarrow\)) Sia \(i : K \to L\) campo di spezzamento di un fissato \(f \in K[X]\) non nullo e preso \(\alpha \in L\) proviamo che il polinomio minimo \(m \in K[X]\) si spezza completamente in \(L\). Chiaramente \(\alpha \in L\), quindi mostriamo che qualsiasi altra sua radice \(\beta\) appartiene a \(L\). Siamo più precisi: dove dovrebbero vivere le radici? Costruiamo a questo fine il campo di spezzamento \(j : L \to L'\) di \(i_\ast(m) \in L[X]\), cioè un campo che sicuramente contiene tutte le radici di \(m\). Quindi, tecnicamente parlando, non giungeremo a provare che \(\beta \in L\), ma che \(\beta\) sta nella copia di \(L\) da qualche parte. Se ancora il discorso è fumoso, ci arriveremo piano piano. Disegniamo per cominciare:
+\[\begin{tikzcd}[row sep=small]
+& L \ar["{i'}", dr] \\
+K \ar["i", ur] \ar["{k_1}", dr, swap] &  & L' \\
+& K(\alpha) \ar["{k_2}", uu]
+\end{tikzcd}\]
+%\[\begin{tikzcd}
+%K \ar["i", r] & L \ar["{i'}", r] & L
+%\end{tikzcd}\]
+Qui introduciamo notazioni: \(k_1\) manda \(r \in K\) in \(i(r)\) mentre \(k_2\) è una mera inclusione insiemistica. Se \(\beta \in L'\) è una delle radici di \(m \in K[X]\), allora possiamo costruire un morfismo di estensioni \(j : K(\alpha) \to L'\) da \(k_2\) a \(i'i\) che manda \(\alpha\) in \(\beta\):
+\[\begin{tikzcd}[row sep=small]
+& L \ar["{i'}", dr] \\
+K \ar["i", ur] \ar["{k_1}", dr, swap] &  & L' \\
+& K(\alpha) \ar["{k_2}", uu] \ar["j", ur, swap]
+\end{tikzcd}\]
+Adesso constatiamo che \(f\) si spezza completamente pure su \(L'\). Infatti se \(f\) si spezza come \(c \prod_{l = 1}^n (X-\alpha_l)\) in \(L\), abbiamo
+\[\left(i'i\right)_\ast (f) = i'_\ast i_\ast (f) = i'_\ast \left(c \prod_{l = 1}^n (X-\alpha_l)\right) = i'(c) \prod_{l = 1}^n \left(X-i'(\alpha_l)\right) .\]
+Questo fatto apparentemente inutile non lo è se si ricorda \(i'i = jk_1\): segue che \(k_{1\ast} (f)\) si spezza completamente su \(L'\). Per il Teorema~\ref{teor:UnicitaCampoDiSpezzamento} esiste un morfismo di estensioni \(h : L \to L'\) da \(k_2\) a \(j\).
+\[\begin{tikzcd}[row sep=small]
+& L \ar["{i'}", dr, shift left] \ar["h", dr, shift right, swap] \\
+K \ar["i", ur] \ar["{k_1}", dr, swap] &  & L' \\
+& K(\alpha) \ar["{k_2}", uu] \ar["j", ur, swap]
+\end{tikzcd}\]
+Qui abbiamo che \(h(\alpha) = h\left(k_2 (\alpha)\right) = \beta\). Avevamo detto che volevamo vedere che \(\beta \in L\): a essere precisi abbiamo trovato \(\beta\) appartiene alla copia di \(L\) dentro \(L'\). Va bene\dots{} no?
+\end{proof}
+
+\begin{eser}
+Quindi nella dimostrazione sopra a cos'è servito \(i'\)?
+\end{eser}
+
+%Propriet\`a delle estensioni normali: \(F\subseteq K\subseteq L\) estensioni.
+%\begin{itemize}
+%\item \(F\subseteq L\) normale \(\implies\) \(K\subseteq L\) normale: \(\alpha\in L\) \(\implies\) \(\polmin_{\alpha,K}\) si spezza su \(L\) perché \(\polmin_{\alpha,K}\dvd\polmin_{\alpha,F}\) e \(\polmin_{\alpha,F}\) si spezza su \(L\).
+%\item \(F\subseteq L\) finita e normale \(\notimplies\) \(F\subseteq K\) normale: per esempio, \(F=\Q\), \(K=\Q(\sqrt[3]{2})\) e \(L=\Q(\sqrt[3]{2},\omega)\) con \(\omega^3=1\) e \(\omega\ne1\) (\(F\subseteq K\) non normale perché \(\polmin_{\sqrt[3]{2},F}=X^3-2\) non si spezza su \(K\subseteq\R\), \(F\subseteq L\) normale perché campo di spezzamento di \(X^3-2\)).
+%\item \([L:K]=2\) \(\implies\) \(K\subseteq L\) normale: \(\alpha\in L\setminus K\) \(\implies\) \(L=K(\alpha)\) \(\implies\) \(\deg(\polmin_{\alpha,K})=[K(\alpha):K]=2\) \(\implies\) \(K\subseteq L\) campo di spezzamento di \(\polmin_{\alpha,K}\).
+%\item \(F\subseteq K\) e \(K\subseteq L\) finite e normali \(\notimplies\) \(F\subseteq L\) normale: per esempio, \(F=\Q\), \(K=\Q(\sqrt{2})\) e \(L=\Q(\sqrt[4]{2})\) (\(F\subseteq K\) e \(K\subseteq L\) normali perché di grado \(2\), \(F\subseteq L\) non normale perché \(\polmin_{\sqrt[4]{2},F}=X^4-2\) non si spezza su \(L\subseteq\R\)).
+%\end{itemize}
+
+

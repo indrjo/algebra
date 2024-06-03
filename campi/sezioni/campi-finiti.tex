@@ -1,0 +1,177 @@
+% !TEX program = lualatex
+% !TEX spellcheck = it_IT
+% !TEX root = ../campi.tex
+
+\section{Campi finiti}
+
+Abbiamo visto degli esempi di campi finiti, cioè \(\F_p := \Z/p\Z\) per \(p\) che varia tra i numeri primi. Le estensioni finite di questi campi sono molto particolari.
+
+\begin{prop}\label{prop:EstensioniDiFp}
+Sia \(p\) primo. Se \(\F_p \mor i L\) è un'estensione di grado \(n\), allora il campo \(L\) ha \(p^n\) elementi, \(L\) è l'insieme degli zeri di \(X^{p^n}-X \in \F_p[X]\). In particolare, \(\F_p \mor i L\) è il campo di spezzamento del polinomio separabile \(X^{p^n}-X \in \F_p[X]\), cioè è un'estensione di Galois. Viceversa, per ogni \(n \in \N\), il polinomio \(X^{p^n}-X \in \F_p[X]\) ha campo di spezzamento di grado \(n\).
+\end{prop}
+
+%Questo è interessante perché, in generale, se \(K \hookrightarrow L\) è un campo di spezzamento di qualche \(f \in K[X]\) non nullo e \(\card L > \deg f\), è impossibile che {\em tutti} gli elementi di \(L\) sono zeri di \(f\). Invece nella nostra Proposizione accade che \(K = \F_p\) e \(f = X^{p^n}-X\) tali che \(\deg f = \card L\).
+
+\begin{proof}
+La cardinalità di \(L\) è facile da determinare. Come spazio vettoriale ha una base di \(n\) elementi di \(L\), mentre \(\F_p\) ha \(p\) elementi: quindi \(L\) consiste di \(p^n\) combinazioni lineari degli elementi della base scelta. L'insieme degli elementi invertibili \(L^\times\) ha cardinalità \(p^n-1\) e forma un gruppo con la moltiplicazione ereditata da \(L\). Per il {\scshape Teorema di Lagrange}, ogni elemento \(a \in L\) non nullo soddisfa \(a^{p^n-1} = 1\). Possiamo quindi che tutti gli elementi di \(L\) sono zeri del polinomio \(X^{p^n}-X \in \F_p[X]\). Per la Proposizione~\ref{prop:PolinomiIrriducibiliSeparabili}, questo polinomio è separabile, quindi ammette \(p^n\) radici distinte. Abbiamo quindi provato che \(\F_p \mor i L\) è il campo di spezzamento del polinomio. \nota{Scrivere il viceversa.}
+\end{proof}
+
+\begin{defi}
+Sia \(p \ge 2\) primo. Scriviamo \(\F_p \subseteq \F_{p^n}\) uno qualsiasi dei campi di spezzamento di \(X^{p^n}-X \in \F_p[X]\) (sappiamo che sono tutti isomorfi tra loro). Vale a dire, \(\F_{p^n}\) è la \(L\) della Proposizione~\ref{prop:EstensioniDiFp}.
+\end{defi}
+
+Le estensioni finite di \(\F_p\), dove \(p\) è primo, sono quindi della forma \(\F_p \subseteq \F_{p^n}\) e campi di spezzamento di, rispettivamente, \(X^{p^n}-X \in \F_p[X]\). E non è tutto: ogni \(\F_{p^n}\) è l'insieme degli zeri di \(X^{p^n}-X \in \F_p[X]\).
+
+Per rendersi conto di come sono speciali queste extensioni, si pensi infatti come non sono rari gli esempi di estensioni finite \(K \hookrightarrow L\) in cui non è proprio possibile che tutti gli elementi di \(L\) siano radici di un solo polinomio in \(K[X]\). 
+
+Ecco una prima conseguenza: il problema di trovare il campo di spezzamento di un polinomio di \(\F_p[X]\) è subito risolto. 
+
+\begin{prop}\label{prop:CampiDiSpezzamentoDaFp}
+Sia \(p\) primo e \(f \in \F_p[X]\) irriducibile di grado \(d\). Allora il suo campo si spezzamento è \(\F_p \subseteq \F_{p^d}\) e \(f\) divide \(X^{p^d}-X \in \F_p[X]\). In generale, se \(f \in \F_p[X]\) è non nullo e si fattorizza i termini irriducibili in \(\F_p[X]\) come \(f = f_1 \cdots f_r\), allora il campo di spezzamento di \(f\) è \(\F_p \subseteq \F_{p^d}\), dove \(d := \mcm\left(\deg f_1, \dots{}, \deg f_r\right)\).
+\end{prop}
+
+\begin{proof}
+Prendiamo in esame l'estensione
+\[\F_p \hookrightarrow E := \frac{\F_p[X]}{\gen f}\,,\ a \mapsto a + \gen f\]
+di cui sappiamo che è di grado \(d\) e \(E\) contiene una radice di \(f\). Per la Proposizione~\ref{prop:EstensioniDiFp}, questa estensione è il campo di spezzamento \(\F_p \subseteq \F_{p^d}\) di \(X^{p^d}-X \in \F_p[X]\) in cui \(\F_{p^d}\) è l'insieme degli zeri di questo polinomio. Possiamo dire che \(f\) divide \(X^{p^d}-X\), essendo \(f\) il polinomio minimo di qualche radice di questo polinomio. 
+\end{proof}
+
+E se questa questione è definitivamente risolta, rimane da capire come calcolare il gruppo di Galois. Ad ora sappiamo che il gruppo di Galois di \(\F_p \subseteq \F_{p^n}\) è il gruppo di Galois del polinomio \(X^{p^n}-X \in \F_p[X]\).
+
+\begin{lemm}[\textenglish{The freshman's dream}]\label{lemm:FreshmansDream}
+Sia \(R\) un anello commutativo di caratteristica $p \ge 2$ primo. Allora
+\[\Phi_R : R \to R\,,\ \Phi_R(a) := a^p\]
+è un omomorfismo di anelli, che chiameremo {\em omomorfismo di Frobenius}. Inoltre se \(f : R \to S\) è un omomorfismo di anelli di caratteristica \(p \ge 2\) primo, allora commuta
+\[\begin{tikzcd}
+R \ar["f", d, swap] \ar["{\Phi_R}", r] & R \ar["f", d] \\
+S \ar["{\Phi_S}", r, swap] & S
+\end{tikzcd}\]
+\end{lemm}
+
+\begin{proof}
+Poiché \(R\) è commutativo, allora \(\Phi_R(ab) = \Phi_R(a) \Phi_R(b)\) per ogni \(a, b \in R\).  L'unica parte che può suscitare qualche perplessità è quella che riguarda la somma. Ricordiamo che per ogni anello commutativo \(R\) vale la {\em formula del binomio di Newton}, cioè 
+\[(a+b)^n = \sum_{k = 0}^n \binom n k a^k b^{n-k}\]
+dove \(\binom n k := \frac{n!}{k!(n-k)!}\). Osserviamo che \(\binom p k\) è multiplo di \(p\) se \(k \in \{2, \dots{}, p-1\}\): infatti \(p\) divide \(p!\) ma nessuno degli \(q!\) con \(q < p\). Essendo \(R\) di caratteristica \(p\) della sommatoria \(\sum_{k = 0}^p \binom p k a^k b^{p-k}\) sopravvive solo \(a^p + b^p\). Per quanto riguarda l'ultima parte, si scrive in una riga:
+\[f(\Phi_R(a)) = f(a^p) = f(a)^p = \Phi_S(f(a)) \quad\text{per ogni } a \in R .\qedhere\]
+\end{proof}
+
+\begin{lemm}[Piccolo Teorema di Fermat]
+%Se \(p \ge 2\) è primo, allora \(a^p \equiv a \mod p\) per ogni \(a \in \Z\). Ovvero 
+L'omomorfismo di Frobenius \(\Phi_{\F_p}\) è l'identità.
+\end{lemm}
+
+\begin{proof}
+L'insieme degli elementi invertibili \(\F_p^\times\) di \(\F_p\) è un gruppo con la moltiplicazione ereditata da \(\F_p\). Da {\scshape Algebra 1} sappiamo che la cardinalità di questo gruppo è \(p-1\). Quindi per il {\scshape Teorema di Lagrange} abbiamo che \(a^{p-1} = 1\) per ogni \(a \in \F_p^\times\), da cui segue che \(a^p = a\). 
+\end{proof}
+
+\begin{prop}\label{prop:GalEstensioniDiFp}
+Sia \(p \ge 2\) primo e l'estensione \(i : \F_p \subseteq \F_{p^n}\). Allora l'omomorfismo di Frobenius \(\Phi : \F_{p^n} \to \F_{p^n}\) è un automorfismo di estensioni 
+\[\begin{tikzcd}[column sep=small]
+\F_{p^n} \ar["{\Phi}", rr] && \F_{p^n} \\
+& \F_p \ar[hookrightarrow, ul] \ar[hookrightarrow, ur]
+\end{tikzcd}\]
+Inoltre 
+\[\Gal{\F_p \subseteq \F_{p^n}} = \Gal[\F_p]{X^{p^n}-X} \iso C_n\]
+e un suo generatore è \(\Phi\).
+\end{prop}
+
+%La parte interessante è ovviamente il gruppo di Galois.
+
+\begin{proof}
+La prima parte è solo la combinazione dei due Lemmi precedenti. Inoltre \(\Phi\) è biettivo perché è gli omomorfismi di campi sono iniettivi e \(\F_{p^n}\) ha cardinalità finita.\footnote{Se \(X\) è un insieme finito, allora le funzioni \(X \to X\) iniettive sono biunivoche.} Quindi effettivamente \(\Phi \in \Gal{\F_p \subseteq \F_{p^n}}\). Di questo gruppo possiamo dire subito l'ordine: essendo \(\F_p \subseteq \F_{p^n}\) di Galois (Proposizione~\ref{prop:EstensioniDiFp}), il gruppo di Galois ha cardinalità \(\left[\F_{p^n}:\F_p\right] = n\). Ecco il piano: se riusciamo a trovare un elemento di questo gruppo che ha ordine \(n\) abbiamo finito. Mostriamo che un elemento con questo requisito è \(\Phi\).\newline
+Scriviamo esplicitamente le potenze di \(\Phi\):
+\[\Phi^k (a) = \underbrace{\Phi \circ \dots \circ \Phi}_{k \text{ volte}}(a) = a^{p^k}\]
+Dalla Proposizione~\ref{prop:EstensioniDiFp} sappiamo che gli elementi di \(\F_{p^n}\) sono le radici di \(X^{p^n}-X\).  Cioè \(\Phi^n\) è l'identità. Questo è il più piccolo \(k\) per cui \(\Phi^k\) è l'identità. Se \(0 < m < n\), allora \(X^{p^m}-X\), essendo separabile, ha \(p^m\) soluzioni distinte: questo significa che \(\Phi^m\) fissa \(p^m < p^n\) elementi, cioè non tutti gli elementi di \(\F_{p^n}\).
+\end{proof}
+
+%\begin{prop}
+%Il campo di spezzamento del polinomio \(X^{p^n}-X \in \F_p[X]\), con \(p \ge 2\) primo, è un'estensione \(\F_p \mor i L\) di grado \(n\) in cui \(\card L = p^n\).
+%\end{prop}
+%
+%\begin{proof}
+%Abbiamo visto che si può sempre costruire il campo di spezzamento di un polinomio e che è unico a meno di isomorfismi di estensioni. Poiché il polinomio è separabile, allora il polinomio ha \(p^n\) radici distinte nel campo di spezzamento. Indichiamo con \(E\) l'insieme delle radici di \(X^{p^n}-X\) dentro \(L\): ha cardinalità \(p^n\) è mostriamo che è un sottocampo di \(L\). \nota{Scrivere il motivo per cui è un campo.} Da definizione di campo di spezzamento, dobbiamo necessariamente concludere che \(E = L\).
+%\end{proof}
+
+%\begin{defi}
+%Indichiamo il campo \(L\) della Proposizione precedente con il simbolo \(\F_{p^n}\).
+%\end{defi}
+%
+%Quindi il polinomio \(X^{p^n}-X \in \F_p[X]\), on \(p \ge 2\) primo, è quello motiva l'esistenza di \(\F_{p^n}\). Studiandolo da vicino, si ha una proprietà che ci è d'aiuto per trovare i polinomi minimi quando si tratta di estensioni di \(\F_p\).
+
+%Adesso procediamo con il punto 2.
+%
+%\begin{prop}
+%Sia \(p \ge 2\) primo e \(n \in \N\). Ogni polinomio monico e irriducibile in \(\F_p[X]\) di grado \(d\) che divide \(n\) appare una e una sola volta nella fattorizzazione di \(X^{p^n}-X\). 
+%\end{prop}
+%
+%\begin{proof}
+%Sia \(f \in \F_p[X]\) monico e irriducibile di grado \(d \mid n\). Ora il campo \(E := \frac{\F_p[X]}{\gen f}\) contiene almeno una radice \(\alpha\) di \(f\) e l'estensione \(\F_p \hookrightarrow E\) è di grado \(d\). Come abbiamo visto nella Proposizione~\ref{prop:EstensioniDiFp} sono tali per cui \(E\) è l'insieme delle radici di \(X^{p^d}-X \in \F_p[X]\) e quindi \(\alpha^{p^d}-\alpha = 0\). Se riusciamo a dimostrare che \(X^{p^d}-X\) divide \(X^{p^n}-X\), allora abbiamo che il polinomio minimo di \(\alpha\), cioè \(f\), divide \(X^{p^n}-X\). \nota{Continua.}
+%\end{proof}
+
+Riassumendo, il calcolo della campo di spezzamento di un \(f \in \F_p[X]\) non nullo e di \(\Gal[\F_p] f\) è tutta questione di saper decomporre \(f\) in fattori irriducibili di \(\F_p[X]\). Svolgiamo un esercizio a titolo d'esempio.
+
+\begin{eser}
+Determinare il gruppo di Galois \(G\) di \(f := X^5-X+3 \in \F_q[X]\) per \(q \in \{2,3,4,5\}\).
+\end{eser}
+
+\begin{proof}[Svolgimento]
+Ecco il piano: con l'aiuto della Proposizione~\ref{prop:CampiDiSpezzamentoDaFp} determiniamo il campo di spezzamento di \(f\), perché per la Proposizione~\ref{prop:GalEstensioniDiFp} il gruppo di Galois di \(f\) è in ogni caso un \(C_d\) con \(d\) da determinare.
+%\nota{Riscrivere.}
+%In ogni caso \(G\iso C_d\) se \(\F_q \subseteq \F_{q^d}\) campo di spezzamento di \(f\), e \(d=\mcm(d_1,\dots,d_r)\) se \(f=\prod_{i=1}^rf_i\) con \(f_1,\dots,f_r\) irriducibili.
+\begin{itemize}[leftmargin=*]
+\item[\(q=2\)] Il polinomio non ha radici, perché \(f(0) = f(1) = 1\). Quindi se è riducibile, allora è decomponibile in due fattori, uno di grado 2 e l'altro di grado 3, senza radici in \(\F_2\). L'unico di grado \(2\) in \(\F_2[X]\) con questi requisiti è \((X^2+X+1)\): in effetti, compiendo la divisione Euclidea, si ha
+\[f=(X^2+X+1)(X^3+X^2+1) .\]% \(\implies\) \(d=\mcm(2,3)=6\).
+Possiamo concludere: il campo di spezzamento è \(\F_2 \subseteq \F_{2^6} = \F_{64}\) è il gruppo di Galois è (isomorfo a) \(C_6\).
+\item[\(q=3\)] In questo caso il polinomio è semplicemente \(X^5-X\). Raccogliendo:
+\[f = X^5-X = X(X-1)(X+1)(X^2+1) .\]% \(\implies\) \(d=2\).
+Il campo di spezzamento di \(f\) è \(\F_3 \subseteq \F_{3^2} = \F_9\) e il gruppo di Galois è \(C_2\).
+\item[\(q=4\)] Qui \(4\) non è primo, come gli altri, e quindi bisogna ingegnarsi. Il campo \(\F_4\) suggerisce di considerare \(\F_2 \subseteq \F_4\). Il caso \(q = 2\) visto prima può aiutare:
+\[\F_2 \subseteq \F_4 \subseteq \F_{64} .\]
+L'estensione \(\F_2 \subseteq \F_{64}\) è campo di spezzamento di \(f\), e lo è quindi anche \(\F_4 \subseteq \F_{64}\). Il gruppo di Galois di \(\F_4 \subseteq \F_{64}\) è \(C_3\). \nota{Scrivere di \(\F_{p^m} \subseteq \F_{p^n}\) con \(m \mid n\) e del suo gruppo di Galois.}
+\item[\(q=5\)] \nota{Da rivedere.} \(\alpha\in\F_{5^d}\) \(\implies\) \(f(\alpha)=\Fro(\alpha)-\alpha+\cl{3}\) \(\implies\) \(f(a)=\cl{3}\ne\cl{0}\) se \(a\in\F_5\) e \(f(\alpha+a)=f(\alpha)\) \(\all\alpha\in\F_{5^d}\) e \(\all a\in\F_5\) \(\implies\) \(\F_{5^d}=\F_5(\alpha)\) se \(\alpha\) radice di \(f\) \(\implies\) \(d=\deg(\polmin_{\alpha,\F_5})\) non dipende dalla radice \(\alpha\) di \(f\) \(\implies\) \(f\) irriducibile in \(\F_5[X]\) (non ha radici in \(\F_5\) e non pu\`o essere \(f=gh\) in \(\F_5[X]\) con \(\deg(g)=2\) e \(\deg(h)=3\)) \(\implies\) \(d=5\).\qedhere
+\end{itemize}
+\end{proof}
+
+%\(K\) campo finito \(\implies\) \(\car(K)=p\) primo.
+%
+%\(0<n:=[K:\F_p]<\infty\) \(\implies\) \(K\iso\F_p^n\) come \(\F_p\)-spazio vettoriale (quindi \(K\iso C_p^n\) come gruppo abeliano) \(\implies\) \(\card{K}=p^n\).
+%\begin{teor}
+%\(\all p\) primo e \(\all n>0\) \(\exiun\) a meno di isomorfismo un campo \(\F_{p^n}\) di ordine \(p^n\); inoltre \(\F_{p^n}\) è campo di spezzamento di \(X^{p^n}-X\) su \(\F_p\).
+%\end{teor}
+%\begin{proof}
+%\(\F_p\subseteq\F_{p^n}\) campo di spezzamento di \(X^{p^n}-X\) \(\implies\)
+%
+%\(R:=\{\alpha\in\F_{p^n}\st\alpha\text{ radice di }X^{p^n}-X\}=\{\alpha\in\F_{p^n}\st\Fro^n(\alpha)=\alpha\}\)
+%
+%sottocampo di \(\F_{p^n}\) \(\implies\) \(\F_{p^n}=\F_p(R)=R\).
+%
+%\((X^{p^n}-X)'=-1\) non ha radici \(\implies\) \(X^{p^n}-X\) non ha radici multiple \(\implies\) \(\card{\F_{p^n}}=\card{R}=\deg(X^{p^n}-X)=p^n\).
+%
+%\(K\) altro campo di ordine \(p^n\) \(\implies\) \(\alpha^{p^n-1}=1\) \(\all\alpha\in K^*\) (per il teorema di Lagrange) \(\implies\) ogni elemento di \(K\) è radice di \(X^{p^n}-X\) \(\implies\) \(\prod_{\alpha\in K}(X-\alpha)\dvd(X^{p^n}-X)\) \(\implies\) \(X^{p^n}-X=\prod_{\alpha\in K}(X-\alpha)\) \(\implies\) \(\F_p\subseteq K\) campo di spezzamento di \(X^{p^n}-X\).
+%\end{proof}
+%
+%Se \(n,m>0\), esiste un'estensione \(\F_{p^n}\subseteq\F_{p^m}\) \(\iff\) \(n\dvd m\):
+%\begin{itemize}
+%\item[\(\implies\)] \(d:=[\F_{p^m}:\F_{p^n}]\) \(\implies\) \(\F_{p^m}\iso\F_{p^n}^d\) (come \(\F_{p^n}\)-spazi vettoriali) \(\implies\) \(p^m=\card{\F_{p^m}}=\card{\F_{p^n}^d}=(p^n)^d=p^{nd}\) \(\implies\) \(m=nd\);
+%\item[\(\impliedby\)] \(\F_{p^n}=\{\alpha\in\calg{\F}_p\st\alpha^{p^n}=\Fro^n(\alpha)=\alpha\}\subseteq\F_{p^m}\) perché, se \(\Fro^n(\alpha)=\alpha\), allora \(\Fro^m(\alpha)=(\Fro^n)^{m/n}(\alpha)=\alpha\).
+%\end{itemize}
+%
+%\begin{coro}
+%\(n\dvd m\) \(\implies\) \(\F_{p^n}\subseteq\F_{p^m}\) di Galois e \(\Gal[\F_{p^n}]{\F_{p^m}}=\gen{\Fro^n}\iso C_{m/n}\).
+%\end{coro}
+%\begin{proof}
+%\(\F_{p^n}\subseteq\F_{p^m}\) è di Galois perché campo di spezzamento di \(X^{p^m}-X\) (e \(\F_{p^n}\) è perfetto) \(\implies\) \(\card{\Gal[\F_{p^n}]{\F_{p^m}}}=[\F_{p^m}:\F_{p^n}]=m/n\).
+%
+%\(\F_{p^n}=\{\alpha\in\F_{p^m}\st\Fro^n(\alpha)=\alpha\}\) \(\implies\) \(\Fro^n\in\Gal[\F_{p^n}]{\F_{p^m}}\), e basta dimostrare \(\ord(\Fro^n)\ge m/n\), cioè \(\ord(\Fro)\ge m\) in \(\Gal{\F_{p^m}}\), vero perché \(0<i<m\) \(\implies\) \(\card{\{\alpha\in\F_{p^m}\st\Fro^i(\alpha)=\alpha^{p^i}=\alpha\}}\le p^i<p^m\) \(\implies\) \(\Fro^i\ne\id_{\F_{p^m}}\).
+%\end{proof}
+%
+%
+%\(p\) primo, \(n>0\), \(q:=p^n\), \(0 \ne f\in\F_q[X]\), \(G:=\Gal[\F_q]{f}\).
+%\begin{itemize}
+%\item \(f\) irriducibile, \(d:=\deg(f)\) \(\implies\) \(\F_q\subseteq\F_{q^d}\) campo di spezzamento di \(f\) (\(\implies\) \(G\iso C_d\)):
+%
+%\(\alpha\in\calg{\F}_p\) radice di \(f\) \(\implies\) \([\F_q(\alpha):\F_q]=d\) \(\implies\) \(\F_q(\alpha)=\F_{q^d}\).
+%\item in generale \(f=\prod_{i=1}^kf_i\) con \(f_i\) irriducibile, \(d_i:=\deg(f_i)\) \(\all i=1,\dots,k\) \(\implies\) \(d:=\mcm(d_1,\dots,d_k)\) tale che \(\F_q\subseteq\F_{q^d}\) campo di spezzamento di \(f\) (\(\implies\) \(G\iso C_d\)):
+%
+%per il punto precedente \(\F_{q^{d_i}}\) è campo di spezzamento di \(f_i\) su \(\F_q\), quindi \(f\) si spezza su \(\F_{q^{d'}}\) \(\iff\) \(\F_{q^{d_i}}\subseteq\F_{q^{d'}}\) \(\all i=1,\dots,k\) \(\iff\) \(d_i\dvd d'\) \(\all i=1,\dots,k\) \(\iff\) \(d\dvd d'\).
+%\end{itemize}

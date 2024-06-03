@@ -1,0 +1,227 @@
+% !TEX program = lualatex
+% !TEX spellcheck = it_IT
+% !TEX root = ../campi.tex
+
+\section{Polinomi e radici}
+
+Se \(R\) è un anello, indichiamo con \(R[X]\) l'anello dei polinomi nell'indeterminata \(X\), dove \(X\) è solo un mero simbolo. Indichiamo gli elementi di questo anello come somme formali
+\[\sum_{k \in \N} a_k X^k\]
+dove \(a : \N \to R\) è una successione in cui solo un numero finito di termini \(a_k\) è diverso da zero. I polinomi \(\sum_{k \in \N} a_k X^k\) in cui \(a_k = 0\) per \(k \ge 1\) sono identificati con \(a_0 \in R\): quindi si potrebbe pensare \(R\) come sottoinsieme di \(R[X]\).
+
+Richiamiamo anche come sono definite la somma e il prodotto di polinomi di un qualsiasi anello \(R[X]\):% Rimandiamo al corso di {\scshape Algebra 1} per i dettagli.
+\begin{align*}
+& \left(\sum_{k \in \N} a_k X^k\right) + \left(\sum_{k \in \N} b_k X^k\right) := \sum_{k \in \N} \left(a_k+b_k\right) X^k \\
+& \left(\sum_{k \in \N} a_k X^k\right) \left(\sum_{k \in \N} b_k X^k\right) := \sum_{k \in \N} \left(\sum_{h=0}^k a_h b_{k-h}\right) X^k
+\end{align*}
+
+Il {\em grado} di un polinomio \(p := \sum_{k \in \N} a_k X^k \in R[X]\) non nullo è il numero
+\[\deg p := \max \left\{k \in \N \mid a_k \ne 0 \right\} .\]
+Il grado del polinomio nullo è definito come \(-\infty\), anche se non è una convenzione universalmente accettata. È facile verificare che
+\[\deg(p + q) = \max\left\{ \deg p, \deg q \right\}\]
+e se \(R\) è un dominio di integrità allora anche
+\[\deg(pq) = \deg p + \deg q .\]
+
+Ora parliamo di anelli commutativi e di anelli di polinomi su anelli commutativi, visto che poi andremo piuttosto rapidamente verso i campi.
+
+\begin{prop}\label{prop:OmomorfismiDaAnelliPolinomi}
+Siano \(R\) e \(S\) due anelli commutativi e \(f : R \to S\) un omomorfismo. Allora per ogni \(\alpha \in S\) esiste uno e un solo omomorfismo \(\tilde f : R[X] \to S\) tale che
+\[\begin{tikzcd}
+R \ar["f", dr, swap] \ar[hookrightarrow, r] & R[X] \ar["{\tilde f}", d] \\
+                                            & S
+\end{tikzcd}\]
+commuta e \(\tilde f (X) = \alpha\).
+\end{prop}
+
+\begin{proof}
+Il diagramma commutativo già suggerisce come è fatto \(\tilde f\):
+\[\tilde f \left(\sum_{k \in \N} a_kX^k\right) := \sum_{k \in \N} f\left(a_k\right)\alpha^k\]
+(In \(\sum_{k \in \N} a_k X^k\) solo un numero finito di \(a_k\) è \(\ne 0\), quindi \(\sum_{k \in \N} f\left(a_k\right) \alpha^k\) è una somma certamente finita.) Questa funzione è un omomorfismo, vediamo.
+\begin{align*}
+\tilde f \left(\sum_{k \in \N} a_kX^k + \sum_{k \in \N} b_kX^k\right) &= \tilde f \left(\sum_{k \in \N} \left(a_k+b_k\right)X^k\right) =\\
+&= \sum_{k \in \N} f\left(a_k+b_k\right)\alpha^k = \\
+&= \sum_{k \in \N} f\left(a_k\right)\alpha^k + \sum_{k \in \N} f\left(b_k\right)\alpha^k = \\
+&= \tilde f \left(\sum_{k \in \N} a_kX^k\right) + \tilde f \left(\sum_{k \in \N} b_kX^k\right)
+\end{align*}
+Per vedere che preserva i prodotti, abbiamo bisogno dell'assunzione della commutatività.
+\begin{align*}
+\tilde f \left(\left(\sum_{k \in \N} a_kX^k\right) \left(\sum_{k \in \N} b_kX^k \right)\right) &= \tilde f \left(\sum_{k \in \N} \left(\sum_{h=0}^k a_hb_{k-h}\right)X^k\right) = \\
+&= \sum_{k \in \N} f\left(\sum_{h=0}^k a_hb_{k-h}\right)\alpha^k = \\
+&= \sum_{k \in \N} \sum_{h=0}^k f\left(a_h\right) f\left(b_{k-h}\right) \alpha^k = \\
+&= \sum_{k \in \N} \sum_{h=0}^k f\left(a_h\right)\alpha^j f\left(b_{k-h}\right)\alpha^{k-h} = \\
+&= \left(\sum_{k \in \N} f\left(a_k\right)\alpha^k\right) \left(\sum_{k \in \N} f\left(b_k\right)\alpha^k\right) = \\
+&= \tilde f \left(\sum_{k \in \N} a_kX^k\right) \tilde f \left(\sum_{k \in \N} b_kX^k\right)
+\end{align*}
+Infine, il fatto che preserva l'identità è immediato.
+\end{proof}
+
+\begin{defi}[Valutazione di polinomi]\label{prop:ValutazionePolinomi}
+Sia \(R\) un anello commutativo e \(\alpha \in R\). Chiamiamo {\em valutazione} in \(\alpha\) l'omomorfismo \(R[X] \to R\) di anelli indotto dall'identità \(\id_R : R \to R\) nel senso della Proposizione~\ref{prop:OmomorfismiDaAnelliPolinomi}. In tal caso, scriviamo \(p(\alpha)\) l'immagine di \(p \in R[X]\) sotto l'omomorfismo di valutazione in \(\alpha\): cioè se 
+\[p = \sum_{j \in \N} a_j X^j ,\]
+allora
+\[p(\alpha) = \sum_{j \in \N} a_j \alpha^j .\]
+\end{defi}
+
+\begin{coro}
+Siano \(R\) e \(S\) due anelli commutativi e \(f : R \to S\) un omomorfismo. Allora esiste uno e un solo omomorfismo \(f_\ast : R[X] \to S[X]\) tale che commuta
+\[\begin{tikzcd}
+R \ar[hookrightarrow, d] \ar["f", r] & S \ar[hookrightarrow,d]   \\
+R[X] \ar["{f_\ast}", r, swap] &             S[X]
+\end{tikzcd}\]
+e \(f_\ast(X) = X\). Esplicitamente, se \(f : R \to S\) è un omomorfismo di anelli, allora %e \(p = \sum_{j \in \N} a_j X^j\), allora
+%\[f_\ast (p) = \sum_{j \in \N} f\left(a_j\right) X^j .\]
+\[f_\ast \left( \sum_{j \in \N} a_j X^j \right) = \sum_{j \in \N} f\left(a_j\right) X^j .\]
+Inoltre valgono le proprietà di funtorialità:
+\begin{enumerate}
+\item \(\left(\id_R\right)_\ast = \id_{R[X]}\) per ogni anello \(R\).
+\item Se abbiamo due omomorfismi di anelli \(R \mor f S \mor g T\), allora \((g \circ f)_\ast = g_\ast \circ f_\ast\).
+\end{enumerate}
+\end{coro}
+
+\begin{proof}
+Si tratta sostanzialmente di fare solo dei conti. Esercizio.
+\end{proof}
+
+È bene prendere familiarità con questo Corollario perché è uno degli strumenti essenziali nelle nozioni che verranno.
+
+\begin{coro}
+Siano \(R\) e \(S\) anelli commutativi, \(f : R \to S\) un omomorfismo e \(\alpha \in S\). Allora l'omomorfismo \(\tilde f : R[X] \to S\) della Proposizione~\ref{prop:OmomorfismiDaAnelliPolinomi} è
+\[R[X] \to S\,,\ p \mapsto f_\ast(p)(\alpha) .\]
+\end{coro}
+
+Da un certo punto in poi parleremo di campi, quindi vediamo subito come si applicano queste cose. Abbiamo già visto che tutti che gli omomorfismi di campi sono iniettivi: quindi, se abbiamo un omomorfismo di campi \(i : K \to L\), allora l'immagine di \(K\) in \(L\) è una copia di \(K\). In questo senso, diciamo che \(K\) è contenuto in \(L\) anche se non è letteralmente un sottoinsieme di \(L\). Confondere \(K\) con la sua immagine dentro \(L\) è un abuso di cui ci gioveremo molto spesso, cercando di essere il più chiari e trasparenti possibile. Inoltre, se \(r \in K\), allora indichiamo con \(r\) anche l'elemento \(i(r)\) di \(L\) che corrisponde a \(r\). L'abuso si propaga anche sui polinomi: un elemento \(p\) di \(K[X]\) viene identificato all'elemento \(i_\ast(p)\) di \(L[X]\), e quindi per evitare troppe parentesi spesso ci riferiremo a quest'ultimo come \enquote{al polinomio \(p\) visto come elemento di \(L[X]\)} o in modi simili. 
+
+\begin{defi}[Radice di un polinomio]
+Sia \(i : K \to L\) un omomorfismo di campi, \(\alpha \in L\) e \(p \in K[X]\). Diciamo che \(\alpha\) è {\em radice} di \(p\) in \(L\) qualora \(i_\ast (p)(\alpha) = 0\). Cioè, impiegando l'abuso di linguaggio appena spiegato, la radice di un polinomio \(p \in K[X]\) in \(L\) è un \(\alpha \in L\) tale che vedendo \(p\) come un elemento di \(L[X]\) si ha che sia annulla valutato in \(\alpha\).
+\end{defi}
+
+\begin{esem}
+Consideriamo il polinomio \(X^2+1 \in \R[X]\): non ha radici in \(\R\), ma li ha in \(\C\). Se consideriamo l'inclusione \(i : \R \hookrightarrow \C\), allora abbiamo
+\[i_\ast \left(X^2+1\right) = X^2+1 .\]
+Le radici complesse sono due: \(i\) e \(-i\).
+\end{esem}
+
+\begin{esem}\label{esem:AlgebristaC}
+La \enquote{definizione da algebrista} di \(\C\) è un'altra però:
+\[\C := \frac{\R[X]}{\left(X^2+1\right)}\]
+in cui
+\[i := X + \left(X^2+1\right) .\]
+Vediamo come si inquadrano le cose nella forma delle definizione data. Ora l'omomorfismo
+\[i : \R \to \C\,,\ i(r) := r + \left(X^2+1\right) \]
+induce l'omomorfismo \(i_\ast : \R[X] \to \C[X]\). Usiamo \(X^2+1\) per indicare l'immagine di \(X^2+1\) sotto \(i_\ast\), identificando i coefficienti \(a_j\) con le rispettive immagini \(a_j + \left(X^2+1\right)\). Verifichiamo che \(i\) è radice di \(X^2+1\):
+\[\left(X + \left(X^2+1\right)\right)^2 +1 = X^2 + 1 + \left(X^2+1\right) = \underbrace{0 + \left(X^2+1\right)}_{\text{lo zero di } \C} .\]
+\end{esem}
+
+\begin{defi}[Elementi algebrici e trascendenti]
+Sia \(i : K \to L\) un'estensione e \(\alpha \in L\). Diciamo che \(\alpha\) è {\em algebrico} qualora esista qualche \(p \in K[X]\) non nullo tale che \(i_\ast(p)(\alpha) = 0\). Equivalentemente, \(\alpha\) è algebrico qualora l'omomorfismo
+\[K[X] \to L\,,\ p \mapsto i_\ast(p)(\alpha)\]
+non è iniettivo. Invece diremo che \(\alpha\) è {\em trascendente} quando \(\alpha\) non è trascendente.
+\end{defi}
+
+\begin{prop}
+Sia \(i : K \to L\) un'estensione e \(\alpha \in L\) algebrico. Allora esiste uno e un solo \(m \in K[X]\) monico e irriducibile tale che sia un generatore nucleo dell'omomorfismo
+\[K[X] \to L\,,\ p \mapsto i_\ast(p)(\alpha) .\]
+\end{prop}
+
+\begin{proof}
+Poiché \(K\) è un campo, \(K[X]\) è un dominio ad ideali principali. Quindi il nucleo dell'omomorfismo in questione è generato da un certo \(m \in K[X]\). Possiamo assumere che sia monico, essendo \(K\) un campo. Inoltre l'omomorfismo di valutazione in \(\alpha\) induce un omomorfismo iniettivo
+\[\frac{K[X]}{\gen m} \to L\]
+verso un altro campo: \(m\) è pure irriducibile perché \(\frac{K[X]}{\gen m}\) è un campo e \(K[X]\) è un dominio ad ideali principali. Infine se \(m_1, m_2 \in K[X]\) sono generatori monici del nucleo di questo omomorfismo, allora \(m_1 = a m_2\) per qualche \(a \in K\) invertibile. Essendo entrambi monici, concludiamo che \(a = 1\).
+\end{proof}
+
+\begin{defi}[Polinomio minimo]
+Sia \(i : K \to L\) un'estensione di campi e \(\alpha \in L\) algebrico. Il {\em polinomio minimo} di \(\alpha\) è il generatore monico del nucleo dell'omomorfismo
+\[K[X] \to L\,,\ p \mapsto i_\ast(p)(\alpha) .\]
+\end{defi}
+
+\begin{prop}\label{prop:EquivalentiPolinomioMinimo}
+Sia \(i : K \to L\) un omomorfismo di campi, \(\alpha \in L\) e \(m \in K[X]\) non nullo e monico. Allora sono equivalenti:
+\begin{enumerate}
+\item \(m\) è il polinomio minimo di \(\alpha\) su \(K\).
+\item \(m\) è irriducibile su \(K\) e \(i_\ast (m)(\alpha) = 0\).
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+(\(1 \implies 2\)) Da definizione, \(m\) è il generatore monico dell'omomorfismo
+\[K[X] \to L\,,\ p \mapsto i_\ast (p)(\alpha) .\]
+Quindi \(m\) come polinomio in \(L[X]\) si annulla in \(\alpha\). Inoltre, essendo \(K\) e \(L\) campi, pure \(\frac{K[X]}{\gen m}\) lo è: allora \(m\) è irriducibile perché \(K[X]\) dominio a ideali principali.\newline
+(\(2 \implies 1\)) Scriviamo \(m'\) il generatore monico del nucleo dell'omomorfismo
+\[K[X] \to L\,,\ p \mapsto i_\ast (p) (\alpha) .\]
+Quindi \(m \in \gen{m'}\). Ma, essendo \(m\) irriducibile, abbiamo \(m = a m'\) con \(a \in L\) invertibile. Trattandosi di polinomi monici, \(a = 1\) necessariamente.
+\end{proof}
+
+La ricerca del polinomio minimo è quindi ridotta ad una questione di irriducibilità: il lettore è invitato a ripassare i criteri per l'irriducibilità di polinomi fatti ad {\scshape Alegbra 1}. Facciamo degli esempi.
+
+\begin{esem}
+Sia il solito omomorfismo \(\R \hookrightarrow \C\). Il polinomio minimo di \(i \in \C\) è \(X^2+1 \in \R[X]\) perché si annulla in \(i\) ed è irriducibile in \(\R[X]\) (è un polinomio di grado due senza zeri nel campo \(\R\)). Allo stesso modo, si verifica che \(-i\) ha lo stesso polinomio minimo.
+\end{esem}
+
+%\begin{esem}
+%Consideriamo l'omomorfismo di inclusione \(\Q \hookrightarrow \R\) e \(\alpha := \frac{1+\sqrt 2}{2} \in \R\). Per trovare un polinomio in \(\Q[X]\) che sia il polinomio minimo di \(\alpha\) a volte serve un po' di inventiva. Ad esempio:
+%\begin{align*}
+%& \alpha = \frac{1+\sqrt 5}{2} \\
+%& 2 \alpha = 1 + \sqrt 5 \\
+%& 2\alpha - 1 = \sqrt 5 \\
+%& 4\alpha^2 - 4\alpha + 1 = 5 \\
+%& \alpha^2 - \alpha - 1 = 0 .
+%\end{align*}
+%Quindi un candidato a polinomio minimo è \(X^2 - X - 1\). Resta da vedere se è irriducibile: è un polinomio di grado 2 a coefficienti in un campo senza zeri in quel campo.
+%\end{esem}
+
+\begin{esem}
+Consideriamo l'omomorfismo di inclusione \(\Q \hookrightarrow \R\) e \(\alpha := \sqrt{\sqrt[3]{4} -1} \in \R\). Per trovare un polinomio in \(\Q[X]\) che sia il polinomio minimo di \(\alpha\) a volte serve un po' di inventiva. Ad esempio:
+\begin{align*}
+& \alpha = \sqrt{\sqrt[3]{4} -1} \\
+& \alpha^2 + 1 = \sqrt[3]{4} \\
+& \alpha^6 + 3\alpha^4 + 3\alpha^2 + 1 = 4 \\
+& \alpha^6 + 3\alpha^4 + 3\alpha^2 - 3 = 0 .
+\end{align*}
+Quindi un candidato a polinomio minimo è \(X^6 + 3X^4 + 3X^2 - 3\). Per vedere se è irriducibile possiamo usare il {\em Criterio di \textgerman{Eisenstein}}: \(3\) non divide il coefficiente direttivo, divide tutti gli altri e \(3^2\) non divide il termine noto.
+\end{esem}
+
+\begin{esem}
+Sia \(i : K \to L\) un omomorfismo di campi e \(\alpha \in L\). Supponiamo che anche \(\alpha \in K\). Tecnicamente parlando questo è un piccolo abuso: quello che vogliamo dire è che \(\alpha\) appartiene all'immagine di \(K\) in \(L\) tramite \(i\), ovvero \(\alpha = i\left(\alpha'\right)\) per un unico \(\alpha' \in K\). Calcoliamo il polinomio minimo di \(\alpha\). Consideriamo l'omomorfismo
+\[K[X] \to L \,,\ p \mapsto i_\ast (p)(\alpha)\]
+e calcoliamone il nucleo. Se \(p \in K[X]\) è tale che
+\[0 = i_\ast(p)(\alpha) = i_\ast(p)\left(i\left(\alpha'\right)\right) = i\left(p\left(\alpha'\right)\right)\]
+allora per l'iniettività di \(i\) si ha
+\[p\left(\alpha'\right) = 0 .\]
+Concludiamo quindi che il polinomio minimo di \(\alpha = i\left(\alpha'\right)\) è \(X-\alpha'\). Con un abuso di notazione, possiamo dire che il polinomio minimo di \(\alpha \in K\) è \(X-\alpha\). È un abuso che nemmeno si nota nel caso in cui l'omomorfismo è una semplice inclusione insiemistica.
+\end{esem}
+
+\begin{esem}
+Consideriamo l'omomorfismo di inclusione \(\R \hookrightarrow \C\). Abbiamo da poco visto che il polinomio minimo di \(\alpha \in \R\) è di primo grado, \(X-\alpha\). Sia quindi \(\alpha \in \C \setminus \R\). Chiaramente il polinomio minimo di \(\alpha\) deve essere di grado \(\ge 2\). Costruiremo il polinomio minimo di \(\alpha\). Indicando con \(\bar\alpha\) il coniugato di \(\alpha\), si verifica immediatamente che \(\alpha + \bar\alpha\) e \(\alpha \bar\alpha\) sono reali. Il polinomio
+\[X^2 - (\alpha + \bar\alpha)X + \alpha \bar\alpha\]
+è a coefficienti reali ed ha come radici \(\alpha\) e \(\bar\alpha\). Trattandosi di un polinomio di grado \(2\) che non ha zeri reali, il polinomio è anche irriducibile in \(\R[X]\).
+\end{esem}
+
+Sotto questo punto di vista, lavorare con gli omomorfismi \(\R \hookrightarrow \C\) è poco interessante: i polinomi minimi sono di grado \(1\) oppure di grado \(2\). Un po' più bizzarri sono gli omomorfismi di campo che partono da \(\Q\). Vediamo qualche esempio.
+
+%\newcommand\RootsOfOne[1]{
+%  \begin{tikzpicture}[ axes/.style={->, gray!65!black, thick}
+%                     , point/.style={circle, fill, inner sep=0pt, minimum size=1mm}
+%                     ]
+%  \pgfmathsetmacro\n{int(#1-1)}
+%  \pgfmathsetmacro\l{1.5}
+%  \draw [axes] (-90:\l) -- (90:\l);
+%  \draw [axes] (180:\l) -- (0:\l);
+%  \foreach \j in {0, ..., \n} {
+%    \pgfmathsetmacro\alpha{360/(\n+1)*\j}
+%    \node (z\j) [point, label=\alpha:\(\xi_\j\)] at (\alpha:1) {};
+%  }
+%  \end{tikzpicture}
+%}
+
+\begin{esem}[Radici dell'unità]
+Il polinomio \(X^n-1\) ha \(n\) radici complesse, che possiamo scrivere in forma esponenziale %\marginpar{\RootsOfOne{5}}
+\[\xi_k := e^{i\frac{2\pi k}n} \quad \text{per } k \in \{0, \dots{}, n-1\}\]
+di cui la prima è sicuramente è reale. Se \(n\) è dispari, \(1\) è l'unica radice reale. Possiamo fattorizzare questo polinomio come
+\[X^n - 1 = (X-1) \left(X^{n-1} + \dots{} + X + 1\right)\]
+e quindi le radici complesse sono di \(X^{n-1} + \dots{} + X + 1\). Ricordiamo che
+\begin{quotation}
+Se \(p \ge 3\) è primo, allora \(X^{p-1} + \dots{} + X + 1\) è irriducibile in \(\Q[X]\).
+\end{quotation}
+Quindi se consideriamo l'estensione \(\Q \hookrightarrow \C\) data dalla composizione delle inclusioni \(\Q \hookrightarrow \R\) e \(\R \hookrightarrow \C\), e se \(p \ge 3\), allora le radici complesse \(\xi_1, \dots{}, \xi_{p-1}\) hanno tutte lo stesso polinomio minimo in \(\Q[X]\), cioè \(X^{p-1} + \dots{} + X + 1\). Osserviamo invece se l'omomorfismo scelto è \(\R \hookrightarrow \C\), allora \(X^{p-1} + \dots{} + X + 1\) come polinomio reale non è più irriducibile. Infatti, se \(\alpha\) è una delle radici non reali, abbiamo visto che il polinomio minimo di \(\alpha\) in \(\R[X]\) è
+\[X^2 - (\alpha + \bar\alpha)X + \alpha \bar\alpha .\]
+e divide \(X^{p-1} + \dots{} + X + 1\).
+\end{esem}

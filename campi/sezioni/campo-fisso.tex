@@ -1,0 +1,44 @@
+% !TEX program = lualatex
+% !TEX spellcheck = it_IT
+% !TEX root = ../campi.tex
+
+\section{Campo fisso}
+
+Consideriamo un'estensione di campi \(K \mor i L\) e un polinomio \(f \in K[X]\). Come un qualunque \(\sigma \in \Gal[K]L\) fissa gli elementi di \(K\), l'automorfismo indotto \(\sigma_\ast : L[X] \to L[X]\) fissa i polinomi a coefficienti in \(K\). Più precisamente,
+\[\sigma_\ast i_\ast = (\sigma i)_\ast = i_\ast .\]
+
+La domanda ora è: \(\Gal[K]L\) fissa gli elementi di \(K\), ma sono gli elementi di \(K\) gli unici che vengono fissati dagli elementi di \(\Gal[K]L\)? Una domanda apparentemente innocente, ma che ci porta da qualche parte con l'introduzione di nuove idee.
+
+\begin{prop}
+  Sia \(K \mor i L\) un'estensione finita e \(G\) un sottogruppo di \(\Gal[K]L\). Allora
+\[ L^G := \{a \in L \mid \sigma(a) = a \text{ per ogni } \sigma \in G\} .\]
+è un sottocampo di \(L\). Inoltre l'estensione \(K \mor i L\) si fattorizza come segue
+\[\begin{tikzcd}[column sep=small]
+K \ar["i", rr] \ar["{\tilde i}",dr, swap] & & L \\
+                 & L^G \ar[hookrightarrow, ur]
+\end{tikzcd}\]
+dove \(\tilde i (r) = i(r)\). Inoltre:
+\begin{enumerate}
+\item \(L^G \subseteq L\) è finita
+\item \(L^G \subseteq L\) è separabile
+\item \(L^G \subseteq L\) è normale
+\item \(G = \Gal[L^G]L\) e \(\card G = \left[L^G:L\right]\).
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+\nota{Vedi~\cite{aluffi:algebra}.}
+\end{proof}
+
+\begin{coro}
+Sia \(K \mor i L\) un'estensione. Allora sono equivalenti:
+\begin{enumerate}
+\item \(K \mor i L\) è di Galois
+\item \(K \mor i L\) è finita e \(\card{\Gal[K]L} = [L:K]\)
+\item \(K \mor i L\) è finita e \(K \to L^{\Gal[K]L}\), \(r \to i(r)\) è un isomorfismo di campi.
+\end{enumerate}
+\end{coro}
+
+\begin{proof}
+\nota{Vedi~\cite{aluffi:algebra}.}
+\end{proof}

@@ -1,0 +1,121 @@
+
+\section{Campi finiti}
+
+
+
+
+
+%\section{Il gruppo di Galois di \(X^n-1\)}
+
+\(n>0\), \(\car(K)\ndvd n\), \(K\subseteq L\) campo di spezzamento di \(X^n-1\).
+\begin{itemize}
+\item \((X^n-1)'=nX^{n-1}\ne0\) ha solo la radice \(0\) (che non è radice di \(X^n-1\)) \(\implies\) \(X^n-1\) non ha radici multiple in \(L\) \(\implies\) \(R:=\{\alpha\in L\st\alpha^n=1\}\) tale che \(\card{R}=n\).
+\item \(R<L^*\) \(\implies\) \(R\) ciclico \(\implies\) \(\exi\omega\in R\) tale che \(R=\gen{\omega}\) (quindi \(\ord(\omega)=n\) in \(L^*\), e si dice che \(\omega\) è una radice \(n\)-esima {\em primitiva} dell'unit\`a; per esempio \(\omega=e^{(2\pi i)/n}\) se \(K\subseteq\C\)).
+\item \(L=K(R)=K(\omega)\) \(\implies\) \(\card{\Gal[K]{L}}=\card{R'}\) con \(R':=\{\alpha\in L\st\polmin_{\omega,K}(\alpha)=0\}\subseteq R\) (perché \(\polmin_{\omega,K}\dvd(X^n-1)\)).
+\item \(\polmin_{\omega,K}\) si spezza su \(L\) e non ha radici multiple \(\implies\) \(\card{\Gal[K]{L}}=\deg(\polmin_{\omega,K})=[L:K]\) \(\implies\) \(K\subseteq L\) di Galois.
+\item La funzione \(\Gal[K]{L}\to\Aut(R)<S(R)\), \(\sigma\mapsto\sigma\rest{R}\) è ben definita e è un omomorfismo iniettivo di gruppi.
+\item \(\Gal[K]{X^n-1}=\Gal[K]{L}\iso G<\Z/n\Z^*\iso\Aut(R)\) \(\implies\) \(G\) abeliano e \(\card{G}\dvd\varphi(n)\).
+\end{itemize}
+
+
+
+%\section{Polinomi ciclotomici}
+\(\alpha\in R'\) \(\implies\) \(\exi\sigma\in\Gal[K]{L}\) tale che \(\alpha=\sigma(\omega)\) \(\implies\) \(\ord(\alpha)=\ord(\omega)=n\) \(\implies\) \(\exi\cl{j}\in\Z/n\Z^*\) tale che \(\alpha=\omega^j\) \(\implies\)
+\[
+\polmin_{\omega,K}=\prod_{\alpha\in R'}(X-\alpha)\dvd\Phi_n:=\prod_{\cl{j}\in\Z/n\Z^*}(X-\omega^j)\in L[X],
+\]
+dove \(\Phi_n\) è detto \(n\)-esimo {\em polinomio ciclotomico}. Chiaramente
+\[
+\Phi_n\dvd(X^n-1)=\prod_{\cl{j}\in\Z/n\Z}(X-\omega^j)
+\]
+e \(\deg(\Phi_n)=\varphi(n)\). 
+\begin{teor}
+\begin{enumerate}
+\item \(\Phi_n\in K[X]\).
+\item \(K=\Q\) \(\implies\) \(\Phi_n\in\Q[X]\) irriducibile.
+\end{enumerate}
+\end{teor}
+\begin{coro}
+\(\polmin_{\omega,\Q}=\Phi_n\) e \(\Gal[\Q]{X^n-1}\iso\Z/n\Z^*\).
+\end{coro}
+
+
+
+\section{Discriminante}
+
+\begin{itemize}
+\item \(K\) campo, \(0\ne f\in K[X]\), \(K\subseteq L\) campo di spezzamento di \(f\).
+\item \(n:=\deg(f)\), \(\alpha_1,\dots,\alpha_n\in L\) radici di \(f\) \(\implies\)
+\[
+\delta:=\prod_{1\le i<j\le n}(\alpha_i-\alpha_j)\in L
+\]
+è ben definito a meno del segno (dipende dall'ordine delle radici), e chiaramente \(\delta\ne0\) \(\iff\) \(f\) non ha radici multiple.
+\item Il {\em discriminante} di \(f\) è \(\Delta=\Delta(f):=\delta^2\in L\) (ben definito e tale che \(\Delta\ne0\) \(\iff\) \(f\) non ha radici multiple).
+\end{itemize}
+\begin{osse}
+\(\sigma(\delta)=\varepsilon(\sigma\rest{R})\delta\) (con \(R:=\{\alpha_1,\dots,\alpha_n\}\)) \(\all\sigma\in\Gal[K]{f}=\Gal[K]{L}\):
+
+posso supporre \(\delta\ne0\) (quindi \(\card{R}=n\)), e allora per definizione di segno di una permutazione in \(S(R)\iso S_n\)
+\[
+\sigma(\delta)=\prod_{1\le i<j\le n}(\sigma(\alpha_i)-\sigma(\alpha_j))=\prod_{1\le i<j\le n}(\sigma\rest{R}(\alpha_i)-\sigma\rest{R}(\alpha_j))=\varepsilon(\sigma\rest{R})\delta.
+\]
+\end{osse}
+
+
+
+%\section{Propriet\`a del discriminante}
+\begin{prop}
+\(K\) perfetto \(\implies\) \(\Delta=\Delta(f)\in K\). Se inoltre \(\car(K)\ne2\), \(f\) non ha radici multiple e identifico \(\Gal[K]{f}\) a un sottogruppo di \(S_n\iso S(R)\), allora \(\Gal[K]{f}\subseteq A_n\) \(\iff\) \(\delta\in K\) \(\iff\) \(\Delta\) è un quadrato in \(K\).
+\end{prop}
+\begin{proof}
+\begin{itemize}
+\item \(K\subseteq L\) di Galois \(\implies\) \(K=L^{\Gal[K]{L}}\). Dunque, dato \(\alpha\in L\), \(\alpha\in K\) \(\iff\) \(\sigma(\alpha)=\alpha\) \(\all\sigma\in\Gal[K]{L}=\Gal[K]{f}\).
+\item \(\sigma(\Delta)=\sigma(\delta^2)=\sigma(\delta)^2=(\varepsilon(\sigma\rest{R})\delta)^2=\varepsilon(\sigma\rest{R})^2\delta^2=\delta^2=\Delta\) \(\all\sigma\in\Gal[K]{f}\) \(\implies\) \(\Delta\in K\).
+\item \(\Gal[K]{f}\subseteq A_n\) \(\implies\) \(\sigma(\delta)=\delta\) \(\all\sigma\in\Gal[K]{f}\) \(\implies\) \(\delta\in K\).
+\item \(\delta\in K\), \(f\) senza radici multiple \(\implies\) \(\delta\in K^*\) e \(\all\sigma\in\Gal[K]{f}\) \(\delta=\sigma(\delta)=\varepsilon(\sigma\rest{R})\delta\) \(\implies\) \(\varepsilon(\sigma\rest{R})_K=1_K\) \(\implies\) \(\varepsilon(\sigma\rest{R})=1\) (cioè \(\Gal[K]{f}\subseteq A_n\)) se \(\car(K)\ne2\).
+\item Chiaramente \(\delta\in K\) \(\iff\) \(\Delta=\delta^2\) è un quadrato in \(K\).
+\end{itemize}
+\end{proof}
+
+
+
+%\section{Discriminante dei polinomi di grado \(2\) e \(3\)}
+\begin{itemize}
+\item Si pu\`o dimostrare che \(\Delta(f)\) è esprimibile come polinomio valutato nei coefficienti di \(f\).
+\item \(\Delta(X^2+aX+b)=a^2-4b\):
+\smallskip
+
+\(X^2+aX+b=(X-\alpha)(X-\beta)=X^2-(\alpha+\beta)X+\alpha\beta\) \(\implies\) \(a=-\alpha-\beta\), \(b=\alpha\beta\);
+
+\(\delta=\alpha-\beta\) \(\implies\) \(\Delta=(\alpha-\beta)^2=(\alpha+\beta)^2-4\alpha\beta=a^2-4b\).
+\item \(\Delta(X^3+aX+b)=-4a^3-27b^2\):
+\smallskip
+
+\(X^3+aX+b=(X-\alpha)(X-\beta)(X-\gamma)=X^3-(\alpha+\beta+\gamma)X^2+(\alpha\beta+\alpha\gamma+\beta\gamma)X-\alpha\beta\gamma\) \(\implies\) \(\alpha+\beta+\gamma=0\), \(a=\alpha\beta+\alpha\gamma+\beta\gamma\), \(b=-\alpha\beta\gamma\) \(\implies\) \(a=-(\alpha^2+\alpha\beta+\beta^2)\), \(b=\alpha\beta(\alpha+\beta)\);
+
+\(\delta=(\alpha-\beta)(\alpha-\gamma)(\beta-\gamma)=(\alpha-\beta)(2\alpha+\beta)(\alpha+2\beta)=2\alpha^3+3\alpha^2\beta-3\alpha\beta^2-2\beta^3\) \(\implies\) \(\Delta=(2\alpha^3+3\alpha^2\beta-3\alpha\beta^2-2\beta^3)^2=4\alpha^6+12\alpha^5\beta-3\alpha^4\beta^2-26\alpha^3\beta^3-3\alpha^2\beta^4+12\alpha\beta^5+4\beta^6=-4a^3-27b^2\).
+\end{itemize}
+
+
+
+%\section{Gruppo di Galois di un polinomio di grado \(3\)}
+
+\(K\) perfetto, \(\car(K)\ne2\), \(\deg(f)=3\), \(f\) irriducibile in \(K[X]\) \(\implies\)
+\(\Gal[K]{f}\iso
+\begin{cases}
+C_3 & \text{se \)\Delta(f)\( è un quadrato in \)K\(}\\
+S_3 & \text{altrimenti.}
+\end{cases}
+\)
+\begin{esem}
+\begin{itemize}
+\item \(f=X^3-3X+1\) irriducibile in \(\Q[X]\) (non ha radici in \(\Q\)) \(\implies\) \(\Delta=-4(-3)^3-27\cdot1^2=81=9^2\) \(\implies\) \(\Gal[\Q]{f}\iso C_3\).
+\item \(f=X^3+3X+1\) irriducibile in \(\Q[X]\) (non ha radici in \(\Q\)) \(\implies\) \(\Delta=-4\cdot3^3-27\cdot1^2=-135<0\) \(\implies\) \(\Gal[\Q]{f}\iso S_3\).
+\end{itemize}
+\end{esem}
+\begin{osse}
+\(\car(K)\ne3\), \(f(X)=X^3+aX^2+bX+c\in K[X]\) \(\implies\) con la sostituzione \(X=Y-a/3\) si ottiene \(f(X)=f(Y-a/3)=:g(Y)\) con \(g(Y)=Y^3+a'Y+b'\in K[Y]\). Chiaramente \(\alpha\in L\) (campo di spezzamento di \(f\) su \(K\)) è radice di \(g\) \(\iff\) \(\alpha-a/3\) è radice di \(f\) \(\implies\) \(L\) è campo di spezzamento di \(g\) su \(K\) \(\implies\) \(\Gal[K]{f}\iso\Gal[K]{g}\).
+\end{osse}
+
+
+

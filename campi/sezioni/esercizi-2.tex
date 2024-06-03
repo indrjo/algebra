@@ -1,0 +1,82 @@
+% !TEX program = lualatex
+% !TEX spellcheck = it_IT
+% !TEX root = ../campi.tex
+
+\section{Esercizi 2}
+
+\begin{eser}[Esercizio sul gruppo di Galois di \(X^n-2\)]
+\(n>1\), \(\alpha:=\sqrt[n]{2}\in\R_{>0}\), \(\omega:=e^{(2\pi i)/n}\in\C\), \(G:=\Gal[\Q]{X^n-2}\).
+\begin{enumerate}
+\item \(\Q\subseteq\Q(\alpha,\omega)\) campo di spezzamento di \(X^n-2\).
+\item \(n\) primo \(\implies\) \(\card{G}=n\varphi(n)=n(n-1)\).
+\item \(n=4\) o \(6\) \(\implies\) \(\card{G}=n\varphi(n)\).
+\item \(n=8\) \(\implies\) \(\card{G}<n\varphi(n)\).
+\item \(\card{G}=n\varphi(n)\) \(\implies\) \(G\iso C_n\rtimes_{\theta}\Z/n\Z^*\) con \(\theta : \Z/n\Z^*\to\Aut(C_n)\) isomorfismo.
+\end{enumerate}
+\end{eser}
+
+\begin{proof}[Svolgimento]
+\begin{enumerate}
+\item Le radici in \(\C\) di \(X^n-2\) sono \(\alpha\omega^j\) per \(j=0,\dots,n-1\) \(\implies\) il campo di spezzamento in \(\C\) di \(X^n-2\) su \(\Q\) è \(L:=\Q(\alpha\omega^j\st j=0,\dots,n-1)=\Q(\alpha,\omega)\).
+\item \(\Q\subseteq L\) di Galois, \(G=\Gal[\Q]{L}\) \(\implies\) \(\card{G}=[L:\Q]\). \\
+\(X^n-2\) irriducibile per Eisenstein \(\implies\) \(\polmin_{\alpha,\Q}=X^n-2\) \(\implies\) \([\Q(\alpha):\Q]=\deg(X^n-2)=n\). \\
+\(\polmin_{\omega,\Q}=\Phi_n\) \(\implies\) \([\Q(\omega):\Q]=\deg(\Phi_n)=\varphi(n)=n-1\). \\
+\(\mcd(n,n-1)=1\) \(\implies\) \([L:\Q]=n(n-1)\).
+\item \(\varphi(4)=\varphi(6)=2\) \(\implies\) \([\Q(\omega):\Q]=\varphi(n)=2\) \(\implies\) \(n=\mcm(n,2)\dvd[L:\Q]\le2n\) \(\implies\) \([L:\Q]=2n=n\varphi(n)\) (altrimenti \([L:\Q]=n\) \(\implies\) \(\omega\in L=\Q(\alpha)\subset\R\), assurdo).
+\item \(\omega=\sqrt{2}(1+i)/2\), \(\omega^2=i\) \(\implies\) \(\sqrt{2}\omega=1+i=1+\omega^2\) \(\implies\) \(\omega\) radice di \(X^2-\sqrt{2}X+1\in\Q(\alpha)[X]\) (perché \(\sqrt{2}=\alpha^4\)) \(\implies\) \([L:\Q]=[L:\Q(\alpha)][\Q(\alpha):\Q]\le2\cdot8=16<32=8\varphi(8)\).
+\item \(H:=\Gal[\Q(\alpha)]{L}<G\) tale che \(\card{H}=\card{G}/[\Q(\alpha):\Q]=\varphi(n)\), \(H':=\Gal[\Q(\omega)]{L}\normal G\) (perché \(\Q\subseteq\Q(\omega)\) normale) tale che \(\card{H'}=\card{G}/[\Q(\omega):\Q]=n\) e \(H\cap H'=\{1\}\) \(\implies\) \(\card{(HH')}=n\varphi(n)=\card{G}\) \(\implies\) \(G=HH'\) \(\implies\) \(G=H'\rtimes H\). \\
+\(H'=\{\sigma_{\cl{j}}\st\cl{j}\in\Z/n\Z\}\) con \(\sigma_{\cl{j}}(\alpha)=\alpha\omega^j\) (e \(\sigma_{\cl{j}}(\omega)=\omega\)) \(\implies\) \(\sigma_{\cl{j}}=\sigma_{\cl{1}}^j\) \(\all \cl{j}\in\Z/n\Z\) \(\implies\) \(H'=\gen{\sigma_{\cl{1}}}\iso C_n\). \\
+\(H\iso G/H'\iso\Gal[\Q]{\Q(\omega)}\iso\Z/n\Z^*\) \(\implies\) \(G\iso C_n\rtimes_{\theta}\Z/n\Z^*\) con \(\theta : \Z/n\Z^*\to\Aut(C_n)\iso\Z/n\Z^*\) omomorfismo iniettivo (quindi isomorfismo) perché \(\tau\in H\) \(\implies\) \(\exi\cl{l}\in\Z/n\Z^*\) tale che \(\tau(\omega)=\omega^l\) (e \(\tau(\alpha)=\alpha\)) \(\implies\) \(\tau\sigma_{\cl{1}}\tau^{-1}=\sigma_{\cl{l}}=\sigma_{\cl{1}}\) \(\iff\) \(\tau=1\) \qedhere
+\end{enumerate}
+\end{proof}
+
+
+\begin{eser}[Polinomi con gruppo di Galois \(S_n\)]
+\(K\) campo, \(0\ne f\in K[X]\) tale che \(\deg(f)=n>0\) e \(\Gal[K]{f}\iso S_n\); \\
+\(\alpha\) radice di \(f\) (in un campo di spezzamento \(L\) di \(f\) su \(K\)).
+\begin{enumerate}
+\item \(f\) è irriducibile in \(K[X]\).
+\item \(n>2\) \(\implies\) \(\Gal[K]{K(\alpha)}=\{1\}\).
+\item \(n>3\) \(\implies\) \(\alpha^n\not\in K\).
+\end{enumerate}
+\end{eser}
+
+\begin{proof}[Svolgimento]
+\begin{enumerate}
+\item \(\Gal[K]{f}\iso S_n\) \(\implies\) le radici \(\alpha=\alpha_1\dots,\alpha_n\in L\) di \(f\) sono distinte e \(\all i=1,\dots,n\) \(\exi\sigma\in\Gal[K]{f}\) tale che \(\sigma(\alpha)=\alpha_i\) \(\implies\) \(\alpha_i\) radice di \(\polmin_{\alpha,K}\) \(\implies\) \(f\dvd\polmin_{\alpha,K}\) \(\implies\) \(f\) irriducibile.
+\item \(\sigma\in\Gal[K]{K(\alpha)}\) \(\implies\) \(\exi i=1,\dots,n\) tale che \(\sigma(\alpha)=\alpha_i\), e basta dimostrare \(i=1\). Per assurdo \(i=2\) \(\implies\) \(K(\alpha)\subseteq L\) campo di spezzamento di \(\prod_{i=3}^n(X-\alpha_i)\) \(\implies\) \([L:K]=[L:K(\alpha)][K(\alpha):K]\le(n-2)!n<n!\), assurdo perché \([L:K]\ge\card{\Gal[K]{L}}=n!\).
+\item Per assurdo \(\alpha^n=a\in K\) \(\implies\) posso supporre \(f=X^n-a\) \(\implies\) \(L=K(\alpha,\omega)\) con \(\gen{\omega}=\{\beta\in L\st\beta^n=1\}<L^*\) \(\implies\) \([L:K]\le[K(\alpha):K][K(\omega):K]\le n(n-1)<n!\), assurdo. \qedhere
+\end{enumerate}
+\end{proof}
+
+
+%\begin{eser}
+%Determinare campo di spezzamento \(\Q\subseteq L\) e gruppo di Galois \(G\) di \(f\) su \(\Q\) nei seguenti casi:
+%\begin{enumerate}
+%\item \(f=X^4-4X^2+2\);
+%\item \(f=X^4-4X^2-2\).
+%\end{enumerate}
+%\end{eser}
+%
+%\begin{proof}[Svolgimento]
+%\begin{enumerate}
+%\item \(f\) irriducibile per Eisenstein. \\
+%\(f(X)=g(X^2)\) con \(g(Y):=Y^2-4Y+2\) che ha radici \(2\pm\sqrt{2}\in\R_{>0}\) \(\implies\) le radici di \(f\) sono \(\pm\alpha,\pm\beta\) con \(\alpha:=\sqrt{2+\sqrt{2}},\beta:=\sqrt{2-\sqrt{2}}\in\R_{>0}\) \(\implies\) \(L=\Q(\alpha,\beta)\). \\
+%\(\alpha^2-2=\sqrt{2}=\alpha\beta\) \(\implies\) \(\beta=(\alpha^2-2)/\alpha\in\Q(\alpha)\) \(\implies\) \(L=\Q(\alpha)\) \(\implies\) \(\card{G}=[L:\Q]=\deg(\polmin_{\alpha,\Q})=\deg(f)=4\). \\
+%\(\exi\sigma\in G=\Gal[\Q]{\Q(\alpha)}\) tale che \(\sigma(\alpha)=\beta\) (perché \(\beta\) radice di \(\polmin_{\alpha,\Q}=f\)) \(\implies\)
+%\[
+%\sigma^2(\alpha)=\sigma(\beta)=\sigma\biggl(\frac{\alpha^2-2}{\alpha}\biggr)=\frac{\beta^2-2}{\beta}=\frac{-\sqrt{2}}{\beta}=-\alpha
+%\]
+%\(\implies\) \(\sigma^2\ne\id_L\) \(\implies\) \(G\iso C_4\).
+%\item \(f\) irriducibile per Eisenstein. \\
+%\(f(X)=g(X^2)\) con \(g(Y):=Y^2-4Y-2\) che ha radici \(2\pm\sqrt{6}\in\R\) \(\implies\) le radici di \(f\) sono \(\pm\alpha,\pm\beta i\) con \(\alpha:=\sqrt{\sqrt{6}+2},\beta:=\sqrt{\sqrt{6}-2}\in\R_{>0}\) \(\implies\) \(L=\Q(\alpha,\beta i)\). \\
+%\(\alpha\beta=\sqrt{2}\) \(\implies\) \(\alpha\beta i=\sqrt{2}i\) \(\implies\) \(L=\Q(\alpha,\sqrt{2}i)\). \\
+%\([\Q(\alpha):\Q]=\deg(\polmin_{\alpha,\Q})=\deg(f)=4\), \([\Q(\sqrt{2}i):\Q]=\deg(\polmin_{\sqrt{2}i,\Q})=2\) (perché \(\polmin_{\sqrt{2}i,\Q}=X^2+2\)) \(\implies\) 
+%\[
+%\mcm(4,2)=4\dvd\card{G}=[\Q(\alpha,\sqrt{2}i):\Q]\le4\cdot2=8
+%\]
+%e non pu\`o essere \([\Q(\alpha,\sqrt{2}i):\Q]=4\) (perché \(\sqrt{2}i\not\in\Q(\alpha)\subset\R\)) \(\implies\) \(\card{G}=8\). \\
+%\(G\iso G'<S_4\) \(\implies\) \(G\iso D_4\). \qedhere
+%\end{enumerate}
+%\end{proof}
+

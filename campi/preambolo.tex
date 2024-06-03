@@ -39,6 +39,7 @@
 \setlist[enumerate]{ref=(\arabic*)}
 
 \usepackage{graphicx}
+\usepackage{booktabs}
 
 \usepackage{libertinust1math}
 \usepackage{MnSymbol}
@@ -52,17 +53,17 @@
 \counterwithin{thmcounter}{section}
 
 \theoremstyle{definition}
-
-\newtheorem{teor}[thmcounter]{Teorema}
-\newtheorem{prop}[thmcounter]{Proposizione}
-\newtheorem{lemm}[thmcounter]{Lemma}
-\newtheorem{coro}[thmcounter]{Corollario}
 \newtheorem{defi}[thmcounter]{Definizione}
+\newtheorem{cons}[thmcounter]{Costruzione}
+\newtheorem{lemm}[thmcounter]{Lemma}
+\newtheorem{prop}[thmcounter]{Proposizione}
+\newtheorem{teor}[thmcounter]{Teorema}
+\newtheorem{coro}[thmcounter]{Corollario}
 \newtheorem{osse}[thmcounter]{Osservazione}
 \newtheorem{rich}[thmcounter]{Richiamo}
 \newtheorem{esem}[thmcounter]{Esempio}
 \newtheorem{eser}[thmcounter]{Esercizio}
-\newtheorem{cons}[thmcounter]{Costruzione}
+
 
 \numberwithin{equation}{section}
 
@@ -70,6 +71,8 @@
 \usetikzlibrary{ calc
                , babel
                , cd
+               , patterns
+               , decorations.pathreplacing
                }
 \tikzset{>={To[length=3pt,width=3pt]}}
 \tikzcdset{ row sep/normal=.7cm
@@ -79,92 +82,55 @@
           , shorten=-2pt
           }
 
-\newcommand{\im}{\operatorname{im}} % image of a morphism
-%\newcommand{\cok}{\operatorname{coker}} % coker of a morphism
-\newcommand{\iso}{\cong}
-\newcommand{\niso}{\ncong}
-\newcommand{\all}{\forall\,}
-\newcommand{\exi}{\exists\,}
-%\newcommand{\nexi}{\nexists\,}
-\newcommand{\exiun}{\exists!\,}
-\newcommand{\id}{\mathrm{id}}
-\newcommand{\st}{\,:\,} % such that
-%\newcommand{\dual}{^{\vee}} % dual
-\newcommand{\comp}{\circ} % composition
-\newcommand{\mor}[1]{\xrightarrow{\,#1\,}}
-%\newcommand{\mono}{\hookrightarrow} % monomorphism
-%\newcommand{\epi}{\twoheadrightarrow} % epimorphism
-\newcommand{\isomor}{\mor{\sim}} % isomorphism
-\newcommand{\rat}{\dashrightarrow} % rational map
-\newcommand{\card}[1]{\left\lvert#1\right\rvert} % cardinality of a set
-\newcommand{\rest}[1]{|_{#1}} % restriction of function
-\newcommand{\abs}[1]{\lvert#1\rvert} % absolute value
-\newcommand{\N}{\mathbb{N}} % natural numbers
-\newcommand{\Z}{\mathbb{Z}} % integer numbers
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\C}{\mathbb{C}}
-\newcommand{\F}{{\mathbb F}}
-%\newcommand{\Hom}{\mathrm{Hom}}
-%\newcommand{\End}{\mathrm{End}}
-%\newcommand{\Iso}{\mathrm{Isom}}
-\newcommand{\Aut}{\mathrm{Aut}}
-%\newcommand{\Ann}{\mathrm{Ann}}
-\newcommand{\mcd}{{\rm mcd}}
-\newcommand{\mcm}{{\rm mcm}}
-\newcommand{\ord}{{\rm ord}}
-\newcommand{\cl}[1]{\mspace{1mu}\overline{\mspace{-1mu}#1\mspace{-1mu}}\mspace{1mu}}
-%\newcommand{\clp}[2][]{[#2]_{#1}}
-\newcommand{\dvd}{\mid}
-\newcommand{\ndvd}{\nmid}
-\newcommand{\primi}{\mathcal{P}}
-%\newcommand{\modmor}{\alpha}
-%\newcommand{\modmorb}{\beta}
-%\newcommand{\opp}{^{op}}
-%\newcommand{\gen}[2][]{\left\langle#2\right\rangle_{#1}}
-\newcommand{\gen}[1]{\left\langle#1\right\rangle}
+\newcommand\im{\operatorname{im}}
+\newcommand\iso{\cong}
+%\newcommand\niso{\ncong}
+\newcommand\all{\forall\,}
+\newcommand\exi{\exists\,}
+\newcommand\exiun{\exists!\,}
+\newcommand\id{\mathrm{id}}
+\newcommand\st{\,:\,}
+\newcommand\comp{\circ}
+\newcommand\mor[1]{\xrightarrow{\,#1\,}}
+\newcommand\rat{\dashrightarrow}
+\newcommand\card[1]{\left\lvert#1\right\rvert}
+\newcommand\rest[1]{|_{#1}}
+\newcommand\abs[1]{\lvert#1\rvert}
+\newcommand\N{\mathbb{N}}
+\newcommand\Z{\mathbb{Z}}
+\newcommand\Q{\mathbb{Q}}
+\newcommand\R{\mathbb{R}}
+\newcommand\C{\mathbb{C}}
+\newcommand\F{\mathbb{F}}
+\newcommand\Aut{\operatorname{Aut}}
+\newcommand\mcd{\operatorname{mcd}}
+\newcommand\mcm{\operatorname{mcm}}
+\renewcommand\gcd{\operatorname{mcd}}
+\newcommand\ord{\operatorname{ord}}
+\newcommand\cl[1]{\mspace{1mu}\overline{\mspace{-1mu}#1\mspace{-1mu}}\mspace{1mu}}
+\newcommand\dvd{\mid}
+\newcommand\ndvd{\nmid}
+\newcommand\primi{\mathcal{P}}
+\newcommand\gen[1]{\left\langle#1\right\rangle}
 \renewcommand\bar\overline
-%\newcommand{\supp}{\mathrm{Supp}}
-%\newcommand{\rk}{\mathrm{rk}}
-%\newcommand{\GL}{\mathrm{GL}}
-%\newcommand{\SL}{\mathrm{SL}}
-%\newcommand{\PSL}{\mathrm{PSL}}
-\newcommand{\mat}[2]{\mathrm{M}_{#1}(#2)}
-\newcommand{\tor}{\mathrm{T}}
-\newcommand{\pro}{\mathrm{pr}}
-\newcommand{\inc}{\mathrm{in}}
-%\newcommand{\reg}{\mathrm{reg}}
-%\newcommand{\Max}{\mathrm{Max}}
-\newcommand{\az}{\varphi}
-\newcommand{\rp}{\rho}
-\newcommand{\esp}[1]{\operatorname{exp}\left(#1\right)}
-%\newcommand{\abn}{\mathrm{ab}}
-%\newcommand{\pn}{\mathrm{p}}
-%\newcommand{\ab}[1]{#1_{\mathrm{ab}}}
-
-%\newcommand{\conj}{\Gamma}
-%\newcommand{\molt}{L}
-%\newcommand{\Int}{\mathrm{Int}}
-\newcommand{\parti}{\mathcal{P}}
-\newcommand{\normal}{\triangleleft}
-%\newcommand{\nnormal}{\ntriangleleft}
-\newcommand{\cc}[1]{[#1]}
-%\newcommand{\Stab}{\mathrm{Stab}}
-%\newcommand{\cent}{C}
-\newcommand{\norm}{N}
-%\newcommand{\Id}{\mathrm{I}}
-\newcommand{\car}{\mathrm{char}}
-\newcommand{\polmin}{\mathrm{m}}
-\newcommand{\calg}[2][]{\overline{#2}^{_{#1}}}
-\newcommand{\Gal}[2][]{\operatorname{Gal}_{#1}\!\left(#2\right)}
-\newcommand{\Fro}{\mathcal{F}}
-\newcommand{\notimplies}{\not{\implies}}
-
+\newcommand\normal{\triangleleft}
+\newcommand\car{\operatorname{char}}
+\newcommand\polmin{\mathrm{m}}
+\newcommand\calg[2][]{\overline{#2}^{_{#1}}}
+\newcommand\Gal[2][]{\operatorname{Gal}_{#1}\!\left(#2\right)}
+\newcommand\Fro{\mathcal{F}}
+\newcommand\notimplies{\not\implies}
 
 %%%
 
 \renewcommand\implies\Rightarrow
 \renewcommand\impliedby\Leftarrow
 \renewcommand\iff\Leftrightarrow
-\usepackage{xcolor}
+\newcommand\sgn{\operatorname{sgn}}
+
+\newcommand\tsumura[1]{%
+  Problema #1 di~\cite{tsumura:exercises}%
+}
+
+%\usepackage{xcolor}
 \newcommand\nota[1]{\textcolor{red}{[#1]}}

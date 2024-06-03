@@ -1,0 +1,492 @@
+% !TEX program = lualatex
+% !TEX spellcheck = it_IT
+% !TEX root = ../campi.tex
+
+\section{Corrispondenza di Galois}
+
+\begin{defi}[Campi intermedi]
+Sia \(i : K \to L\) un'estensione di campi. Un {\em campo intermedio} è il dato di un campo e di due estensioni 
+\[K \mor{i_1} E \mor{i_2} L\]
+tali che \(i = i_2 i_1\). Introduciamo anche una relazione tra due campi intermedi \(K \mor{i_1} E \mor{i_2} L\) e \(K \mor{j_1} F \mor{j_2} L\): diciamo che il primo è {\em contenuto} nel secondo qualora esiste un omomorfismo \(h : E \to F\) tale che \(h i_1 = j_1\) e \(j_2 h = i_2\).
+\begin{equation}\begin{tikzcd}
+E \ar["{i_2}", drr] \ar["h", rrr, bend left=5] & & & F \ar["{j_2}", dl] \\
+ & K \ar["i", r, swap] \ar["{i_1}", ul] \ar["{j_1}", urr] & L
+\end{tikzcd}\label{diag:MorfismoCampiIntermedi}
+\end{equation}
+\end{defi}
+
+Richiamiamo un risultato ricavato molto tempo fa, quello della formula~\eqref{form:GradoDiComposizioneEstensioni}. In generale, può non dire nulla sulla costituzione dei campi intermedi, ma può dare delle indicazioni sul grado dei campi intermedi o guidare ad una prima scrematura in certi casi. Richiamiamo questo fatto con il linguaggio della definizione di campo intermedio: se \(i : K \to L\) è finito ed è assegnato il campo intermedio \(K \mor{i_1} F \mor{i_2} L\), allora vale \([L:K] = [L:F][F:K]\).
+
+Come sempre, quando si tratta di semplici inclusioni tutto il macchinario della definizione precedente passa inosservato: un campo intermedio è un campo \(F\) compreso tra due campi \(K\) e \(L\), cioè \(K \subseteq F \subseteq L\). Tuttavia, in un contesto generale può essere bene averci a che fare per almeno un po'. Ecco infatti la prima parte della corrispondenza di Galois.
+
+\nota{L'insieme dei campi intermedi insieme preordinato.}
+
+\begin{prop}\label{prop:CorrispondenzaGaloisI}
+Sia \(i : K \to L\) un'estensione e \(K \mor{i_1} E \mor{i_2} L\) e \(K \mor{j_1} F \mor{j_2} L\) due campi intermedi. Se il primo è contenuto nel secondo, allora
+\[\Gal{F \mor{j_2} L} \subseteq \Gal{E \mor{i_2} L} .\] 
+In altre parole, abbiamo la funzione
+\begin{align*}
+& \phi : \left\{ \text{campi intermedi di } K \mor i L \right\} \to \left\{ \text{sottogruppi di } \Gal{K \mor i L} \right\} \\
+& \phi\left(K \mor{i_2} E \mor{i_2} L \right) := \Gal{E \mor{i_2} L}
+\end{align*}
+con le seguenti proprietà:
+\begin{enumerate}
+\item è una funzione antitòna 
+\item \(\phi\left(K \mor{\id_K} K \mor j L\right) = \Gal{K \mor j L}\)
+\item \(\phi\left(K \mor i L \mor{\id_L} L\right) = \left\{\id_L\right\}\).
+\end{enumerate}
+\end{prop}
+
+L'enunciato è più difficile a scriversi che a dimostrarsi.
+
+\begin{proof}
+Sia \(\sigma \in \Gal{F \mor{j_2} L}\), cioè \(\sigma j_2 = j_2\). Sia \(h : E \to F\) tale che \(hi_1 = j_1\) e \(j_2h = i_2\) (teniamo sempre presente il diagramma~\eqref{diag:MorfismoCampiIntermedi} visto che manteniamo la stessa notazione). Allora
+\[\sigma i_2 = \underbrace{\sigma j_2}_{= j_2} h = j_2 h = i_2 .\]
+Cioè \(\sigma \in \Gal{E \mor{i_2} L}\). Il resto è solo banale verifica.
+\end{proof}
+
+\nota{Fare esempi su come varia il gruppo di Galois di un'estensione \(K \subseteq L\) al quando varia \(K\). Forse troppo presto?}
+
+L'altra metà della corrispondenza di Galois ha bisogno di nuove nozioni. Le introdurremo all'interno di una Proposizione che ricorda tanto quella precedente in alcuni aspetti. 
+
+\begin{lemm}[Campo fisso]
+Sia \(L\) un campo e \(G\) un sottogruppo di automorfismi di \(L\) (quindi non necessariamente automorfismi di una fissata estensione \(i : K \to L\)). Allora
+\[L^G := \{ a \in L \mid \sigma(a) = a \text{ per ogni } \sigma \in G\}\]
+è un sottocampo di \(L\), che noi chiameremo {\em campo fisso} di \(G\).
+\end{lemm}
+
+\begin{proof}
+La verifica che \(L^G\) è sottocampo di \(L\) è banale routine.
+\end{proof}
+
+\begin{prop}\label{prop:CorrispondenzaGaloisII}
+Sia \(i : K \to L\) un'estensione e \(G\) un sottogruppo di \(\Gal{K \mor i L}\). Allora si ha il campo intermedio
+\[K \mor{i_G} L^G \hookrightarrow L\]
+in cui \(i_G(r) := i(r)\) e la seconda estensione è una banale inclusione insiemistica. Inoltre, la funzione
+\begin{align*}
+& \psi : \left\{ \text{sottogruppi di } \Gal{K \mor i L} \right\} \to \left\{ \text{campi intermedi di } K \mor i L \right\} \\
+& \psi(H) := \left(K \mor{i_H} L^H \hookrightarrow L \right)
+\end{align*}
+ha le seguenti proprietà:
+\begin{enumerate}
+\item è antitòna
+\item \(\psi(\left\{e\right\})\) è il campo intermedio \(K \mor i L\) stesso
+\item Se \(G = \Gal{K \mor i L}\), allora abbiamo il campo intermedio \(K \mor{i_G} L^G \hookrightarrow L\) in cui non necessariamente \(i_G\) è un isomorfismo. % \(\psi\left(\Gal{K \mor i L}\right) = \dots{}\) \nota{Esaminare bene, non credo vada bene.}
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+Siano ora \(r \in K\) e \(\sigma \in G \subseteq \Gal{K \mor i L}\) qualsiasi, l'immagine di \(K\) sotto \(i\) è contenuta in \(L^G\) perché da definizione di gruppo di Galois di \(i : K \to L\) si ha \(\sigma(i(r)) = i(r)\). Qui il lavoro per il controllo dell'antitonia è semplice. Siano \(H_1\) e \(H_2\) sottogruppi di \(\Gal{K \mor i L}\) tali che \(H_1 \subseteq H_2\): gli elementi di \(L^{H_2}\) sono gli elementi di \(L\) fissati da ogni \(\sigma \in H_2\), e quindi a maggior ragione da ogni automorfismo in \(H_1\). \nota{Il punto 3?}
+\end{proof}
+
+\begin{lemm}[di E. Artin]\label{lemm:Artin}
+Sia \(L\) campo e \(G\) un gruppo finito di automorfismi di \(L\). Allora
+\[\left[L:L^G\right] \le \card G .\]
+\end{lemm}
+
+In particolare, se \(G\) è finito, allora pure l'estensione \(L^G \subseteq L\) lo sarà. Questo è il caso, per esempio, se \(G\) è sottogruppo del gruppo di Galois di un'estensione \(K \to L\) finita.
+
+\begin{proof}
+Consideriamo un generico gruppo finito \(G=\{\sigma_1=\id_L,\dots,\sigma_m\}\) di cardinalità \(m\). Dobbiamo quindi mostrare che \(L\) come spazio vettoriale su \(L^G\) ha dimensione \(\le m\). Per quanto visto nel corso di {\scshape Algebra Lineare}, è sufficiente mostrare che ogni sottoinsieme \(\left\{\alpha_1,\dots,\alpha_n\right\}\) di \(L\) con \(m < n\) è linearmente dipendente.
+\nota{Vedi il capitolo 3 di~\cite{milne:fields}.}
+%\(\card{G}=m\), \(G=\{\sigma_1=\id_L,\dots,\sigma_m\}\).
+%
+%Dati \(\alpha_1,\dots,\alpha_n\in L\) distinti con \(n>m\), basta dimostrare che \(\{\alpha_1,\dots,\alpha_n\}\) è linearmente dipendente su \(L^G\).
+%\(v_j:=(\sigma_1(\alpha_j),\dots,\sigma_m(\alpha_j))\in L^m\) (per \(j=1,\dots,n\)) distinti.
+%
+%\(\{v_1,\dots,v_n\}\) linearmente dipendente su \(L\) (perché \(n>m\)) \(\implies\)
+%\[
+%W:=\{(\beta_1,\dots,\beta_n)\in L^n\st\sum_{j=1}^n\beta_jv_j=0\}
+%\]
+%\(L\)-sottospazio vettoriale non nullo di \(L^n\).
+%
+%\(\sigma\in G\), \((\beta_1,\dots,\beta_n)\in W\) \(\implies\) \((\sigma(\beta_1),\dots,\sigma(\beta_n))\in W\): \((\beta_1,\dots,\beta_n)\in W\) \(\iff\) \(\sum_{j=1}^n\beta_j\sigma_i(\alpha_j)=0\) \(\all i=1,\dots,m\) \(\implies\) \(\sum_{j=1}^n\sigma(\beta_j)(\sigma\comp\sigma_i)(\alpha_j)=0\) \(\all i=1,\dots,m\) \(\iff\) \((\sigma(\beta_1),\dots,\sigma(\beta_n))\in W\) perché \(\{\sigma\comp\sigma_1,\dots,\sigma\comp\sigma_m\}=G\).
+%
+%\((\gamma_1,\dots,\gamma_n)\in W\setminus\{0\}\) (\(\implies\) \(\exi j_0\in\{1,\dots,n\}\) tale che \(\gamma_{j_0}\ne0\) e posso supporre \(\gamma_{j_0}=1\)) con il minimo numero di componenti \(\ne0\).
+%
+%\(\sigma\in G\) \(\implies\) \(\delta_j:=\gamma_j-\sigma(\gamma_j)\) tali che \((\delta_1,\dots,\delta_n)\in W\) e \(\delta_j=0\) se \(\gamma_j=0\) o \(j=j_0\) \(\implies\) \((\delta_1,\dots,\delta_n)=0\) per l'ipotesi su \((\gamma_1,\dots,\gamma_n)\) \(\implies\) \(\gamma_j=\sigma(\gamma_j)\in L^G\) (per \(j=1,\dots,n\)) tali che \(\sum_{j=1}^n\gamma_j\alpha_j=0\) perché \(\sum_{j=1}^n\gamma_j\sigma_1(\alpha_j)=0\) e \(\sigma_1=\id_L\).
+\end{proof}
+
+\begin{prop}
+Sia \(G\) un gruppo finito di automorfismi di un campo \(L\). Allora
+\[G = \Gal{L^G \subseteq L} .\]
+\end{prop}
+
+Vale a dire ogni gruppo finito di automorfismi di campi è il gruppo di Galois di qualche estensione.
+
+\begin{proof}
+Abbiamo tutti gli strumenti per farlo.
+\[\underbrace{\left[L:L^G\right] \le \card G}_{\text{Lemma~\ref{lemm:Artin}}} \le \underbrace{\card{\Gal{L^G \subseteq L}} \le \left[L:L^G\right]}_{\text{Proposizione~\ref{prop:CardGruppiGalois}}}.\]
+\(G\) e \(\Gal{L^G \subseteq L}\) hanno la stessa cardinalità finita, e quindi sono uguali. 
+\end{proof}
+
+
+%\section{Estensioni di Galois}
+
+%Prima di fare i primi esempi, indugiamo sui gruppi di Galois di estensioni finite par farci un'idea su come siano fatti gli automorfismi di questo tipo di estensioni.
+
+%\begin{coro}
+%\(K\subseteq L\) estensione finita \(\implies\) \(\card{\Gal[K]{L}}\le[L:K]\) e vale l'uguaglianza \(\iff\) \(K\subseteq L\) è di Galois.
+%\end{coro}
+
+%\begin{proof}
+%\(j : L\to L\) \(K\)-omomorfismo \(\implies\) \(j\) suriettivo (perché \(j\) omomorfismo iniettivo di \(K\)-spazi vettoriali e \(\dim_K(L)<\infty\)) \(\implies\) per il Teorema
+%\[
+%\card{\Gal[K]{L}}=\card{\{j : L\to L\st j\text{ \(K\)-omomorfismo}\}}\le[L:K]
+%\]
+%e vale l'uguaglianza \(\iff\) \(\polmin_{\alpha,K}\) separabile e si spezza su \(L\) \(\all\alpha\in L\) \(\iff\) \(K\subseteq L\) separabile e normale \(\iff\) \(K\subseteq L\) di Galois.
+%\end{proof}
+
+%\section{Campo fisso di un gruppo di automorfismi}
+%\section{Corrispondenza di Galois}
+
+%\section{Il teorema fondamentale}
+%
+%\nota{Riscrivere la parte su come \(\Gal[K]{L}\) agisce sull'insieme delle radici.}
+%
+%\(G\) gruppo, \(X\) \(G\)-insieme \(\implies\)
+%\[
+%X^G:=\{x\in X\st gx=x\ \all g\in G\}\subseteq X.
+%\]
+%\(L\) campo, \(G<\Gal{L}\) \(\implies\)
+%\[
+%L^G=\{\alpha\in L\st\sigma(\alpha)=\alpha\ \all\sigma\in G\}\subseteq L
+%\]
+%sottocampo (detto {\em campo fisso} di \(G\)).
+%\begin{osse}
+%\(F\subseteq L\) sottocampo primo \(\implies\) \(F\subseteq L^{\Gal{L}}\) (perché \(L^{\Gal{L}}\subseteq L\) sottocampo) \(\implies\) \(\Gal[F]{L}=\Gal{L}\).
+%\end{osse}
+
+%\begin{teor}[Artin]
+%\(L\) campo, \(G<\Gal{L}\) finito \(\implies\) \([L:L^G]\le\card{G}\).
+%\end{teor}
+
+%\begin{proof}
+%%\renewcommand{\qedsymbol}{}
+%\(\card{G}=m\), \(G=\{\sigma_1=\id_L,\dots,\sigma_m\}\).
+%
+%Dati \(\alpha_1,\dots,\alpha_n\in L\) distinti con \(n>m\), basta dimostrare che \(\{\alpha_1,\dots,\alpha_n\}\) è linearmente dipendente su \(L^G\).
+%\(v_j:=(\sigma_1(\alpha_j),\dots,\sigma_m(\alpha_j))\in L^m\) (per \(j=1,\dots,n\)) distinti.
+%\smallskip
+%
+%\(\{v_1,\dots,v_n\}\) linearmente dipendente su \(L\) (perché \(n>m\)) \(\implies\)
+%\[
+%W:=\{(\beta_1,\dots,\beta_n)\in L^n\st\sum_{j=1}^n\beta_jv_j=0\}
+%\]
+%\(L\)-sottospazio vettoriale non nullo di \(L^n\).
+%\smallskip
+%
+%\(\sigma\in G\), \((\beta_1,\dots,\beta_n)\in W\) \(\implies\) \((\sigma(\beta_1),\dots,\sigma(\beta_n))\in W\): \((\beta_1,\dots,\beta_n)\in W\) \(\iff\) \(\sum_{j=1}^n\beta_j\sigma_i(\alpha_j)=0\) \(\all i=1,\dots,m\) \(\implies\) \(\sum_{j=1}^n\sigma(\beta_j)(\sigma\comp\sigma_i)(\alpha_j)=0\) \(\all i=1,\dots,m\) \(\iff\) \((\sigma(\beta_1),\dots,\sigma(\beta_n))\in W\) perché \(\{\sigma\comp\sigma_1,\dots,\sigma\comp\sigma_m\}=G\).
+%\smallskip
+%
+%\((\gamma_1,\dots,\gamma_n)\in W\setminus\{0\}\) (\(\implies\) \(\exi j_0\in\{1,\dots,n\}\) tale che \(\gamma_{j_0}\ne0\) e posso supporre \(\gamma_{j_0}=1\)) con il minimo numero di componenti \(\ne0\).
+%\smallskip
+%
+%\(\sigma\in G\) \(\implies\) \(\delta_j:=\gamma_j-\sigma(\gamma_j)\) tali che \((\delta_1,\dots,\delta_n)\in W\) e \(\delta_j=0\) se \(\gamma_j=0\) o \(j=j_0\) \(\implies\) \((\delta_1,\dots,\delta_n)=0\) per l'ipotesi su \((\gamma_1,\dots,\gamma_n)\) \(\implies\) \(\gamma_j=\sigma(\gamma_j)\in L^G\) (per \(j=1,\dots,n\)) tali che \(\sum_{j=1}^n\gamma_j\alpha_j=0\) perché \(\sum_{j=1}^n\gamma_j\sigma_1(\alpha_j)=0\) e \(\sigma_1=\id_L\).
+%\end{proof}
+%
+%
+%%\section{Corrispondenza tra sottocampi e sottogruppi}
+%
+%\(L\) campo \(\implies\) le funzioni
+%\begin{gather*}
+%\phi : \{K\st K\subseteq L\text{ sottocampo}\}\to\{G\st G<\Gal{L}\}\quad K\mapsto\Gal[K]{L} \\
+%\psi : \{G\st G<\Gal{L}\}\to\{K\st K\subseteq L\text{ sottocampo}\}\quad G\mapsto L^G
+%\end{gather*}
+%soddifano le seguenti propriet\`a:
+%\begin{enumerate}%[i]
+%\item \(K'\subseteq K\subseteq L\) sottocampi \(\implies\) \(\phi(K)\subseteq\phi(K')\) (cioè \(\Gal[K]{L}<\Gal[K']{L}\));
+%\item \(G'<G<\Gal{L}\) \(\implies\) \(\psi(G)\subseteq\psi(G')\) (cioè \(L^G\subseteq L^{G'}\));
+%\item \(K\subseteq L\) sottocampo \(\implies\) \(K\subseteq\psi(\phi(K))\) (cioè \(K\subseteq L^{\Gal[K]{L}}\));
+%\item \(G<\Gal{L}\) \(\implies\) \(G\subseteq\phi(\psi(G))\) (cioè \(G<\Gal[L^G]{L}\)).
+%\end{enumerate}
+%Segue formalmente che valgono queste ulteriori propriet\`a:
+%\begin{enumerate}%[i]
+%\setcounter{enumi}{4}
+%\item \(K\subseteq L\) sottocampo \(\implies\) \(\phi(K)=\phi(\psi(\phi(K)))\) (cioè \(\Gal[K]{L}=\Gal[L^{\Gal[K]{L}}]{L}\)) perché \(\phi(K)\subseteq\phi(\psi(\phi(K)))\) per iv e \(K\subseteq\psi(\phi(K))\) per iii, quindi \(\phi(\psi(\phi(K)))\subseteq\phi(K)\) per i;
+%\item \(G<\Gal{L}\) \(\implies\) \(\psi(G)=\psi(\phi(\psi(G)))\) (cioè \(L^G=L^{\Gal[L^G]{L}}\)).
+%\end{enumerate}
+%
+%Da v e vi segue anche che \(\phi\rest{\im(\psi)} : \im(\psi)\to\im(\phi)\) è biunivoca con inversa \(\psi\rest{\im(\phi)} : \im(\phi)\to\im(\psi)\), dove \(\im(\psi)=\{L^G\st G<\Gal{L}\}\) e \(\im(\phi)=\{\Gal[K]{L}\st K\subseteq L\text{ sottocampo}\}\).
+%
+%\begin{teor}
+%\begin{enumerate}
+%\item \(G<\Gal{L}\) finito \(\implies\) \([L:L^G]=\card{G}\), \(L^G\subseteq L\) di Galois e \(G=\Gal[L^G]{L}\).
+%\item \(K\subseteq L\) estensione finita \(\implies\) \(\card{\Gal[K]{L}}\le[L:K]\) e vale l'uguaglianza \(\iff\) \(K\subseteq L\) di Galois \(\iff\) \(K=L^{\Gal[K]{L}}\).
+%\end{enumerate}
+%\end{teor}
+%
+%\begin{coro}
+%\begin{gather*}
+%\{K\st K\subseteq L\text{ di Galois}\}\to\{G\st G<\Gal{L}\text{ finito}\}\quad K\mapsto\Gal[K]{L} \\
+%\{G\st G<\Gal{L}\text{ finito}\}\to\{K\st K\subseteq L\text{ di Galois}\}\quad G\mapsto L^G
+%\end{gather*}
+%sono funzioni biunivoche una l'inversa dell'altra e che invertono le inclusioni. Inoltre \(K\subseteq L\) di Galois \(\implies\) \(\card{\Gal[K]{L}}=[L:K]\).
+%\end{coro}
+%
+%\begin{proof}
+%Sappiamo gi\`a che:
+%\begin{enumerate}
+%\item[1'] \(G<\Gal{L}\) finito \(\implies\) \([L:L^G]\le\card{G}\);
+%\item[2'] \(K\subseteq L\) estensione finita \(\implies\) \(\card{\Gal[K]{L}}\le[L:K]\) e vale l'uguaglianza \(\iff\) \(K\subseteq L\) di Galois.
+%\end{enumerate}
+%\begin{enumerate}
+%\item Per 1' \([L:L^G]\le\card{G}<\infty\). \\
+%Per iv \(G<\Gal[L^G]{L}\), e quindi \(\card{G}\le\card{\Gal[L^G]{L}}\). \\
+%Per 2' \(\card{\Gal[L^G]{L}}\le[L:L^G]\). \\
+%Dunque \([L:L^G]=\card{G}=\card{\Gal[L^G]{L}}\) (per cui \(G=\Gal[L^G]{L}\)) e, ancora per 2', \(L^G\subseteq L\) di Galois.
+%\item Per iii \(K\subseteq L^{\Gal[K]{L}}\). \\
+%Per 2' \(\card{\Gal[K]{L}}\le[L:K]<\infty\). \\
+%Per 1 \(L^{\Gal[K]{L}}\subseteq L\) di Galois e \([L:L^{\Gal[K]{L}}]=\card{\Gal[K]{L}}\). \\
+%Dunque, se \(K=L^{\Gal[K]{L}}\), allora \(K\subseteq L\) è di Galois. \\
+%Viceversa, se \(K\subseteq L\) è di Galois, allora, sempre per 2', \([L:K]=\card{\Gal[K]{L}}=[L:L^{\Gal[K]{L}}]\), da cui segue \(K=L^{\Gal[K]{L}}\). \qedhere
+%\end{enumerate}
+%\end{proof}
+%
+%
+%%\section{Il teorema fondamentale}
+%
+%Ricordiamo che, fissato un campo \(L\),
+%\begin{gather*}
+%\{K\st K\subseteq L\text{ di Galois}\}\to\{G\st G<\Gal{L}\text{ finito}\}\quad K\mapsto\Gal[K]{L} \\
+%\{G\st G<\Gal{L}\text{ finito}\}\to\{K\st K\subseteq L\text{ di Galois}\}\quad G\mapsto L^G
+%\end{gather*}
+%sono funzioni biunivoche una l'inversa dell'altra e che invertono le inclusioni. Inoltre \(K\subseteq L\) di Galois \(\implies\) \(\card{\Gal[K]{L}}=[L:K]\).
+%
+%\begin{teor}[Il teorema fondamentale]
+%\(K\subseteq L\) estensione di Galois, \(G:=\Gal[K]{L}\). Allora
+%\begin{gather*}
+%\{F\st K\subseteq F\subseteq L\text{ sottocampo}\}\to\{H\st H<G\}\quad F\mapsto\Gal[F]{L} \\
+%\{H\st H<G\}\to\{F\st K\subseteq F\subseteq L\text{ sottocampo}\}\quad H\mapsto L^H
+%\end{gather*}
+%sono funzioni biunivoche una l'inversa dell'altra e che invertono le inclusioni. Inoltre, se \(K\subseteq F\subseteq L\) è un sottocampo, allora
+%\begin{enumerate}
+%\item \(F\subseteq L\) di Galois e \(\card{\Gal[F]{L}}=[L:F]\);
+%\item \(K\subseteq F\) normale \(\iff\) \(H:=\Gal[F]{L}\normal G\) \(\implies\) \(\Gal[K]{F}\iso G/H\).
+%\end{enumerate}
+%\end{teor}
+%
+%\begin{proof}
+%\begin{itemize}
+%\item La prima parte e il punto 1 seguono da quanto gi\`a visto, tenendo conto che \(K\subseteq F\subseteq L\) sottocampo \(\implies\) \(F\subseteq L\) di Galois (perché \(K\subseteq L\) di Galois).
+%\item Per dimostrare il punto 2, ricordiamo che \(K\subseteq F\) è normale (e quindi di Galois) \(\iff\) \(F\) è \(G\)-stabile.
+%\item \(K\subseteq F\) normale \(\implies\) \(f : G\to\Gal[K]{F}\), \(\sigma\mapsto\sigma\rest{F}\) ben definita. Chiaramente \(f\) omomorfismo e \(\ker(f)=H\), per cui \(H\normal G\) e \(G/H\iso\im(f)\) per il primo teorema di isomorfismo. Inoltre
+%\[
+%\card{\im(f)}=\card{(G/H)}=\frac{\card{G}}{\card{H}}=\frac{\card{[L:K]}}{\card{[L:F]}}=[F:K]=\card{\Gal[K]{F}},
+%\]
+%\(\implies\) \(f\) suriettiva e \(\Gal[K]{F}\iso G/H\).
+%\item \(H\normal G\) \(\implies\) \(\sigma(\alpha)\in F\) \(\all\sigma\in G\) e \(\all\alpha\in F\) (quindi \(K\subseteq F\) normale): \(\sigma(\alpha)\in F=L^H\) \(\iff\) \(\tau(\sigma(\alpha))=\sigma(\alpha)\) \(\all \tau\in H\) \(\iff\) \((\sigma^{-1}\tau\sigma)(\alpha)=\alpha\) \(\all\tau\in H\), vero perché \(\sigma^{-1}\tau\sigma\in H\) e \(\alpha\in F=L^H\).
+%\end{itemize}
+%\end{proof}
+%
+%
+%\begin{esem}
+%\(K:=\Q\) e \(L:=\Q(\sqrt[3]{2},\omega)\) con \(1\ne\omega\in\C\) tale che \(\omega^3=1\).
+%\begin{itemize}
+%\item \(\Q\subset L\) di Galois (è campo di spezzamento di \(X^3-2\)) e \(G:=\Gal[\Q]{L}=\Gal{L}\) tale che \(\card{G}=[L:\Q]=6\).
+%\item \(\Q\subset\Q(\sqrt[3]{2})\) non normale \(\implies\) \(\Gal[{\Q(\sqrt[3]{2})}]{L}<G\) non normale \(\implies\) \(G\iso S_3\).
+%\item \(\exiun H\normal G\) non banale (di ordine \(3\)) \(\implies\) \([L:L^H]=3\), \(\Q\subset L^H\) normale e \(\Gal[\Q]{L^H}\iso G/H\iso C_2\) \(\implies\) \(L^H=\Q(\omega)\).
+%\item \(G\) ha anche \(3\) sottogruppi non normali non banali (di ordine \(2\)), che corrispondono a \(\Q(\omega^i\sqrt[3]{2})\) per \(i=0,1,2\).
+%\end{itemize}
+%\end{esem}
+%
+%\begin{osse}
+%\begin{itemize}
+%\item \(K\subseteq L\) di Galois \(\implies\) \(\card{\{F\st K\subseteq F\subseteq L\text{ sottocampo}\}}<\infty\) perché coincide con \(\card{\{H\st H<\Gal[K]{L}\}}\).
+%\item \(K\subseteq L\) finita \(\implies\) \(\card{\Gal[K]{L}}\le[L:K]<\infty\) \(\implies\) \(L^{\Gal[K]{L}}\subseteq L\) di Galois e \(\card{\Gal[K]{L}}=[L:L^{\Gal[K]{L}}]\dvd [L:K]\) (perché \(K\subseteq L^{\Gal[K]{L}}\subseteq L\), quindi \([L:K]=[L:L^{\Gal[K]{L}}][L^{\Gal[K]{L}}:K]\)).
+%\end{itemize}
+%\end{osse}
+%
+%
+%
+%%\section{Il gruppo di Galois di un polinomio}
+%%\begin{defi}
+%%\(K\) campo, \(0\ne f\in K[X]\). Il {\em gruppo di Galois} di \(f\) su \(K\) (ben definito a meno di isomorfismo) è \(\Gal[K]{f}:=\Gal[K]{L}\) con \(K\subseteq L\) campo di spezzamento di \(f\).
+%%\end{defi}
+%%\begin{osse}
+%%\(K\subseteq L\) campo di spezzamento di \(f\in K[X]\setminus\{0\}\), \(G:=\Gal[K]{f}\).
+%%\begin{itemize}
+%%\item \(K\) perfetto \(\implies\) \(K\subseteq L\) di Galois \(\implies\) \(\card{G}=[L:K]\).
+%%\item \(R:=\{\alpha\in L\st f(\alpha)=0\}\) \(\implies\) \(n:=\card{R}\le\deg(f)\). \\
+%%\(\sigma\in G\), \(\alpha\in R\) \(\implies\) \(\sigma(\alpha)\in R\), quindi si ottiene una funzione \(G\to S(R)\iso S_n\), \(\sigma\mapsto\sigma\rest{R}\), che è un omomorfismo iniettivo (perché \(L=K(R)\)) \(\implies\) \(G\iso G'< S_n\) (\(\implies\) \(\card{G}\dvd n!\)).
+%%\item \(K\) perfetto, \(f\) irriducibile \(\implies\) \(\deg(f)=n\) e \(n\dvd\card{G}\dvd n!\).
+%%\end{itemize}
+%%\end{osse}
+%%
+%%Esempi: \(K\) perfetto, \(f\in K[X]\) irriducibile, \(n:=\deg(f)\), \(G:=\Gal[K]{f}\).
+%%\begin{itemize}
+%%\item \(n=2\) \(\implies\) \(2\dvd\card{G}\dvd2!\) \(\implies\) \(\card{G}=2\) \(\implies\) \(G\iso C_2\).
+%%\item \(n=3\) \(\implies\) \(3\dvd\card{G}\dvd3!\) \(\implies\) \(\card{G}=3\) o \(6\) \(\implies\) \(G\iso C_3\) o \(S_3\) (perché \(G\iso G'<S_3\)).
+%%\smallskip
+%%
+%%\(f=X^3-2\) \(\implies\) \(G\iso S_3\) se \(K=\Q\), \(G\iso C_3\) se \(K=\Q(\omega)\).
+%%\item \(n=4\) \(\implies\) \(4\dvd\card{G}\dvd4!\) \(\implies\) \(\card{G}=4\), \(8\), \(12\) o \(24\) \(\implies\) \(G\iso C_4\), \(C_2^2\), \(D_4\), \(A_4\) o \(S_4\) (perché \(G\iso G'<S_4\)).
+%%\smallskip
+%%
+%%\(f=X^4-10X^2+1=\polmin_{\alpha,\Q}\) con \(\alpha=\sqrt{2}+\sqrt{3}\) \(\implies\) \(G\iso C_2^2\): \(\Q\subset\Q(\alpha)=\Q(\sqrt{2},\sqrt{3})\) normale (perché campo di spezzamento di \((X^2-2)(X^2-3)\)) \(\implies\) \(f\) si spezza su \(\Q(\alpha)\) \(\implies\) \(\Q\subset\Q(\alpha)\) campo di spezzamento di \(f\) \(\implies\) \(G=\Gal[\Q]{\Q(\alpha)}\) \(\implies\) \(\card{G}=[\Q(\alpha):\Q]=\deg{f}=4\) e \(G\niso C_4\) perché \(\sigma\in G=\Gal[\Q]{\Q(\sqrt{2},\sqrt{3})}\) \(\implies\) \(\sigma(\sqrt{2})=\pm\sqrt{2}\) e \(\sigma(\sqrt{3})=\pm\sqrt{3}\) \(\implies\) \(\sigma^2(\sqrt{2})=\sqrt{2}\) e \(\sigma^2(\sqrt{3})=\sqrt{3}\) \(\implies\) \(\sigma^2=\id_{\Q(\sqrt{2},\sqrt{3})}\).
+%%\end{itemize}
+%
+%
+%
+%\section{Campi finiti}
+%
+%\(K\) campo finito \(\implies\) \(\car(K)=p\) primo.
+%
+%\(0<n:=[K:\F_p]<\infty\) \(\implies\) \(K\iso\F_p^n\) come \(\F_p\)-spazio vettoriale (quindi \(K\iso C_p^n\) come gruppo abeliano) \(\implies\) \(\card{K}=p^n\).
+%\begin{teor}
+%\(\all p\) primo e \(\all n>0\) \(\exiun\) a meno di isomorfismo un campo \(\F_{p^n}\) di ordine \(p^n\); inoltre \(\F_{p^n}\) è campo di spezzamento di \(X^{p^n}-X\) su \(\F_p\).
+%\end{teor}
+%\begin{proof}
+%\(\F_p\subseteq\F_{p^n}\) campo di spezzamento di \(X^{p^n}-X\) \(\implies\)
+%
+%\(R:=\{\alpha\in\F_{p^n}\st\alpha\text{ radice di }X^{p^n}-X\}=\{\alpha\in\F_{p^n}\st\Fro^n(\alpha)=\alpha\}\)
+%
+%sottocampo di \(\F_{p^n}\) \(\implies\) \(\F_{p^n}=\F_p(R)=R\).
+%
+%\((X^{p^n}-X)'=-1\) non ha radici \(\implies\) \(X^{p^n}-X\) non ha radici multiple \(\implies\) \(\card{\F_{p^n}}=\card{R}=\deg(X^{p^n}-X)=p^n\).
+%
+%\(K\) altro campo di ordine \(p^n\) \(\implies\) \(\alpha^{p^n-1}=1\) \(\all\alpha\in K^*\) (per il teorema di Lagrange) \(\implies\) ogni elemento di \(K\) è radice di \(X^{p^n}-X\) \(\implies\) \(\prod_{\alpha\in K}(X-\alpha)\dvd(X^{p^n}-X)\) \(\implies\) \(X^{p^n}-X=\prod_{\alpha\in K}(X-\alpha)\) \(\implies\) \(\F_p\subseteq K\) campo di spezzamento di \(X^{p^n}-X\).
+%\end{proof}
+%
+%Se \(n,m>0\), esiste un'estensione \(\F_{p^n}\subseteq\F_{p^m}\) \(\iff\) \(n\dvd m\):
+%\begin{itemize}
+%\item[\(\implies\)] \(d:=[\F_{p^m}:\F_{p^n}]\) \(\implies\) \(\F_{p^m}\iso\F_{p^n}^d\) (come \(\F_{p^n}\)-spazi vettoriali) \(\implies\) \(p^m=\card{\F_{p^m}}=\card{\F_{p^n}^d}=(p^n)^d=p^{nd}\) \(\implies\) \(m=nd\);
+%\item[\(\impliedby\)] \(\F_{p^n}=\{\alpha\in\calg{\F}_p\st\alpha^{p^n}=\Fro^n(\alpha)=\alpha\}\subseteq\F_{p^m}\) perché, se \(\Fro^n(\alpha)=\alpha\), allora \(\Fro^m(\alpha)=(\Fro^n)^{m/n}(\alpha)=\alpha\).
+%\end{itemize}
+%
+%\begin{coro}
+%\(n\dvd m\) \(\implies\) \(\F_{p^n}\subseteq\F_{p^m}\) di Galois e \(\Gal[\F_{p^n}]{\F_{p^m}}=\gen{\Fro^n}\iso C_{m/n}\).
+%\end{coro}
+%\begin{proof}
+%\(\F_{p^n}\subseteq\F_{p^m}\) è di Galois perché campo di spezzamento di \(X^{p^m}-X\) (e \(\F_{p^n}\) è perfetto) \(\implies\) \(\card{\Gal[\F_{p^n}]{\F_{p^m}}}=[\F_{p^m}:\F_{p^n}]=m/n\).
+%
+%\(\F_{p^n}=\{\alpha\in\F_{p^m}\st\Fro^n(\alpha)=\alpha\}\) \(\implies\) \(\Fro^n\in\Gal[\F_{p^n}]{\F_{p^m}}\), e basta dimostrare \(\ord(\Fro^n)\ge m/n\), cioè \(\ord(\Fro)\ge m\) in \(\Gal{\F_{p^m}}\), vero perché \(0<i<m\) \(\implies\) \(\card{\{\alpha\in\F_{p^m}\st\Fro^i(\alpha)=\alpha^{p^i}=\alpha\}}\le p^i<p^m\) \(\implies\) \(\Fro^i\ne\id_{\F_{p^m}}\).
+%\end{proof}
+%
+%
+%\(p\) primo, \(n>0\), \(q:=p^n\), \(0\ne f\in\F_q[X]\), \(G:=\Gal[\F_q]{f}\).
+%\begin{itemize}
+%\item \(f\) irriducibile, \(d:=\deg(f)\) \(\implies\) \(\F_q\subseteq\F_{q^d}\) campo di spezzamento di \(f\) (\(\implies\) \(G\iso C_d\)):
+%
+%\(\alpha\in\calg{\F}_p\) radice di \(f\) \(\implies\) \([\F_q(\alpha):\F_q]=d\) \(\implies\) \(\F_q(\alpha)=\F_{q^d}\).
+%\item in generale \(f=\prod_{i=1}^kf_i\) con \(f_i\) irriducibile, \(d_i:=\deg(f_i)\) \(\all i=1,\dots,k\) \(\implies\) \(d:=\mcm(d_1,\dots,d_k)\) tale che \(\F_q\subseteq\F_{q^d}\) campo di spezzamento di \(f\) (\(\implies\) \(G\iso C_d\)):
+%
+%per il punto precedente \(\F_{q^{d_i}}\) è campo di spezzamento di \(f_i\) su \(\F_q\), quindi \(f\) si spezza su \(\F_{q^{d'}}\) \(\iff\) \(\F_{q^{d_i}}\subseteq\F_{q^{d'}}\) \(\all i=1,\dots,k\) \(\iff\) \(d_i\dvd d'\) \(\all i=1,\dots,k\) \(\iff\) \(d\dvd d'\).
+%\end{itemize}
+%
+%
+%
+%%\section{Il gruppo di Galois di \(X^n-1\)}
+%
+%\(n>0\), \(\car(K)\ndvd n\), \(K\subseteq L\) campo di spezzamento di \(X^n-1\).
+%\begin{itemize}
+%\item \((X^n-1)'=nX^{n-1}\ne0\) ha solo la radice \(0\) (che non è radice di \(X^n-1\)) \(\implies\) \(X^n-1\) non ha radici multiple in \(L\) \(\implies\) \(R:=\{\alpha\in L\st\alpha^n=1\}\) tale che \(\card{R}=n\).
+%\item \(R<L^*\) \(\implies\) \(R\) ciclico \(\implies\) \(\exi\omega\in R\) tale che \(R=\gen{\omega}\) (quindi \(\ord(\omega)=n\) in \(L^*\), e si dice che \(\omega\) è una radice \(n\)-esima {\em primitiva} dell'unit\`a; per esempio \(\omega=e^{(2\pi i)/n}\) se \(K\subseteq\C\)).
+%\item \(L=K(R)=K(\omega)\) \(\implies\) \(\card{\Gal[K]{L}}=\card{R'}\) con \(R':=\{\alpha\in L\st\polmin_{\omega,K}(\alpha)=0\}\subseteq R\) (perché \(\polmin_{\omega,K}\dvd(X^n-1)\)).
+%\item \(\polmin_{\omega,K}\) si spezza su \(L\) e non ha radici multiple \(\implies\) \(\card{\Gal[K]{L}}=\deg(\polmin_{\omega,K})=[L:K]\) \(\implies\) \(K\subseteq L\) di Galois.
+%\item La funzione \(\Gal[K]{L}\to\Aut(R)<S(R)\), \(\sigma\mapsto\sigma\rest{R}\) è ben definita e è un omomorfismo iniettivo di gruppi.
+%\item \(\Gal[K]{X^n-1}=\Gal[K]{L}\iso G<\Z/n\Z^*\iso\Aut(R)\) \(\implies\) \(G\) abeliano e \(\card{G}\dvd\varphi(n)\).
+%\end{itemize}
+%
+%
+%
+%%\section{Polinomi ciclotomici}
+%\(\alpha\in R'\) \(\implies\) \(\exi\sigma\in\Gal[K]{L}\) tale che \(\alpha=\sigma(\omega)\) \(\implies\) \(\ord(\alpha)=\ord(\omega)=n\) \(\implies\) \(\exi\cl{j}\in\Z/n\Z^*\) tale che \(\alpha=\omega^j\) \(\implies\)
+%\[
+%\polmin_{\omega,K}=\prod_{\alpha\in R'}(X-\alpha)\dvd\Phi_n:=\prod_{\cl{j}\in\Z/n\Z^*}(X-\omega^j)\in L[X],
+%\]
+%dove \(\Phi_n\) è detto \(n\)-esimo {\em polinomio ciclotomico}. Chiaramente
+%\[
+%\Phi_n\dvd(X^n-1)=\prod_{\cl{j}\in\Z/n\Z}(X-\omega^j)
+%\]
+%e \(\deg(\Phi_n)=\varphi(n)\). 
+%\begin{teor}
+%\begin{enumerate}
+%\item \(\Phi_n\in K[X]\).
+%\item \(K=\Q\) \(\implies\) \(\Phi_n\in\Q[X]\) irriducibile.
+%\end{enumerate}
+%\end{teor}
+%\begin{coro}
+%\(\polmin_{\omega,\Q}=\Phi_n\) e \(\Gal[\Q]{X^n-1}\iso\Z/n\Z^*\).
+%\end{coro}
+%
+%
+%
+%\section{Discriminante}
+%
+%\begin{itemize}
+%\item \(K\) campo, \(0\ne f\in K[X]\), \(K\subseteq L\) campo di spezzamento di \(f\).
+%\item \(n:=\deg(f)\), \(\alpha_1,\dots,\alpha_n\in L\) radici di \(f\) \(\implies\)
+%\[
+%\delta:=\prod_{1\le i<j\le n}(\alpha_i-\alpha_j)\in L
+%\]
+%è ben definito a meno del segno (dipende dall'ordine delle radici), e chiaramente \(\delta\ne0\) \(\iff\) \(f\) non ha radici multiple.
+%\item Il {\em discriminante} di \(f\) è \(\Delta=\Delta(f):=\delta^2\in L\) (ben definito e tale che \(\Delta\ne0\) \(\iff\) \(f\) non ha radici multiple).
+%\end{itemize}
+%\begin{osse}
+%\(\sigma(\delta)=\varepsilon(\sigma\rest{R})\delta\) (con \(R:=\{\alpha_1,\dots,\alpha_n\}\)) \(\all\sigma\in\Gal[K]{f}=\Gal[K]{L}\):
+%
+%posso supporre \(\delta\ne0\) (quindi \(\card{R}=n\)), e allora per definizione di segno di una permutazione in \(S(R)\iso S_n\)
+%\[
+%\sigma(\delta)=\prod_{1\le i<j\le n}(\sigma(\alpha_i)-\sigma(\alpha_j))=\prod_{1\le i<j\le n}(\sigma\rest{R}(\alpha_i)-\sigma\rest{R}(\alpha_j))=\varepsilon(\sigma\rest{R})\delta.
+%\]
+%\end{osse}
+%
+%
+%
+%%\section{Propriet\`a del discriminante}
+%\begin{prop}
+%\(K\) perfetto \(\implies\) \(\Delta=\Delta(f)\in K\). Se inoltre \(\car(K)\ne2\), \(f\) non ha radici multiple e identifico \(\Gal[K]{f}\) a un sottogruppo di \(S_n\iso S(R)\), allora \(\Gal[K]{f}\subseteq A_n\) \(\iff\) \(\delta\in K\) \(\iff\) \(\Delta\) è un quadrato in \(K\).
+%\end{prop}
+%\begin{proof}
+%\begin{itemize}
+%\item \(K\subseteq L\) di Galois \(\implies\) \(K=L^{\Gal[K]{L}}\). Dunque, dato \(\alpha\in L\), \(\alpha\in K\) \(\iff\) \(\sigma(\alpha)=\alpha\) \(\all\sigma\in\Gal[K]{L}=\Gal[K]{f}\).
+%\item \(\sigma(\Delta)=\sigma(\delta^2)=\sigma(\delta)^2=(\varepsilon(\sigma\rest{R})\delta)^2=\varepsilon(\sigma\rest{R})^2\delta^2=\delta^2=\Delta\) \(\all\sigma\in\Gal[K]{f}\) \(\implies\) \(\Delta\in K\).
+%\item \(\Gal[K]{f}\subseteq A_n\) \(\implies\) \(\sigma(\delta)=\delta\) \(\all\sigma\in\Gal[K]{f}\) \(\implies\) \(\delta\in K\).
+%\item \(\delta\in K\), \(f\) senza radici multiple \(\implies\) \(\delta\in K^*\) e \(\all\sigma\in\Gal[K]{f}\) \(\delta=\sigma(\delta)=\varepsilon(\sigma\rest{R})\delta\) \(\implies\) \(\varepsilon(\sigma\rest{R})_K=1_K\) \(\implies\) \(\varepsilon(\sigma\rest{R})=1\) (cioè \(\Gal[K]{f}\subseteq A_n\)) se \(\car(K)\ne2\).
+%\item Chiaramente \(\delta\in K\) \(\iff\) \(\Delta=\delta^2\) è un quadrato in \(K\).
+%\end{itemize}
+%\end{proof}
+%
+%
+%
+%%\section{Discriminante dei polinomi di grado \(2\) e \(3\)}
+%\begin{itemize}
+%\item Si pu\`o dimostrare che \(\Delta(f)\) è esprimibile come polinomio valutato nei coefficienti di \(f\).
+%\item \(\Delta(X^2+aX+b)=a^2-4b\):
+%\smallskip
+%
+%\(X^2+aX+b=(X-\alpha)(X-\beta)=X^2-(\alpha+\beta)X+\alpha\beta\) \(\implies\) \(a=-\alpha-\beta\), \(b=\alpha\beta\);
+%
+%\(\delta=\alpha-\beta\) \(\implies\) \(\Delta=(\alpha-\beta)^2=(\alpha+\beta)^2-4\alpha\beta=a^2-4b\).
+%\item \(\Delta(X^3+aX+b)=-4a^3-27b^2\):
+%\smallskip
+%
+%\(X^3+aX+b=(X-\alpha)(X-\beta)(X-\gamma)=X^3-(\alpha+\beta+\gamma)X^2+(\alpha\beta+\alpha\gamma+\beta\gamma)X-\alpha\beta\gamma\) \(\implies\) \(\alpha+\beta+\gamma=0\), \(a=\alpha\beta+\alpha\gamma+\beta\gamma\), \(b=-\alpha\beta\gamma\) \(\implies\) \(a=-(\alpha^2+\alpha\beta+\beta^2)\), \(b=\alpha\beta(\alpha+\beta)\);
+%
+%\(\delta=(\alpha-\beta)(\alpha-\gamma)(\beta-\gamma)=(\alpha-\beta)(2\alpha+\beta)(\alpha+2\beta)=2\alpha^3+3\alpha^2\beta-3\alpha\beta^2-2\beta^3\) \(\implies\) \(\Delta=(2\alpha^3+3\alpha^2\beta-3\alpha\beta^2-2\beta^3)^2=4\alpha^6+12\alpha^5\beta-3\alpha^4\beta^2-26\alpha^3\beta^3-3\alpha^2\beta^4+12\alpha\beta^5+4\beta^6=-4a^3-27b^2\).
+%\end{itemize}
+%
+%
+%
+%%\section{Gruppo di Galois di un polinomio di grado \(3\)}
+%
+%\(K\) perfetto, \(\car(K)\ne2\), \(\deg(f)=3\), \(f\) irriducibile in \(K[X]\) \(\implies\)
+%\(\Gal[K]{f}\iso
+%\begin{cases}
+%C_3 & \text{se \)\Delta(f)\( è un quadrato in \)K\(}\\
+%S_3 & \text{altrimenti.}
+%\end{cases}
+%\)
+%\begin{esem}
+%\begin{itemize}
+%\item \(f=X^3-3X+1\) irriducibile in \(\Q[X]\) (non ha radici in \(\Q\)) \(\implies\) \(\Delta=-4(-3)^3-27\cdot1^2=81=9^2\) \(\implies\) \(\Gal[\Q]{f}\iso C_3\).
+%\item \(f=X^3+3X+1\) irriducibile in \(\Q[X]\) (non ha radici in \(\Q\)) \(\implies\) \(\Delta=-4\cdot3^3-27\cdot1^2=-135<0\) \(\implies\) \(\Gal[\Q]{f}\iso S_3\).
+%\end{itemize}
+%\end{esem}
+%\begin{osse}
+%\(\car(K)\ne3\), \(f(X)=X^3+aX^2+bX+c\in K[X]\) \(\implies\) con la sostituzione \(X=Y-a/3\) si ottiene \(f(X)=f(Y-a/3)=:g(Y)\) con \(g(Y)=Y^3+a'Y+b'\in K[Y]\). Chiaramente \(\alpha\in L\) (campo di spezzamento di \(f\) su \(K\)) è radice di \(g\) \(\iff\) \(\alpha-a/3\) è radice di \(f\) \(\implies\) \(L\) è campo di spezzamento di \(g\) su \(K\) \(\implies\) \(\Gal[K]{f}\iso\Gal[K]{g}\).
+%\end{osse}
+%
+%
+%

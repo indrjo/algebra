@@ -1,0 +1,74 @@
+% !TEX program = lualatex
+% !TEX spellcheck = it_IT
+% !TEX root = ../campi.tex
+
+\section{Chiusura algebrica}
+
+\nota{Da riscrivere.}
+
+\begin{lemm}
+Sia \(K\subseteq L\) un'estensione. Allora la {\em chiusura algebrica} di \(K\) in \(L\)
+\[\calg[L]{K}:=\{\alpha\in L\st\text{\(\alpha\) algebrico su \(K\)}\}\]
+è un sottocampo di \(L\). Inoltre l'estensione \(K\subseteq\calg[L]{K}\) è algebrica e \(\calg[L]{\calg[L]{K}}=\calg[L]{K}\).
+\end{lemm}
+
+\begin{proof}
+Chiaramente \(K\subseteq\calg[L]{K}\) (in particolare \(1\in\calg[L]{K}\)). \\
+\(\alpha,\beta\in\calg[L]{K}\) \(\implies\) per la Proposizione di prima \(K\subseteq K(\alpha,\beta)\) è un'estensione algebrica \(\implies\) \(\alpha-\beta,\alpha\beta\in K(\alpha,\beta)\) sono algebrici su \(K\) \(\implies\) \(\alpha-\beta,\alpha\beta\in\calg[L]{K}\). \\
+Analogamente \(0\ne\alpha\in\calg[L]{K}\) \(\implies\) \(K\subseteq K(\alpha)\) estensione algebrica \(\implies\) \(\alpha^{-1}\in K(\alpha)\) algebrico su \(K\) \(\implies\) \(\alpha^{-1}\in\calg[L]{K}\). \\
+Per definizione l'estensione \(K\subseteq\calg[L]{K}\) è algebrica. Analogamente è algebrica l'estensione \(\calg[L]{K}\subseteq\calg[L]{\calg[L]{K}}\), e quindi anche \(K\subseteq\calg[L]{\calg[L]{K}}\) per la Proposizione precedente. Allora \(\calg[L]{\calg[L]{K}}\subseteq\calg[L]{K}\), per cui \(\calg[L]{\calg[L]{K}}=\calg[L]{K}\).
+\end{proof}
+
+\begin{defi}
+Una {\em chiusura algebrica} di un campo \(K\) è un'estensione algebrica \(K \subseteq \calg{K}\) con \(\calg{K}\) algebricamente chiuso.
+\end{defi}
+
+\begin{coro}
+\(K\subseteq L\) estensione con \(L\) algebricamente chiuso \(\implies\) \(K\subseteq\calg[L]{K}\) è una chiusura algebrica di \(K\).
+\end{coro}
+
+\begin{proof}
+\(K\subseteq\calg[L]{K}\) estensione algebrica per la Definizione-Proposizione. \\
+\(\calg[L]{K}\) algebricamente chiuso: \(f\in\calg[L]{K}[X]\setminus\calg[L]{K}\subseteq L[X]\setminus L\) \(\implies\) \(\exi\alpha\in L\) tale che \(f(\alpha)=0\) (perché \(L\) algebricamente chiuso) \(\implies\) \(\alpha\) algebrico su \(\calg[L]{K}\) \(\implies\) \(\alpha\in\calg[L]{\calg[L]{K}}=\calg[L]{K}\).  
+\end{proof}
+
+\begin{esem}
+\(\Q\subseteq\calg{\Q}:=\calg[\C]{\Q}\) è una chiusura algebrica di \(\Q\). Si dice che \(\alpha\in\C\) è {\em algebrico} (risp.\ {\em trascendente}) se \(\alpha\in\calg{\Q}\) (risp.\ \(\alpha\not\in\calg{\Q}\)).
+\end{esem}
+
+\begin{lemm}
+Sia \(K\) un campo. Allora esiste un'estensione \(K \to K'\) tale che ogni polinomio non costante a coefficienti in \(K\) ha una radice in \(K'\).
+\end{lemm}
+
+\begin{proof}
+Consideriamo l'insieme 
+\[U:=\{f \in K[X] \mid f \text{ irriducibile e monico}\}\]
+e per ogni \(f \in U\) assegniamo un simbolo \(X_f\) che svolgerà il ruolo di indeterminata per certi polinomi. Consideriamo infatti l'anello dei polinomi a coefficienti in \(K\) e nelle indeterminate \(X_f\), con \(f \in U\), 
+\[A:=K\left[X_f \mid f \in U\right] .\]
+\nota{Abbiamo parlato di polinomi in un un numero arbitrario di indeterminate?} L'insieme \(I:= \left(f(X_f) \mid f\in U\right)\) è un ideale di \(A\). Mostriamo che \(I \subsetneq A\): Se fosse \(I = A\), allora esisterebbero \(f_1, \dots{}, f_n \in U\) distinti e \(g_1,\dots,g_n\in A\) tali che
+\[ h:=\sum_{l=1}^nf_i\left(X_{f_i}\right)g_i=1. \]
+\(K\subseteq L\) campo di spezzamento di \(\prod_{i=1}^nf_i\) \(\implies\) \(\all i=1,\dots,n\) \(\exi\alpha_i\in L\) tale che \(f_i(\alpha_i)=0\). Valutando \(h=1\) in
+\[
+X_f=
+\begin{cases}
+\alpha_i & \text{se \(f=f_i\) per qualche \(i=1,\dots,n\)} \\
+0 & \text{altrimenti}  
+\end{cases}
+\]
+si ottiene \(0=1\) in \(L\), assurdo. \\
+\(\exi J\subset A\) ideale massimale tale che \(I\subseteq J\) \(\implies\) \(K':=A/J\) campo e \(\pi\rest{K} : K\to K'\) (con \(\pi : A\to K'\) proiezione) estensione di campi con la propriet\`a richiesta: dato \(f\in K[X]\setminus K\), posso supporre \(f\in U\) \(\implies\) \(f(\pi(X_f))=\pi(f(X_f))=0\) perché \(f(X_f)\in I\subseteq J=\ker(\pi)\).
+\end{proof}
+
+\begin{teor}
+Ogni campo \(K\) ha una chiusura algebrica \(K\subseteq\calg{K}\).
+\end{teor}
+
+\begin{proof}
+\begin{itemize}
+\item Posto \(K_0:=K\), per il Lemma induttivamente \(\all n\in\N\) \(\exi K_n\subseteq K_{n+1}\) estensione tale che \(f\in K_n[X]\setminus K\) \(\implies\) \(f\) ha una radice in \(K_{n+1}\).
+\item \(L:=\bigcup_{n\in\N}K_n\) campo ({\em esercizio}) tale che \(K\subseteq L\) estensione con \(L\) algebricamente chiuso: \(f\in L[X]\setminus L\) \(\implies\) \(\exi n\in\N\) tale che \(f\in K_n[X]\) \(\implies\) \(f\) ha una radice in \(K_{n+1}\subseteq L\).
+\item \(\calg{K}:=\calg[L]{K}\) tale che \(K\subseteq\calg{K}\) chiusura algebrica di \(K\) (gi\`a visto). \qedhere
+\end{itemize}
+\end{proof}
+
+

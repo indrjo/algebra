@@ -1,0 +1,181 @@
+% !TEX program = lualatex
+% !TEX spellcheck = it_IT
+% !TEX root = ../campi.tex
+
+\section{Caratteristica di un anello}
+
+In queste pagine gli anelli sono tutti dotati di identità moltiplicativa e gli omomorfismi di anelli preservano questi elementi. %Ricordiamo anche un fatto apparentemente innocuo come il seguente.
+
+\begin{lemm}\label{lemm:AnelloIniziale}
+Per ogni anello \(R\) esiste uno e un solo omomorfismo \(\Z \to R\).
+\end{lemm}
+
+\begin{proof}
+Scriviamo esplicitamente questo omomorfismo:
+\[\phi : \Z \to R \,,\ \phi(n) := \begin{cases} \underbrace{\phi(1) + \dots{} + \phi(1)}_{n \text{ volte}} & \text{se } n \ge 0 \\ -\phi(-n) & \text{altrimenti} \end{cases}.\]
+Che questo sia effettivamente un omomorfismo e che sia l'unico è facilmente verificabile.
+\end{proof}
+
+\begin{defi}
+La {\em caratteristica} di un anello \(R\) è il numero naturale \(\car(R)\) per cui, indicato con \(\phi : \Z \to R\) indica l'unico omomorfismo di anelli, si ha
+\[\car(R)\Z = \ker \phi .\]
+\(\Z\) è un dominio ad ideali principali: per questo, si può definire la caratteristica di \(R\) come il generatore \(\ge 0\) dell'ideale \(\ker \phi\). In alcuni libri potreste trovare definita la caratteristica di \(R\) come proprio l'ideale \(\ker \phi\).
+\end{defi} 
+
+\begin{esem}
+Alcuni esempi:
+\begin{itemize}
+\item \(\car(\Z) = 0\). Infatti un omomorfismo \(\Z \to \Z\) è l'identità: a causa del Lemma~\ref{lemm:AnelloIniziale}, questo è l'unico che può esserci. Così stando le cose, il nucleo è banale.
+\item \(\car(\Z/n\Z)=n\) con \(n \ge 1\). La proiezione al quoziente \(\Z \to \Z/n\Z\): di nuovo a causa del Lemma~\ref{lemm:AnelloIniziale}, è l'unico che può esserci. Il nucleo di questo omomorfismo è \(n\Z\).
+\end{itemize}
+\end{esem}
+
+%\begin{osse}
+Per il {\scshape Primo Teorema di Isomorfismo} si ha che 
+\[\im\left(\Z \mor \phi R\right) \iso \frac{\Z}{\car(R)\Z} .\]
+Questo vuol dire, ad esempio, che gli anelli a caratteristica \(n\) contengono al loro interno una copia isomorfa di \(\Z/n\Z\). In particolare, la caratteristica è \(0\), l'anello contiene una copia di \(\Z\) e quindi è necessariamente infinito.
+
+%\begin{itemize}
+%\item Gli anelli a caratteristica \(n \ne 0\) contengono al loro interno una copia isomorfa di \(\Z/n\Z\). Questo è il caso per esempio degli anelli di cardinalità finita.
+%\item Gli anelli a caratteristica \(0\) contengono una copia di \(\Z\) al loro interno invece. In realtà, scopriremo breve che per certi anelli vale di più.
+%\end{itemize}
+%Quindi se \(A\) è un dominio di integrità, allora \(\car(A)\) è \(0\) oppure un numero primo.
+
+%Ecco qualche prima conseguenza:
+%\begin{itemize}
+%\item Poiché \(\im(f)=\{n_A : n \in \Z\}=\gen{1_A}\),
+%\[
+%\car(A)=
+%\begin{cases}
+%\ord(1_A) & \text{se \(\ord(1_A)<\infty\)} \\
+%0 & \text{se \(\ord(1_A)=\infty\)}.
+%\end{cases}
+%\]
+%\item \(A\) dominio (in particolare campo) \(\implies\) \(\im(f)\) dominio \(\implies\) \(\car(A)\Z\) ideale primo \(\implies\) \(\car(A)\) è \(0\) o un numero primo.
+%\end{itemize}
+%\end{osse}
+
+Vale anche il viceversa: un anello che contiene una copia isomorfa a \(\Z/n\Z\) ha caratteristica \(n\). E per rendersi conto ciò abbiamo bisogno di un semplice teorema.
+
+%Sotto alcune condizioni, la caratteristica di un anello è davvero qualcosa di \enquote{caratteristico}: se un anello \(R\) è contenuto in uno più grande \(S\), cioè esiste un omomorfismo iniettivo \(R \hookrightarrow S\), allora hanno caratteristiche uguali.
+
+\begin{prop}\label{prop:ConservazioneCaratteristica}
+Se \(R\) e \(S\) sono due anelli e se esiste un omomorfismo iniettvo \(i : R \to S\), allora \(\car(R)=\car(S)\).
+\end{prop}
+
+\begin{proof}
+Scriviamo \(\phi_R : \Z \to R\) e \(\phi_S : \Z \to S\) gli unici omomorfismi che ci possono essere. Ne segue quindi che \(\phi_S = i \phi_R\). Se riusciamo a mostrare che i due omomorfismi hanno lo stesso nucleo, allora possiamo concludere. Viceversa, se \(x \in \ker \phi_S\), allora \(0 = \phi_S(x) = i\left(\phi_R(x)\right)\), da cui \(\phi_R(x) = 0\) perché \(i\) è iniettiva.
+\end{proof}
+
+Osserviamo che la caratteristica non è esattamente un affare di cardinalità. Certo, gli anelli finiti, hanno caratteristica non nulla e gli anelli a caratteristica \(0\) sono infiniti. Tuttavia, possiamo farci un semplice esempio in cui la caratteristica un anello sia non nulla e la sua cardinalità infinita.
+
+\begin{esem}
+L'anello \(\Z/2\Z\) ha caratteristica \(2\). Ma anche \(\Z/2\Z[X]\) ha caratteristica \(2\) grazie all'inclusione \(\Z/2\Z \hookrightarrow \Z/2\Z[X]\), e certamente non ha cardinalità finita.
+\end{esem}
+
+Noi ci interesseremo di campi da un certo punto in poi: è utile richiamare una proprietà fondamentale allora.
+
+\begin{prop}\label{prop:OmomorfismiCampiSonoIniettivi}
+Sia \(R\) un anello con divisione e \(S\) un anello non banale. Allora ogni omomorfismo \(f : R \to S\) è iniettivo.
+\end{prop}
+
+\begin{proof}
+\(\ker f\) è banale. Infatti gli unici ideali di \(R\) sono quello banale e \(R\) stesso. Poiché \(S\) non è banale, \(0 \ne 1\) e quindi \(1 \notin \ker f\). Pertanto il nucleo non può essere \(R\).
+\end{proof}
+
+\begin{coro}
+Gli omomorfismi di campi sono tutti iniettivi. Se esiste un omomorfismo di campi \(K \to L\), allora \(K\) e \(L\) hanno la stessa caratteristica. Equivalentemente, se due campi hanno caratteristica diversa, non possono esserci omomorfismi tra loro.
+\end{coro}
+
+
+%\section{Campo dei quozienti di un dominio}
+
+Rimandiamo al corso di {\scshape Algebra 1}, la costruzione del {\em campo delle frazioni} \(Q(R)\) a partire da un dominio di integrità \(R\). A causa dell'omomorfismo iniettivo \(R \to Q(R)\) che manda \(a\) in \(a/1\), possiamo scrivere \(a\) al posto di \(a/1\). Ricordiamo in particolare come \(a/b\) è una classe di equivalenza sotto una certa relazione di equivalenza su \(R \times (R \setminus \{0\})\). Questo campo ha una notevole proprietà universale.
+
+%\begin{defi}
+%Indichiamo con \(Q(A)\) il campo dei quozienti (o delle frazioni) di un dominio \(A\). Vediamo \(A\) come sottoanello di \(Q(A)\) identificando \(a\in A\) con \(a/1\in Q(A)\).
+%\end{defi}
+
+\begin{lemm}\label{lemm:CampoFrazioni}
+Siano \(R\) un dominio di integrità, \(K\) un campo qualsiasi e \(f : R \to K\) omomorfismo iniettivo. Allora esiste uno e un solo omomorfismo iniettivo \(\tilde f : Q(R) \to K\) per cui commuta
+\[\begin{tikzcd}[column sep=tiny]
+R \ar[hookrightarrow, dr, swap] \ar["f", rr] & & K \\
+ & Q(R) \ar["{\tilde f}", ur, swap]
+\end{tikzcd}\]
+\end{lemm}
+
+\begin{proof}
+Introduciamo immediatamente \(\tilde f\):
+\[\tilde f(a/b) := f(a)f(b)^{-1} .\]
+È un omomorfismo: per ogni \(a, c \in R\) e \(b, d \in R \setminus \{0\}\) si ha
+\begin{align*}
+\tilde{f}((a/b)+(c/d)) &= \tilde{f}((ad+bc)/(bd))=f(ad+bc)f(bd)^{-1}= \\
+                       &= f(a)f(b)^{-1}+f(c)f(d)^{-1} =\tilde{f}(a/b)+\tilde{f}(c/d) \\
+\tilde{f}((a/b)(c/d))  &=\tilde{f}((ac)/(bd))=f(ac)f(bd)^{-1}= \\
+                       &= f(a)f(b)^{-1}f(c)f(d)^{-1}=\tilde{f}(a/b)\tilde{f}(c/d) \\
+\tilde{f}(1)    &= f(1)=1 .        
+\end{align*}
+Poiché l'omomorfismo di inclusione è iniettivo, allora i nuclei di \(f\) e \(\tilde f\) sono uguali: quindi \(\tilde f\) è pure iniettivo. L'unicità è praticamente contenuta nella definizione di \(\tilde f\).
+\end{proof}
+
+Questo lemma è interessante. L'iniezione \(f : R \to K\) individua all'interno di \(K\) una copia isomorfa a \(R\): il lemma dice che se \(K\) ha il suo interno una copia di \(R\), allora contiene tutto \(Q(R)\). L'ovvia applicazione riguarda \(\Z\) e \(\Q\) e la nozione di caratteristica di anello.
+
+\begin{coro}
+Se \(K\) è un campo di caratteristica \(0\), allora contiene al suo interno una e una sola copia isomorfa a \(\Q\). Vale a dire: esiste ed un solo omomorfismo iniettivo \(\Q \to K\).
+\end{coro}
+
+\begin{proof}
+Dal Lemma~\ref{lemm:AnelloIniziale} sappiamo che c'è un unico omomorfismo \(\Z \to K\). Da ipotesi questo omomorfismo è iniettivo e per il Lemma~\ref{lemm:CampoFrazioni} esiste esattamente un omomorfismo iniettivo \(\Q \to K\). 
+%\(\exiun f : \Z\to K\) omomorfismo di anelli, e \(f\) è iniettivo perché \(\car(K)=0\). Per il Lemma \(\exiun\tilde{f} : Q(\Z)=\Q\to K\) omomorfismo (iniettivo) di anelli (tale che \(\tilde{f}\rest{\Z}=f\)).
+\end{proof}
+
+Questo teorema è a riepilogo delle considerazioni fatte fino ad ora.
+
+\begin{teor}
+Un campo \(K\) ha al suo interno una copia isomorfa a \(\Z/p\Z\) con \(p\) primo (nel qual caso, \(p = \car(K)\)) oppure a \(\Q\) (nel qual caso \(0 = \car(K)\)).
+\end{teor}
+
+\begin{proof}
+Per il Lemma~\ref{lemm:AnelloIniziale}, c'è un unico omomorfismo \(\phi : \Z \to K\). Se è iniettivo, allora \(K\) ha caratteristica \(0\). Altrimenti, ha una caratteristica finita e \(\im \phi \iso \Z/p\Z\) per qualche \(p \ge 1\). Essendo \(\Z\) un dominio ad ideali principali e \(K\) un campo, necessariamente la \(p\) è primo.
+\end{proof}
+
+\begin{eser}
+Riesci a trovare un campo infinito ma di caratteristica \(\ne 0\)?
+\end{eser}
+
+%Questo teorema è molto interessante: se di un campo \(K\) riesco a trovare una copia di \(\Z/p\Z\) con \(p\) primo, allora ho determinato la caratteristica dell'intero campo, non importa quanto grande sia. Facciamo qualche passo indietro.
+%
+%%\begin{eser}
+%Gli anelli di caratteristica \(0\) sono necessariamente infiniti. Gli anelli finiti hanno caratteristica non nulla. Esistono anelli infiniti ma di caratteristica \(\ne 0\)?
+%%\end{eser}
+%
+%\begin{esem}
+%Prendiamo l'anello dei polinomi su \(R := \Z/2\Z\), cioè l'anello dei polinomi a coefficienti \(0\) oppure \(1\). Ora, a causa del Lemma~\ref{prop:ConservazioneCaratteristica}, \(R[X]\) ha la stessa caratteristica di \(R\). Anche campo delle frazioni \(K := Q(R[X])\) ha caratteristica finita, \(2\), come abbiamo visto. Tuttavia \(K\) non è finito, visto che sicuramente contiene tutti i termini \(X^r\) con \(r \in \Z\).
+%\end{esem}
+
+
+
+%\begin{defi}
+%Se \(K\) è un campo, \(F\subseteq K\) è un {\em sottocampo} di \(K\) se \(F\) è un sottoanello di \(K\) e come anello è un campo. \\
+%\end{defi}
+%Chiaramente \(F\subseteq K\) è un sottocampo di \(K\) \(\iff\)
+%\begin{itemize}
+%\item \(1\in F\);
+%\item \(a,b\in F\) \(\implies\) \(a-b,ab\in F\);
+%\item \(a\in F\setminus\{0\}\) \(\implies\) \(a^{-1}\in F\).
+%\end{itemize}
+%\begin{esem}
+%Le seguenti inclusioni sono sottocampi:
+%\begin{itemize}
+%\item \(\Q\subset\R\subset\C\);
+%\item \(K\subset K(X):=Q(K[X])\) \(\all K\) campo.
+%\end{itemize}
+%\end{esem}
+%\begin{osse}
+%\(K\) campo, \(F_{\lambda}\subseteq K\) sottocampi (con \(\lambda\in\Lambda\)) \(\implies\) \(\bigcap_{\lambda\in\Lambda}F_{\lambda}\subseteq K\) sottocampo ({\em esercizio}).
+%\end{osse}
+
+
+%\begin{defi}
+%Il {\em sottocampo primo} di un campo \(K\) è il pi\`u piccolo sottocampo di \(K\), cioè l'intersezione di tutti i sottocampi di \(K\).
+%\end{defi}

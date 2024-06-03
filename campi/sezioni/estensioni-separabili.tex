@@ -1,0 +1,158 @@
+% !TEX program = lualatex
+% !TEX spellcheck = it_IT
+% !TEX root = ../campi.tex
+
+\section{Estensioni separabili}
+
+\begin{defi}
+Sia \(K\) un campo. Un \(f \in K[X]\) non nullo è detto {\em separabile} quando ha \(\deg(f)\) radici distinte in un campo di spezzamento di \(f\).
+\end{defi}
+
+\begin{rich}[Derivata di un polinomio]
+Dato \(R\) un anello e \(f := \sum_{k \in \N} a_kX^k \in R[X]\), la {\em derivata} di \(f\) è definito come il polinomio
+\[f' := \sum_{k \ge 1} ka_kX^{k-1} .\] 
+Ricordiamo anche che soddisfa le note proprietà della derivazione vista in Analisi: in particolare \((f+g)' = f'+g'\) e \((fg)' = f'g + fg'\) e la derivata dei polinomi costanti è \(0\).\newline
+Questa nozione è importante per stabilire la molteplicità delle radici. Se \(K \subseteq L\) è un'estensione, \(f \in K[X]\) e \(\alpha \in L\) è radice di \(f\), allora \(\alpha\) è radice multipla di \(f\) (vale a dire che cioè \((X-\alpha)^2\) divide \(f\)) se e solo se \(\alpha\) è radice di \(f'\).
+\end{rich}
+
+Torniamo al discorso della definizione di polinomio separabile. È molto semplice provare la separabilità di un polinomio, ma questo richiede un'osservazione preliminare.
+
+\begin{osse}
+Sia \(i : K \to L\) un'estensione e \(f, g \in K[X]\). Se \(\gcd(f, g) = 1\), allora \(\gcd\left(i_\ast(f), i_\ast(g)\right) = 1\), cioè le estensioni preservano la relazione di essere coprimi.
+\end{osse}
+
+\begin{lemm}\label{lemm:PolinomiSeparabili}
+Sia \(K\) un campo e \(f \in K[X]\) non nullo. Allora sono equivalenti:
+\begin{enumerate}
+\item \(f\) è separabile.
+\item \(\gcd(f, f') = 1\).
+\end{enumerate}
+\end{lemm}
+
+\begin{proof}
+%(\(1 \implies 2\)) Per \(\alpha\) radice di \(f\), possiamo scrivere \(f = (X-\alpha) g_\alpha\) per dei \(g_\alpha\). Derivando
+%\[f' = g_\alpha + (X-\alpha)g'_\alpha\]
+%si ha che \(g_\alpha\) non si annullerà mai in \(\alpha\) e quindi i polinomio \(X-\alpha\) non divideranno mai \(f'\). Concludiamo quindi che \(\gcd (f, f') = 1\).\newline
+%(\(2 \implies 1\))
+Sia \(K \subseteq L\) un campo di spezzamento di \(f\). Per \(\alpha \in L\) radice di \(f\), indichiamo con \(m_\alpha\) la molteplicità algebrica di \(\alpha\). Possiamo quindi scrivere 
+\[f = (X-\alpha)^{m_\alpha} g_\alpha\]
+dove in particolare \(g_\alpha\) non si annulla in \(0\). Deriviamo:
+\[f' = m_\alpha (X-\alpha)^{m_\alpha -1}g_\alpha + (X-\alpha)^{m_\alpha} g_\alpha' = (X-\alpha)^{m_\alpha -1} \left(m_\alpha g_\alpha + (X-\alpha)g_\alpha'\right) .\]
+Se \(m_\alpha = 1\) per ogni radice \(\alpha\), allora \(f\) e \(f'\) non hanno alcun divisore comune \(X-\alpha\). Quindi \(f\) e \(f'\) devono essere coprimi. Viceversa, se \(\gcd(f, f') = 1\), allora tutti gli \(m_\alpha\) devono essere \(1\).
+\end{proof}
+
+\begin{prop}\label{prop:PolinomiIrriducibiliSeparabili}
+Sia \(K\) un campo e \(f \in K[X]\) irriducibile . Allora un \(f\) è separabile se e solo se \(f' \ne 0\).
+\end{prop}
+
+È straordinariamente semplice verificare se un polinomio irriducibile è separabile o meno.
+
+\begin{proof}
+Se \(f \ne 0\), allora \(\gcd(f, f') = 1\) perché \(f\) è irriducibile. Quindi \(f\) è separabile. Viceversa, se \(f\) è separabile, allora \(\gcd(f, f') = 1\), cioè \(fg + f'h = 1\) per qualche \(g, h \in K[X]\). Valutando in una delle radici \(\alpha \in L\) di \(f\), si ha \(f'(\alpha) h(\alpha) = 1\), e quindi \(f'(\alpha) \ne 0\). Possiamo tranquillamente concludere che \(f' \ne 0\).
+%Sia \(K\subseteq L\) campo di spezzamento di \(f\).\newline
+%(\(\implies\)) Se \(\alpha \in L\) è una radice semplice di \(f\), allora \(f = (X-\alpha) g\) per qualche \(g \in L[X]\). Deriviamo: \(f' = g + (X-\alpha)g'\). Qui \(g\) non si annulla se valutato in \(\alpha\), mentre il secondo addendo sì. Possiamo concludere che sicuramente \(f' \ne 0\).\newline
+%(\(\impliedby\)) \(\deg f' < \deg f\) \(\implies\) \(f\ndvd f'\), \(\implies\) \(\mcd(f,f') = 1\) in \(K[X]\) (perché \(f\) irriducibile in \(K[X]\)) \(\implies\) \(\exi g,h\in K[X]\) tali che \(1=gf+hf'\) \(\implies\) \(\mcd(f,f')=1\) in \(L[X]\) \(\implies\) \(f\) non ha radici multiple in \(L\), cioè \(f\) è separabile. \qedhere
+\end{proof}
+
+\begin{defi}
+Un'estensione algebrica \(K \subseteq L\) è detta {\em separabile} qualora il polinomio minimo di ogni elemento di \(L\) è separabile.
+\end{defi}
+
+Per fortuna, per certe estensioni \(K \subseteq L\) non è necessario dimostrare che tutti gli elementi di \(L\) abbiano polinomio minimo separabile.
+
+\begin{prop}
+Sia \(K \subseteq L\) un'estensione generata da \(\alpha_1, \dots{}, \alpha_n \in L\) algebrici. Se i polinomi minimi degli \(\alpha_i\) sono separabili, allora l'estensione \(K \subseteq L\) è separabile.
+\end{prop}
+
+\begin{proof}
+\nota{Da scrivere.}
+\end{proof}
+
+\begin{defi}[Campi perfetti]
+\nota{Scrivere.}
+\end{defi}
+
+\begin{prop}
+Sia \(K\) un campo di caratteristica \(0\). Tutti gli \(f \in K[X]\) irriducibili sono separabili. Pertanto tutte le estensioni algebriche di campi di caratteristica \(0\) sono separabili. 
+\end{prop}
+
+\begin{proof}
+Se \(f\) è irriducibile, in particolare \(n:=\deg f >0\). Scriviamo \(f := \sum_{k = 0}^n a_kX^k\) con \(a_n \ne 0\). Derivando, \(f' = \sum_{k=1}^n ka_kX^{k-1}\). Il polinomio sicuramente non nullo: \(n a_n \ne 0\) perché \(K\) ha caratteristica \(0\). Concludiamo quindi che \(f\) è separabile.
+\end{proof}
+
+\begin{prop}
+Sia \(K\) un campo di caratteristica \(p\) primo. Tutti gli \(f \in K[X]\) irriducibili sono separabili. Quindi le estensioni algebriche di siffatti campi sono separabili. 
+\end{prop}
+
+\begin{proof}
+\nota{Da scrivere.}
+\end{proof}
+
+\begin{teor}[Elemento primitivo]\label{teor:ElementoPrimitivo}
+Sia \(K \subseteq L\) un'estensione finita e separabile. Allora \(L = K(\alpha)\) per qualche \(\alpha \in L\). 
+\end{teor}
+
+\begin{proof}
+\nota{Vedi la dimostrazione di \href{https://en.wikipedia.org/wiki/Primitive_element_theorem}{Wikipedia}.}
+\end{proof}
+
+%\begin{defi}
+%\(A\) dominio, \(\car(A)=p\) primo. L'{\em omomorfismo di Frobenius} (di \(A\)) è l'omomorfismo di anelli \(\Fro : A\to A\), \(a\mapsto a^p\).
+%\end{defi}
+%
+%\begin{proof}
+%\(\Fro(1)=1\); \(\all a,b\in A\) \(\Fro(ab)=(ab)^p=a^pb^p=\Fro(a)\Fro(b)\) e \(\Fro(a+b)=(a+b)^p=\sum_{i=0}^p\binom{p}{i}a^{p-i}b^i=a^p+b^p=\Fro(a)+\Fro(b)\) perché \(p\dvd\binom{p}{i}=\frac{p!}{i!(p-i)!}\) per \(0<i<p\).
+%\end{proof}
+%
+%\begin{defi}
+%Un campo \(K\) è {\em perfetto} se \(\car(K)=0\) o \(\car(K)=p\) primo e \(\Fro : K\to K\) è suriettivo (nel qual caso \(\Fro\in\Gal{K}\)).
+%\end{defi}
+%
+%\begin{prop}
+%\(K\) campo è perfetto \(\iff\) \(f\) è separabile \(\all f\in K[X]\) irriducibile.
+%\end{prop}
+%
+%\begin{proof}
+%Posso supporre \(\car(K)=p\) primo.
+%\begin{itemize}
+%\item[\(\implies\)] \(f\in K[X]\) irriducibile \(\implies\) per il Lemma basta dimostrare \(f'\ne0\). Per assurdo \(f'=0\) \(\implies\) \(f=\sum_{i=0}^na_iX^{pi}\); \(K\) perfetto \(\implies\) \(\exi b_i\in K\) tale che \(a_i=\Fro(b_i)=b_i^p\) \(\all i=0,\dots,n\) \(\implies\) \(f=\Fro(\sum_{i=0}^nb_iX^i)=(\sum_{i=0}^nb_iX^i)^p\), assurdo.
+%\item[\(\impliedby\)] \(a\in K\) \(\implies\) \(\exi K\subseteq L\) estensione tale che \(X^p-a\) ha una radice \(\alpha\) in \(L\) \(\implies\) \(\polmin_{\alpha,K}\dvd(X^p-a)=X^p-\alpha^p=(X-\alpha)^p\) \(\implies\) \(\polmin_{\alpha,K}=X-\alpha\) (perché \(\polmin_{\alpha,K}\) monico e irriducibile, quindi separabile) \(\implies\) \(\alpha\in K\) e \(a=\alpha^p=\Fro(\alpha)\).\qedhere
+%\end{itemize}
+%\end{proof}
+%
+%\begin{defi}
+%\(K\subseteq L\) estensione.
+%\begin{itemize}
+%\item \(\alpha\in L\) è {\em separabile} su \(K\) se \(\alpha\) è algebrico su \(K\) e \(\polmin_{\alpha,K}\) è separabile.
+%\item \(K\subseteq L\) è {\em separabile} se \(\alpha\) è separabile su \(K\) \(\all\alpha\in L\).
+%\end{itemize}
+%\end{defi}
+%
+%\begin{osse}
+%\(F\subseteq K\subseteq L\) estensioni con \(F\subseteq L\) separabile \(\implies\) \(F\subseteq K\) separabile (ovvio) e \(K\subseteq L\) separabile (perché \(\polmin_{\alpha,K}\dvd\polmin_{\alpha,F}\) \(\all\alpha\in L\)). \\
+%%Si pu\`o dimostrare che \(F\subseteq K\) e \(K\subseteq L\) separabili \(\implies\) \(F\subseteq L\) separabile.  
+%\end{osse}
+%
+%\begin{coro}
+%\(K\) è perfetto \(\iff\) ogni estensione algebrica di \(K\) è separabile.
+%\end{coro}
+%
+%\begin{proof}
+%Segue dalla Proposizione precedente, tenendo conto che \(f\in K[X]\) irriducibile e monico \(\implies\) \(\exi K\subseteq L\) estensione algebrica e \(\exi\alpha\in L\) tale che  \(f=\polmin_{\alpha,K}\).
+%\end{proof}
+%
+%Esempi di campi perfetti.
+%
+%\begin{itemize}
+%\item \(K\) finito \(\implies\) \(K\) perfetto: \\
+%\(\car(K)=p\) primo e \(\Fro : K\to K\) è suriettivo perché iniettivo.
+%\item \(K\) algebricamente chiuso \(\implies\) \(K\) perfetto: \\
+%posso supporre \(\car(K)=p\) primo \(\implies\) \(\Fro : K\to K\) è suriettivo perché \(\all a\in K\) \(X^p-a\) ha una radice \(b\in K\), cioè \(a=b^p=\Fro(b)\).
+%\item \(K\subseteq L\) estensione algebrica, \(K\) perfetto \(\implies\) \(L\) perfetto: \\
+%per il Corollario basta dimostrare ogni estensione algebrica \(L\subseteq L'\) è separabile. \\
+%\(K\subseteq L\) e \(L\subseteq L'\) algebriche \(\implies\) \(K\subseteq L'\) algebrica \(\implies\) \(K\subseteq L'\) separabile (sempre per il Corollario) \(\implies\) \(L\subseteq L'\) separabile.
+%\item \(\car(K)=p\) primo \(\implies\) \(K(X)\) non perfetto: \\
+%per assurdo \(\exi f/g\in K(X)\) (con \(f,g\in K[X]\) e \(g\ne0\)) tale che \(X=\Fro(f/g)=f^p/g^p\) \(\implies\) \(f^p=Xg^p\) in \(K[X]\), assurdo.
+%\end{itemize}
+
+
